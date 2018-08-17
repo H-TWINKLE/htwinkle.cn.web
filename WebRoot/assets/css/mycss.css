@@ -1,0 +1,71 @@
+
+.login_success_panel{
+	min-height: 550px; 
+	margin-top: -20px;
+}
+
+
+.dataTables_wrapper {
+	float: left;
+	min-width: 900px;
+}
+
+.dataTables_length {
+	width: 100px;
+	float: left;
+}
+
+.dataTables_filter {
+	width: 100px;
+	float: right;
+}
+
+.dataTables_filter input {
+	background: transparent;
+	border: solid 2px rgba(255, 255, 255, 0.25);
+	border-radius: 0.25rem;
+	width: 100px;
+	margin-top: 2px;
+	float: right;
+	color: #000;
+}
+.paginate_button{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.title {
+	color: black;
+	margin:auto;
+	/* margin-right: -80px; */
+	/* writing-mode: tb-lr;
+	writing-mode: vertical-lr; */
+	/* margin-left: 150px; */
+}
+
+.author {
+	color: gray;
+	margin:auto;
+	
+	/* writing-mode: vertical-lr;
+	writing-mode: tb-lr; */
+	 margin-top: 20px; 
+}
+
+.dates {
+	margin:auto;
+	margin-top: 20px; 
+	/* margin-top: 200px;
+	margin-right: -150px; */
+	/* writing-mode: vertical-lr;
+	writing-mode: tb-lr; */
+}
+.contents {
+	font-size:1.2em;
+	color:black;
+	/* margin-left:30px; */
+	margin:auto;
+	margin-top: 20px; 
+	/* writing-mode: vertical-lr;
+	writing-mode: tb-lr; */
+}
