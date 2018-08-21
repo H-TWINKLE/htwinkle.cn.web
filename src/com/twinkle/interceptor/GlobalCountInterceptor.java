@@ -9,7 +9,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.twinkle.common.model.Globalcount;
-import com.twinkle.plugin.IpSpider;
+import com.twinkle.plugin.IpSpiderPlugin;
 import com.twinkle.utils.CommUtils;
 
 public class GlobalCountInterceptor implements Interceptor {
@@ -52,7 +52,7 @@ public class GlobalCountInterceptor implements Interceptor {
 	}
 
 	private String getPlace(String ip) {
-		IpSpider spider = new IpSpider();
+		IpSpiderPlugin spider = new IpSpiderPlugin();
 
 		String place = spider.getIpByChinaZ(ip);
 
