@@ -1,9 +1,6 @@
 package com.twinkle.handler;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -100,7 +97,7 @@ public class JreBelHander extends Handler {
 		String validUntil = "null";
 		if (offline) {
 			String clientTime = request.getParameter("clientTime");
-			String offlineDays = request.getParameter("offlineDays");
+			//String offlineDays = request.getParameter("offlineDays");
 			// long clinetTimeUntil = Long.parseLong(clientTime) +
 			// Long.parseLong(offlineDays) * 24 * 60 * 60 * 1000;
 			long clinetTimeUntil = Long.parseLong(clientTime) + 180L * 24 * 60 * 60 * 1000;
@@ -153,8 +150,8 @@ public class JreBelHander extends Handler {
 			throws IOException {
 		response.setContentType("text/html; charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
-		SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy hh:mm:ss Z", Locale.ENGLISH);
-		String date = fm.format(new Date()) + " GMT";
+		//SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy hh:mm:ss Z", Locale.ENGLISH);
+		//String date = fm.format(new Date()) + " GMT";
 		// response.setHeader("Date", date);
 		// response.setHeader("Server", "fasthttp");
 		String salt = request.getParameter("salt");
@@ -190,12 +187,12 @@ public class JreBelHander extends Handler {
 
 	}
 
-	private void indexHandler(String target, HttpServletRequest request, HttpServletResponse response)
+	/*private void indexHandler(String target, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		response.setContentType("text/html; charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 		response.getWriter().println("<h1>Hello,This is a Jrebel & JetBrains License Server!</h1>");
 
-	}
+	}*/
 
 }

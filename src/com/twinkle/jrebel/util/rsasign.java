@@ -10,6 +10,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAPrivateKeySpec;
 
 
+@SuppressWarnings("deprecation")
 public class rsasign {
     static String header = "<!-- 537606aed546c5ba42c0820ad7fd0d74ee7caf90c232a484d0464b3332c42a9189555aebdba3570fe6566842ba7b7bb88da360f202ae9536a2a12fcdf39600c7 --><ObtainTicketResponse><message></message><prolongationPeriod>607875500</prolongationPeriod><responseCode>OK</responseCode><salt>1508484258274</salt><ticketId>1</ticketId><ticketProperties>licensee=Administrator    licenseType=0   </ticketProperties></ObtainTicketResponse>";
     static String content = "<ObtainTicketResponse><message></message><prolongationPeriod>607875500</prolongationPeriod><responseCode>OK</responseCode><salt>1508484258274</salt><ticketId>1</ticketId><ticketProperties>licensee=Administrator    licenseType=0   </ticketProperties></ObtainTicketResponse>";
@@ -57,7 +58,8 @@ public class rsasign {
 	
 	//传入秘钥为ASN格式
     //私钥签名程序，privateKey是私钥base64编码字符串，即私钥文件数据中，中间的主体部分
-    public static String Sign(byte[] content, String privateKey) {
+    @SuppressWarnings("resource")
+	public static String Sign(byte[] content, String privateKey) {
 	try {
 		byte[] keybyte = Base64.decode(privateKey.toString());
 		ASN1InputStream in = new ASN1InputStream(keybyte);
