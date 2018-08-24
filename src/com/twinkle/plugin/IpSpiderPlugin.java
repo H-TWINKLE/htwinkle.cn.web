@@ -35,7 +35,7 @@ public class IpSpiderPlugin {
 		try {
 			doc = Jsoup.connect("https://ip.cn/index.php?ip=" + ip)
 					.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0")
-					.header("Host", "ip.cn").timeout(2000).get();
+					.header("Host", "ip.cn").timeout(5000).get();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return "";

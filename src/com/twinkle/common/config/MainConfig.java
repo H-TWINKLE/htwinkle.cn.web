@@ -8,6 +8,7 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
+import com.jfinal.ext.handler.UrlSkipHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.template.Engine;
 import com.twinkle.common.model._MappingKit;
@@ -18,6 +19,7 @@ import com.twinkle.controller.IndexController;
 import com.twinkle.controller.JwglController;
 import com.twinkle.controller.KpShareController;
 import com.twinkle.controller.NetMusicController;
+import com.twinkle.handler.JreBelHander;
 import com.twinkle.interceptor.GlobalCountInterceptor;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.json.MixedJsonFactory;
@@ -83,8 +85,9 @@ public class MainConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configInterceptor(Interceptors me) {
-
+		
 		me.add(new GlobalCountInterceptor());
+		
 
 	}
 
@@ -93,6 +96,7 @@ public class MainConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configHandler(Handlers me) {
+		me.add(new JreBelHander());
 		me.add(new ContextPathHandler("base"));
 	}
 

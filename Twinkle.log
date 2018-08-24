@@ -205,3 +205,34 @@ java.lang.RuntimeException: File not found : E:\MyMajor\myeclipse\Twinkle\WebRoo
 	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
 	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
 	at java.lang.Thread.run(Thread.java:745)
+
+2018-08-24 10:48:43
+[ERROR]-[Thread: main]-[com.jfinal.kit.LogKit.error()]: port: 1314 already in use!
+java.lang.IllegalStateException: port: 1314 already in use!
+	at com.jfinal.server.JettyServerForIDEA.doStart(JettyServerForIDEA.java:89)
+	at com.jfinal.server.JettyServerForIDEA.start(JettyServerForIDEA.java:72)
+	at com.jfinal.core.JFinal.start(JFinal.java:174)
+	at com.twinkle.common.config.MainConfig.main(MainConfig.java:113)
+
+2018-08-24 10:48:56
+[ERROR]-[Thread: main]-[com.jfinal.kit.LogKit.error()]: port: 1314 already in use!
+java.lang.IllegalStateException: port: 1314 already in use!
+	at com.jfinal.server.JettyServerForIDEA.doStart(JettyServerForIDEA.java:89)
+	at com.jfinal.server.JettyServerForIDEA.start(JettyServerForIDEA.java:72)
+	at com.jfinal.core.JFinal.start(JFinal.java:174)
+	at com.twinkle.common.config.MainConfig.main(MainConfig.java:113)
+
+2018-08-24 10:57:29
+[WARN]-[Thread: qtp359023572-21]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /jrebel/leases
+
+2018-08-24 11:05:35
+[WARN]-[Thread: qtp359023572-21]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /jrebel/leases
+
+2018-08-24 11:34:05
+[WARN]-[Thread: qtp359023572-25]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /jrebel/leases
+
+2018-08-24 12:25:22
+[WARN]-[Thread: qtp359023572-24]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /agent/features
+
+2018-08-24 12:25:22
+[WARN]-[Thread: qtp359023572-24]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /agent/features?token=020a2d70-cbbe-43fd-be3d-db7040d4a4e2&guid=tLZ0kwIvVLnkn%252FeamsMALPKqsCFWyla7wt%252B4rfNYARg%253D&clientTime=1535084722544&clientProtocolVersion=1.1&username=TWINKLE&rebelVersion=2018.1.4&product=JRebel&definedUserId=htwinkle%2540qq.com&signature=kKtwaxVBKT8T%252B8LldUYxg2EM%252BxreMcl%252FU1ZTZPJcYovs8kF9QDfs8cUqElcW%252BBim7jyHe39lUVz4FGLfKte2FxopTekf9VouqN4e4zMBF%252FmX5JEhuSK4n8OiPacpr9WWM7oFethYrnySJ6SDc0uBxGnSSx6%252BVvOgi8lpIfpwSrE%253D

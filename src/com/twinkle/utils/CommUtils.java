@@ -24,6 +24,9 @@ import static com.twinkle.utils.Constant.*;
 public enum CommUtils {
 
 	INSTANCE;
+	
+	
+	public static final String UUID = "020a2d70-cbbe-43fd-be3d-db7040d4a4e2";
 
 	public Boolean regex(String text, String regex) {
 		return Pattern.compile(regex).matcher(text).find();
