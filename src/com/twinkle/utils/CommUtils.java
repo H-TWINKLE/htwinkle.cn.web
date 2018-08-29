@@ -19,13 +19,13 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.twinkle.common.model._MappingKit;
+
 import static com.twinkle.utils.Constant.*;
 
 public enum CommUtils {
 
 	INSTANCE;
-	
-	
+
 	public static final String UUID = "020a2d70-cbbe-43fd-be3d-db7040d4a4e2";
 
 	public Boolean regex(String text, String regex) {
@@ -99,31 +99,37 @@ public enum CommUtils {
 		initExeCutorPool.execute(r);
 	}
 
-	public String getRemoteAddrIp(Controller c) {
+	public String getRemoteAddr(Controller c) {
 
-		String ip = c.getHeader("x-forwarded-for");
+		if (c == null)
+			return null;
+
+		String ip = c.getRequest().getHeader("x-forwarded-for");
 
 		if (validatorIp(ip)) {
 			return ip;
 		}
-		ip = c.getHeader("Proxy-Client-IP");
+		ip = c.getRequest().getHeader("Proxy-Client-IP");
 		if (validatorIp(ip)) {
 			return ip;
 		}
-		ip = c.getHeader("WL-Proxy-Client-IP");
+		ip = c.getRequest().getHeader("WL-Proxy-Client-IP");
 		if (validatorIp(ip)) {
 			return ip;
 		}
-		ip = c.getHeader("HTTP_CLIENT_IP");
+		ip = c.getRequest().getHeader("HTTP_CLIENT_IP");
 		if (validatorIp(ip)) {
 			return ip;
 		}
-		ip = c.getHeader("X-Real-IP");
+		ip = c.getRequest().getHeader("X-Real-IP");
 		if (validatorIp(ip)) {
 			return ip;
 		}
 		ip = c.getRequest().getRemoteAddr();
 		if (validatorIp(ip)) {
+			if (ip.equals(Constant.LOCALIP)) {
+				return "127.0.0.1";
+			}
 			return ip;
 		}
 
@@ -148,8 +154,9 @@ public enum CommUtils {
 	}
 
 	public byte[] imgConvert(InputStream in) throws IOException {
-		
-		if(in==null)return null;
+
+		if (in == null)
+			return null;
 
 		BufferedImage bImage = ImageIO.read(in);
 
@@ -160,8 +167,8 @@ public enum CommUtils {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 
 		ImageIO.write(newBImage, "jpg", os);
-		
-		//ImageIO.write(newBImage, "jpg", new File("E:\\TWINKLE\\Desktop\\1.jpg"));
+
+		// ImageIO.write(newBImage, "jpg", new File("E:\\TWINKLE\\Desktop\\1.jpg"));
 
 		return os.toByteArray();
 

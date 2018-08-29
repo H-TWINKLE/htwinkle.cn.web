@@ -31,7 +31,7 @@ public class GlobalCountInterceptor implements Interceptor {
 
 		globalCount.getAndIncrement();
 
-		String ip = CommUtils.INSTANCE.getRemoteAddrIp(c);
+		String ip = CommUtils.INSTANCE.getRemoteAddr(c);
 
 		if (ip == null || "".equals(ip))
 			return;
@@ -54,13 +54,17 @@ public class GlobalCountInterceptor implements Interceptor {
 	private String getPlace(String ip) {
 		IpSpiderPlugin spider = new IpSpiderPlugin();
 
-		String place = spider.getIpByChinaZ(ip);
+		String place = spider.getIpByXpcha(ip);
 
 		if (!"".equals(place))
 			return place;
 
 		place = spider.getIpByIp(ip);
-
+		
+		if (!"".equals(place))
+			return place;
+		
+        place = spider.getIpByChinaZ(ip);
 		return place;
 
 	}

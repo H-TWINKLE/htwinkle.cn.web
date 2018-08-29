@@ -236,3 +236,138 @@ java.lang.IllegalStateException: port: 1314 already in use!
 
 2018-08-24 12:25:22
 [WARN]-[Thread: qtp359023572-24]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /agent/features?token=020a2d70-cbbe-43fd-be3d-db7040d4a4e2&guid=tLZ0kwIvVLnkn%252FeamsMALPKqsCFWyla7wt%252B4rfNYARg%253D&clientTime=1535084722544&clientProtocolVersion=1.1&username=TWINKLE&rebelVersion=2018.1.4&product=JRebel&definedUserId=htwinkle%2540qq.com&signature=kKtwaxVBKT8T%252B8LldUYxg2EM%252BxreMcl%252FU1ZTZPJcYovs8kF9QDfs8cUqElcW%252BBim7jyHe39lUVz4FGLfKte2FxopTekf9VouqN4e4zMBF%252FmX5JEhuSK4n8OiPacpr9WWM7oFethYrnySJ6SDc0uBxGnSSx6%252BVvOgi8lpIfpwSrE%253D
+
+2018-08-29 17:06:27
+[WARN]-[Thread: qtp2111991224-24]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/
+
+2018-08-29 17:07:01
+[WARN]-[Thread: qtp2111991224-25]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/m
+
+2018-08-29 17:07:26
+[ERROR]-[Thread: main]-[com.jfinal.kit.LogKit.error()]: port: 1314 already in use!
+java.lang.IllegalStateException: port: 1314 already in use!
+	at com.jfinal.server.JettyServerForIDEA.doStart(JettyServerForIDEA.java:89)
+	at com.jfinal.server.JettyServerForIDEA.start(JettyServerForIDEA.java:72)
+	at com.jfinal.core.JFinal.start(JFinal.java:174)
+	at com.twinkle.common.config.MainConfig.main(MainConfig.java:117)
+
+2018-08-29 17:07:41
+[WARN]-[Thread: qtp2111991224-20]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/m
+
+2018-08-29 17:07:48
+[WARN]-[Thread: qtp2111991224-25]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/a
+
+2018-08-29 17:09:31
+[WARN]-[Thread: qtp2111991224-21]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/a
+
+2018-08-29 17:09:35
+[WARN]-[Thread: qtp2111991224-25]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/
+
+2018-08-29 17:10:05
+[WARN]-[Thread: qtp2111991224-25]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/s
+
+2018-08-29 17:19:09
+[WARN]-[Thread: qtp2111991224-21]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/
+
+2018-08-29 17:19:13
+[WARN]-[Thread: qtp2111991224-22]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/11
+
+2018-08-29 17:19:39
+[ERROR]-[Thread: main]-[com.jfinal.kit.LogKit.error()]: Illegal/unsupported escape sequence near index 2
+^\Law\*
+  ^
+java.util.regex.PatternSyntaxException: Illegal/unsupported escape sequence near index 2
+^\Law\*
+  ^
+	at java.util.regex.Pattern.error(Pattern.java:1955)
+	at java.util.regex.Pattern.escape(Pattern.java:2471)
+	at java.util.regex.Pattern.atom(Pattern.java:2198)
+	at java.util.regex.Pattern.sequence(Pattern.java:2079)
+	at java.util.regex.Pattern.expr(Pattern.java:1996)
+	at java.util.regex.Pattern.compile(Pattern.java:1696)
+	at java.util.regex.Pattern.<init>(Pattern.java:1351)
+	at java.util.regex.Pattern.compile(Pattern.java:1054)
+	at com.jfinal.ext.handler.UrlSkipHandler.<init>(UrlSkipHandler.java:39)
+	at com.twinkle.common.config.MainConfig.configHandler(MainConfig.java:101)
+	at com.jfinal.core.Config.configJFinal(Config.java:63)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServerForIDEA.doStart(JettyServerForIDEA.java:133)
+	at com.jfinal.server.JettyServerForIDEA.start(JettyServerForIDEA.java:72)
+	at com.jfinal.core.JFinal.start(JFinal.java:174)
+	at com.twinkle.common.config.MainConfig.main(MainConfig.java:117)
+
+2018-08-29 17:20:14
+[WARN]-[Thread: qtp2111991224-24]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/11
+
+2018-08-29 17:20:41
+[ERROR]-[Thread: main]-[com.jfinal.kit.LogKit.error()]: Dangling meta character '*' near index 7
+^/Law/*********
+       ^
+java.util.regex.PatternSyntaxException: Dangling meta character '*' near index 7
+^/Law/*********
+       ^
+	at java.util.regex.Pattern.error(Pattern.java:1955)
+	at java.util.regex.Pattern.sequence(Pattern.java:2123)
+	at java.util.regex.Pattern.expr(Pattern.java:1996)
+	at java.util.regex.Pattern.compile(Pattern.java:1696)
+	at java.util.regex.Pattern.<init>(Pattern.java:1351)
+	at java.util.regex.Pattern.compile(Pattern.java:1054)
+	at com.jfinal.ext.handler.UrlSkipHandler.<init>(UrlSkipHandler.java:39)
+	at com.twinkle.common.config.MainConfig.configHandler(MainConfig.java:101)
+	at com.jfinal.core.Config.configJFinal(Config.java:63)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServerForIDEA.doStart(JettyServerForIDEA.java:133)
+	at com.jfinal.server.JettyServerForIDEA.start(JettyServerForIDEA.java:72)
+	at com.jfinal.core.JFinal.start(JFinal.java:174)
+	at com.twinkle.common.config.MainConfig.main(MainConfig.java:117)
+
+2018-08-29 17:21:28
+[WARN]-[Thread: qtp2111991224-25]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/4
+
+2018-08-29 17:25:33
+[WARN]-[Thread: qtp2111991224-20]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/x
+
+2018-08-29 17:25:56
+[WARN]-[Thread: qtp2111991224-22]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/x/k
+
+2018-08-29 17:26:24
+[WARN]-[Thread: qtp2111991224-24]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/x/k
+
+2018-08-29 17:26:29
+[WARN]-[Thread: qtp2111991224-23]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/
+
+2018-08-29 17:26:43
+[WARN]-[Thread: qtp2111991224-25]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/
+
+2018-08-29 17:27:09
+[WARN]-[Thread: qtp2111991224-21]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/*
+
+2018-08-29 17:27:48
+[WARN]-[Thread: qtp2111991224-25]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/*
+
+2018-08-29 17:28:02
+[WARN]-[Thread: qtp2111991224-23]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /Law/fffff

@@ -42,5 +42,7 @@ public interface Constant {
 	public static final String APP_ID = "11692607";       //百度orc sdk
 	public static final String API_KEY = "OoKiNeBN2YBc0l2W2T0NI83P";
 	public static final String SECRET_KEY = "OWrrF6mpueItSb16RPvpBH222LDydriu";
+	
+	public static final String LOCALIP = "0:0:0:0:0:0:0:1";
 
 }

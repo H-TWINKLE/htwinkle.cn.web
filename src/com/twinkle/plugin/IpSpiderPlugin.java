@@ -23,7 +23,7 @@ public class IpSpiderPlugin {
 		Element ele = doc.selectFirst("p.WhwtdWrap:nth-child(2) > span:nth-child(4)");
 
 		if (ele == null)
-			return null;
+			return "";
 
 		return ele.text();
 
@@ -37,20 +37,45 @@ public class IpSpiderPlugin {
 					.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0")
 					.header("Host", "ip.cn").timeout(5000).get();
 		} catch (IOException e) {
-			e.printStackTrace();
 			return "";
 		}
 
-		if (doc == null) {			
+		if (doc == null) {
 			return "";
 		}
-		
+
 		Element ele = doc.selectFirst(".well > p:nth-child(2) > code:nth-child(1)");
 
 		if (ele == null)
-			return null;
+			return "";
 
 		return ele.text();
+
+	}
+
+	public String getIpByXpcha(String ip) {
+
+		Document doc = null;
+		try {
+			doc = Jsoup.connect("http://ip.xpcha.com/?q=" + ip)
+					.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0")
+					.timeout(5000).get();
+		} catch (IOException e) {
+			return "";
+		}
+
+		if (doc == null) {
+			return "";
+		}
+
+		Element ele = doc.selectFirst("dl.shaixuan_1:nth-child(4) > dd:nth-child(2)");			
+
+		if (ele == null)
+			return "";
+		
+		ele.selectFirst("a").remove();
+
+		return ele.select("dd").text();
 
 	}
 
