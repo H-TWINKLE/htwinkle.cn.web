@@ -68,15 +68,14 @@ public class IpSpiderPlugin {
 			return "";
 		}
 
-		Element ele = doc.selectFirst("dl.shaixuan_1:nth-child(4) > dd:nth-child(2)");			
+		Element ele = doc.selectFirst("dl.shaixuan_1:nth-child(4) > dd:nth-child(2)");
 
 		if (ele == null)
 			return "";
-		
+
 		ele.selectFirst("a").remove();
 
 		return ele.select("dd").text();
 
 	}
-
 }

@@ -14,6 +14,7 @@ import com.twinkle.utils.Constant;
 public class JwglService {
 
 	public Jwgl toLogin(String admin, String pass) {
+		
 
 		JwglProxy jProxy = new JwglProxy();
 

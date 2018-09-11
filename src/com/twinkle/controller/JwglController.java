@@ -3,8 +3,6 @@ package com.twinkle.controller;
 import com.alibaba.fastjson.JSON;
 import com.jfinal.aop.Before;
 import com.twinkle.common.model.Jwgl;
-import com.twinkle.interceptor.JLSuccessInterceptor;
-import com.twinkle.interceptor.JwglInterceptor;
 import com.twinkle.service.JwglService;
 import com.twinkle.utils.BaseController;
 import com.twinkle.utils.Constant;
@@ -18,7 +16,7 @@ public class JwglController extends BaseController {
 		render("/pages/page_jwgl.html");
 	}
 
-	@Before({ JEValidator.class, JwglInterceptor.class })
+	@Before({ JEValidator.class })
 	public void login() { // ------登录页面
 
 		String admin = getPara("admin");
@@ -36,7 +34,7 @@ public class JwglController extends BaseController {
 				return;
 			}
 
-			if (jwgl.getCode() != Constant.SUCCESS) {						
+			if (jwgl.getCode() != Constant.SUCCESS) {
 				setAttr("TipMsg", jwgl.getTip());
 				render("/pages/page_jwgl.html");
 				return;
@@ -48,7 +46,7 @@ public class JwglController extends BaseController {
 		}
 
 		jwgl = jwglService.findByAdmin(admin, pass);
-		
+
 		if (jwgl == null) {
 			setAttr("TipMsg", "用户名或者密码错误! <br> 如果是第一次登录，请勾选 ‘新登录’");
 			render("/pages/page_jwgl.html");
@@ -59,26 +57,28 @@ public class JwglController extends BaseController {
 		render("/pages/page_jwgl_info.html");
 	}
 
-	@Before(JLSuccessInterceptor.class)
-	public void login_success() { // ---------登录成功页面
-		render("/pages/page_jwgl_info.html");
-	}
-
-
-	public void api() { // 纯api接口 -----优先检测登录数据，没有再纯新登录
+	public void api() {
 
 		String admin = getPara("admin");
 		String pass = getPara("pass");
 		String news = getPara("news");
-		
+
+		if (admin == null || "".equals(admin)) {
+			renderNull();
+			return;
+		}
+
+		if (pass == null || "".equals(pass)) {
+			renderNull();
+			return;
+		}
+
 		if (news != null && "yes".equals(news)) {
 			renderJson(JSON.toJSONString(jwglService.toLogin(admin, pass)));
-			return ;
-		} 	
-			renderJson(JSON.toJSONString(jwglService.findByAdmin(admin, pass)));
+			return;
+		}
+		renderJson(JSON.toJSONString(jwglService.findByAdmin(admin, pass)));
 
 	}
-
-
 
 }

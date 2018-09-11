@@ -18,31 +18,51 @@ public class ImgController extends BaseController {
 
 	}
 
-	public void img_api() {
-		renderJson(getImg());
-	}
-
-	public void addimg_api() {
-
-		String types = getPara("types");
-		types = imgService.checkParms(types);
-		renderJson(imgService.addImg(types));
-
-	}
-
 	@Override
 	public void api() {
-		redirect(imgService.getOneImg());
+
+		Integer num = getParaToInt("num");
+
+		if (num == null || num == 0) {
+			redirect(imgService.getOneImg());
+			return;
+		}
+
+		renderJson(getImg());
+
 	}
 
 	private List<Img> getImg() {
+		
+		return imgService.getImg(getNum(), checkParmsByTypes());
+		
+	}
+
+	private Integer getNum() {
+
 		Integer num = getParaToInt("num");
 		if (num == null || num == 0) {
-			num = 10;
+			return 10;
 		}
+
+		return num;
+
+	}
+
+	private String checkParmsByTypes() {
+
 		String types = getPara("types");
-		types = imgService.checkParms(types);
-		return imgService.getImg(num, types);
+
+		if (types == null || "".equals(types)) {
+			return types = "wallQFJ";
+		}
+
+		if (!"wallQFJ".equals(types) || !"wallKA".equals(types) || !"wallJZ".equals(types) || !"wallZW".equals(types)
+				|| !"wallDW".equals(types))
+			return types = "wallQFJ";
+
+		return types;
+
 	}
 
 }

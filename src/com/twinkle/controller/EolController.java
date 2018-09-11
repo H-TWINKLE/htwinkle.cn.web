@@ -3,8 +3,6 @@ package com.twinkle.controller;
 import com.alibaba.fastjson.JSON;
 import com.jfinal.aop.Before;
 import com.twinkle.common.model.Eol;
-import com.twinkle.interceptor.ElSuccessInterceptor;
-import com.twinkle.interceptor.EolInterceptor;
 import com.twinkle.service.EolService;
 import com.twinkle.utils.BaseController;
 import com.twinkle.utils.Constant;
@@ -18,10 +16,11 @@ public class EolController extends BaseController {
 		render("/pages/page_eol.html");
 	}
 
-	@Before({ JEValidator.class, EolInterceptor.class })
+	@Before({ JEValidator.class})
 	public void login() {
 
 		Eol eol = getEol();
+		
 		if (eol.getCode() == Constant.SUCCESS) {
 			setAttr("eol", eol);
 			render("/pages/page_eol_info.html");
@@ -33,10 +32,6 @@ public class EolController extends BaseController {
 
 	}
 
-	@Before(ElSuccessInterceptor.class)
-	public void login_success() {
-		render("/pages/page_eol_info.html");
-	}
 
 	@Override
 	public void api() {

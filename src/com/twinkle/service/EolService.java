@@ -10,13 +10,21 @@ import com.twinkle.utils.Constant;
 public class EolService {
 
 	public Eol toLogin(String admin, String pass) {
-		
+
+		if (admin == null || "".equals(admin)) {
+			return null;
+		}
+
+		if (pass == null || "".equals(pass)) {
+			return null;
+		}
+
 		EolProxy eProxy = new EolProxy();
-		
+
 		Eol eol = eProxy.eolpreLogin(admin, pass);
 
 		if (eol == null) {
-			
+
 			eol = new Eol();
 			eol.setDates(new Date(System.currentTimeMillis()));
 			eol.setCode(Constant.SERVERERROR);

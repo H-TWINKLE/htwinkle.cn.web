@@ -12,9 +12,7 @@ import org.jsoup.select.Elements;
 import com.twinkle.common.model.Img;
 import com.twinkle.utils.Constant;
 
-public enum ImgProxy {
-
-	INSTANCE;
+public class ImgProxy {
 
 	public List<Img> get3GBiZhiImg(String types) {
 
@@ -44,7 +42,7 @@ public enum ImgProxy {
 				img.setPic(e.attr("src").replace(".255.344.jpg", ""));
 
 				img.setDate(new Date(System.currentTimeMillis()));
-				
+
 				img.save();
 
 				list.add(img);

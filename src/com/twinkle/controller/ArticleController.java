@@ -1,12 +1,11 @@
 package com.twinkle.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.twinkle.service.ArticleService;
 import com.twinkle.utils.BaseController;
 
 public class ArticleController extends BaseController {
 
-	static ArticleService service = new ArticleService();
+	private final static ArticleService service = new ArticleService();
 
 	@Override
 	public void index() {
@@ -18,12 +17,14 @@ public class ArticleController extends BaseController {
 
 	@Override
 	public void api() {
+		
 		Integer num = getParaToInt("num");
 
 		if (num == null || num == 0) {
-			num = 10;}
-		
-		renderJson(JSON.toJSONString(service.getListArticle(num)));
+			num = 10;
+		}
+
+		renderJson(service.getListArticle(num));
 
 	}
 

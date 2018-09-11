@@ -167,32 +167,46 @@ public class JwglUtils {
 		jwglinfo.setUserid(jwgl.getId());
 		jwglinfo.setDates(new Date(System.currentTimeMillis()));
 
-		jwglinfo.setXh(doc.getElementById("xh").text());
-		jwglinfo.setXm(doc.getElementById("xm").text());
+		jwglinfo.setXh(getElementById(doc, "xh"));
+		jwglinfo.setXm(getElementById(doc, "xm"));
 		jwglinfo.setXszp(doc.getElementById("xszp").attr("src"));
-		jwglinfo.setLblXb(doc.getElementById("lbl_xb").text());
-		jwglinfo.setLblRxrq(doc.getElementById("lbl_rxrq").text());
-		jwglinfo.setLblCsrq(doc.getElementById("lbl_csrq").text());
-		jwglinfo.setLblMz(doc.getElementById("lbl_mz").text());
-		jwglinfo.setLblZzmm(doc.getElementById("lbl_zzmm").text());
-		jwglinfo.setLblLxdh(doc.getElementById("lbl_lxdh").text());
-		jwglinfo.setLblYzbm(doc.getElementById("lbl_yzbm").text());
-		jwglinfo.setLblZkzh(doc.getElementById("lbl_zkzh").text());
-		jwglinfo.setLblSfzh(doc.getElementById("lbl_sfzh").text());
-		jwglinfo.setLblCc(doc.getElementById("lbl_CC").text());
-		jwglinfo.setLblXy(doc.getElementById("lbl_xy").text());
-		jwglinfo.setLblJtszd(doc.getElementById("lbl_jtszd").text());
-		jwglinfo.setLblZymc(doc.getElementById("lbl_zymc").text());
-		jwglinfo.setLblXzb(doc.getElementById("lbl_xzb").text());
-		jwglinfo.setLblYycj(doc.getElementById("lbl_YYCJ").text());
-		jwglinfo.setLblXz(doc.getElementById("lbl_xz").text());
-		jwglinfo.setLblXjzt(doc.getElementById("lbl_xjzt").text());
-		jwglinfo.setLblDqszj(doc.getElementById("lbl_dqszj").text());
-		jwglinfo.setLblKsh(doc.getElementById("lbl_ksh").text());
+		jwglinfo.setLblXb(getElementById(doc, "lbl_xb"));
+		jwglinfo.setLblRxrq(getElementById(doc, "lbl_rxrq"));
+		jwglinfo.setLblCsrq(getElementById(doc, "lbl_csrq"));
+		jwglinfo.setLblMz(getElementById(doc, "lbl_mz"));
+		jwglinfo.setLblZzmm(getElementById(doc, "lbl_zzmm"));
+		jwglinfo.setLblLxdh(getElementById(doc, "lbl_lxdh"));
+		jwglinfo.setLblYzbm(getElementById(doc, "lbl_yzbm"));
+		jwglinfo.setLblZkzh(getElementById(doc, "lbl_zkzh"));
+		jwglinfo.setLblSfzh(getElementById(doc, "lbl_sfzh"));
+		jwglinfo.setLblCc(getElementById(doc, "lbl_CC"));
+		jwglinfo.setLblXy(getElementById(doc, "lbl_xy"));
+		jwglinfo.setLblJtszd(getElementById(doc, "lbl_jtszd"));
+		jwglinfo.setLblZymc(getElementById(doc, "lbl_zymc"));
+		jwglinfo.setLblXzb(getElementById(doc, "lbl_xzb"));
+		jwglinfo.setLblYycj(getElementById(doc, "lbl_YYCJ"));
+		jwglinfo.setLblXz(getElementById(doc, "lbl_xz"));
+		jwglinfo.setLblXjzt(getElementById(doc, "lbl_xjzt"));
+		jwglinfo.setLblDqszj(getElementById(doc, "lbl_dqszj"));
+		jwglinfo.setLblKsh(getElementById(doc, "lbl_ksh"));
 
 		jwglinfo.save();
 
 		return jwglinfo;
+	}
+
+	private String getElementById(Document doc, String text) {
+
+		if (text == null) {
+			return null;
+		}
+
+		try {
+			return doc.getElementById(text).text();
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 	public Jwglttb analTtb(String html, Jwgl jwglb) {

@@ -9,16 +9,16 @@
 		<section class="panel spotlight large left color4-alt">
 			<div class="content span-3">
 				<h2 class="major">
-					<p>#(jwgl.getJwglinfo().getXm()??)</p>
+					<p style="text-indent: 0em;">#(jwgl.getJwglinfo().getXm()??)</p>
 				</h2>
-				<p>像梦一样的触动.</p>
+				<p style="text-indent: 0em;">像梦一样的触动.</p>
 			</div>
 			<div class="inner columns aligned" style="margin: auto; width: auto;">
 
 				<div class="span-8">
 
 					<div class="table-wrapper">
-						<table  role="grid">
+						<table role="grid">
 							<thead>
 								<tr>
 									<th>类别</th>
@@ -37,7 +37,7 @@
 								<tr>
 									<td>我的专业：</td>
 									<td>#(jwgl.getJwglinfo().getLblZymc()??)</td>
-								</tr>																
+								</tr>
 								<tr>
 									<td>我的班级：</td>
 									<td>#(jwgl.getJwglinfo().getLblXzb()??)</td>
@@ -45,7 +45,7 @@
 								<tr>
 									<td>我的通讯地址：</td>
 									<td>#(jwgl.getJwglinfo().getLblJtszd()??)</td>
-								</tr>								
+								</tr>
 								<tr>
 									<td>我的高考英语成绩：</td>
 									<td>#(jwgl.getJwglinfo().getLblYycj()??)</td>
@@ -83,8 +83,8 @@
 									<th>更新时间</th>
 								</tr>
 							</thead>
-							<tbody>						
-								 #for(x : jwgl.getJwglscore()??) 
+							<tbody>
+								#for(x : jwgl.getJwglscore()??)
 								<tr>
 									<td>#(x.getKechengmingcheng()??)</td>
 									<td>#(x.getXuenian()??)</td>
@@ -94,7 +94,7 @@
 									<td>#(x.getChengji()??)</td>
 									<td>#date(x.getDates()??, "yyyy-MM-dd HH:mm:ss")</td>
 								</tr>
-								#end  								
+								#end
 							</tbody>
 
 						</table>

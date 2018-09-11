@@ -2,9 +2,7 @@ package com.twinkle.service;
 
 import java.util.List;
 
-import com.alibaba.fastjson.JSON;
 import com.twinkle.common.model.Img;
-import com.twinkle.proxy.ImgProxy;
 import com.twinkle.task.ImgTask;
 import com.twinkle.utils.CommUtils;
 
@@ -26,10 +24,6 @@ public class ImgService {
 
 	}
 
-	public String addImg(String types) {
-
-		return JSON.toJSONString(ImgProxy.INSTANCE.get3GBiZhiImg(types));
-	}
 
 	public String getOneImg() {
 
@@ -45,20 +39,6 @@ public class ImgService {
 		
 		return list.get(0).getPic();
 	}
-
-	public String checkParms(String types) {
-		if (types == null || types.equals("")) {
-			return types = "wallQFJ";
-		}
-
-		if (!"wallQFJ".equals(types) || !"wallKA".equals(types) || !"wallJZ".equals(types) || !"wallZW".equals(types)
-				|| !"wallDW".equals(types))
-			return types = "wallQFJ";
-
-		return types;
-
-	}
-	
-	
+		
 
 }

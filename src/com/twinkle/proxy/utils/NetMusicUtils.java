@@ -71,12 +71,7 @@ public enum NetMusicUtils {
 			return null;
 
 		String obj = JSONObject.parseArray(JSONObject.parseObject(html).getString("hotComments")).getString(0);
-		
-		//String comm =  CommUtils.getInstance().removeFourChar(JSONObject.parseObject(obj).getString("content"));
-		
-
-		//net.setNetcomm(comm);
-		
+				
 		net.setNetcomm(JSONObject.parseObject(obj).getString("content").replaceAll("[^\\u0000-\\uFFFF]", ""));
 
 		net.setNettime(new Date(Long.parseLong((JSONObject.parseObject(obj).getString("time")))));

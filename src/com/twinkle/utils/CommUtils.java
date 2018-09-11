@@ -26,7 +26,28 @@ public enum CommUtils {
 
 	INSTANCE;
 
+	private HashMap<String, String> options;
+
+	private AipOcr orcClient = new AipOcr(APP_ID, API_KEY, SECRET_KEY);
+
 	public static final String UUID = "020a2d70-cbbe-43fd-be3d-db7040d4a4e2";
+
+	private ThreadPoolExecutor initExeCutorPool = new ThreadPoolExecutor(2, 5, 5, TimeUnit.SECONDS,
+			new ArrayBlockingQueue<>(20));
+
+	private HashMap<String, String> validatorHashMapParam() {
+
+		if (options == null) {
+			options = new HashMap<>();
+		}
+
+		if (options.size() == 0) {
+			options.put("language_type", "ENG");
+		}
+
+		return options;
+
+	}
 
 	public Boolean regex(String text, String regex) {
 		return Pattern.compile(regex).matcher(text).find();
@@ -37,13 +58,11 @@ public enum CommUtils {
 	}
 
 	public String isServicePath() {
-		// System.out.println(path);
 		return regex(System.getProperty(Constant.JavaProperty), Constant.JavaPath) ? Constant.demoPath
 				: Constant.tomcatPath;
 	}
 
 	public String ocrPath() {
-		// System.out.println(path);
 		return regex(System.getProperty(Constant.JavaProperty), Constant.JavaPath) ? Constant.orcPath
 				: Constant.orcTomcatPath;
 	}
@@ -54,7 +73,7 @@ public enum CommUtils {
 			try {
 				xm = URLEncoder.encode(xh, "gb2312");
 			} catch (Exception e) {
-				e.printStackTrace();
+				return null;
 			}
 		}
 
@@ -90,9 +109,6 @@ public enum CommUtils {
 		arp.start();
 
 	}
-
-	private ThreadPoolExecutor initExeCutorPool = new ThreadPoolExecutor(2, 5, 5, TimeUnit.SECONDS,
-			new ArrayBlockingQueue<>(20));
 
 	public void addToExeCutorPool(Runnable r) {
 
@@ -143,14 +159,9 @@ public enum CommUtils {
 
 	}
 
-	private AipOcr orcClient = new AipOcr(APP_ID, API_KEY, SECRET_KEY);
-
 	public String getOrcText(byte[] bytes) {
 
-		HashMap<String, String> options = new HashMap<String, String>();
-		options.put("language_type", "ENG");
-
-		return orcClient.basicGeneral(bytes, options).toString();
+		return orcClient.basicGeneral(bytes, validatorHashMapParam()).toString();
 	}
 
 	public byte[] imgConvert(InputStream in) throws IOException {

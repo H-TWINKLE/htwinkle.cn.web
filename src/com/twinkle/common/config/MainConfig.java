@@ -34,15 +34,18 @@ public class MainConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configConstant(Constants me) {
+		
 		PropKit.use("config.properties");
 		me.setDevMode(PropKit.getBoolean("devMode"));
-		me.setBaseUploadPath("upload/temp/");
+		
 		me.setMaxPostSize(1024 * 1024 * 10);
-		// 设置默认下载文件路径 renderFile使用
-		me.setBaseDownloadPath("download");
+		me.setBaseUploadPath("upload");
+		me.setBaseDownloadPath("download");					
+		
 		me.setViewType(ViewType.JFINAL_TEMPLATE);
 		me.setError404View("/comm/error/404.html");
 		me.setError500View("/comm/error/500.html");
+		
 		me.setJsonFactory(MixedJsonFactory.me());
 
 	}
@@ -52,7 +55,7 @@ public class MainConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configRoute(Routes me) {
-		me.add("/", IndexController.class); // index 主页
+		me.add("/", IndexController.class);
 		me.add("/jwgl", JwglController.class);
 		me.add("/eol", EolController.class);
 		me.add("/netmusic", NetMusicController.class);
@@ -69,6 +72,7 @@ public class MainConfig extends JFinalConfig {
 		DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"),
 				PropKit.get("password").trim());
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+		
 		arp.setShowSql(PropKit.getBoolean("devMode"));
 		arp.setDialect(new MysqlDialect());
 
@@ -88,7 +92,6 @@ public class MainConfig extends JFinalConfig {
 		
 		me.add(new GlobalCountInterceptor());
 		
-
 	}
 
 	/**
@@ -96,9 +99,11 @@ public class MainConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configHandler(Handlers me) {
+		
 		me.add(new JreBelHander());
 		me.add(new ContextPathHandler("base"));
 		me.add(new UrlSkipHandler("^/Law.+", false));
+		
 	}
 
 	/**
@@ -106,9 +111,11 @@ public class MainConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configEngine(Engine me) {
+		
 		me.setDevMode(PropKit.getBoolean("devMode")); 
 		me.addSharedFunction("/comm/_layout.html");
 		me.addSharedFunction("/comm/_pour.html");
+		
 
 	}
 

@@ -9,24 +9,31 @@ public class ImgTask implements ITask {
 	@Override
 	public void run() {
 
-		deleteObsoluteImg();
-
-		try {
-			String[] str = new String[] { "wallQFJ", "wallKA", "wallJZ", "wallZW", "wallDW" }; // 风景，可爱，建筑，植物，动物
-
-			for (String s : str) {
-				ImgProxy.INSTANCE.get3GBiZhiImg(s);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		getListImg();
 	}
 
 	@Override
 	public void stop() {
 		// TODO 自动生成的方法存根
+
+	}
+
+	private void getListImg() {
+
+		deleteObsoluteImg();
+
+		try {
+			String[] str = new String[] { "wallQFJ", "wallKA", "wallJZ", "wallZW", "wallDW" }; // 风景，可爱，建筑，植物，动物
+
+			ImgProxy i = new ImgProxy();
+
+			for (String s : str) {
+				i.get3GBiZhiImg(s);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
