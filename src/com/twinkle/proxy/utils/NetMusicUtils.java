@@ -55,6 +55,8 @@ public enum NetMusicUtils {
 			netmusic.setNetcommid(JSONObject.parseObject(oj).get("commentThreadId").toString());
 
 			netmusic.setNetpic(((Map) JSONObject.parseObject(oj).get("album")).get("picUrl").toString());
+			
+			netmusic.setDate(new Date(System.currentTimeMillis()));
 
 			nlist.add(netmusic);
 
@@ -77,8 +79,6 @@ public enum NetMusicUtils {
 		net.setNettime(new Date(Long.parseLong((JSONObject.parseObject(obj).getString("time")))));
 
 		net.setNettauthor(((Map) JSONObject.parseObject(obj).get("user")).get("nickname").toString());
-		
-		net.setDate(new Date(System.currentTimeMillis()));
 
 		return net;
 
