@@ -1,11 +1,16 @@
 package com.twinkle.utils;
 
+import static com.twinkle.utils.Constant.API_KEY;
+import static com.twinkle.utils.Constant.APP_ID;
+import static com.twinkle.utils.Constant.SECRET_KEY;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -16,11 +21,17 @@ import javax.imageio.ImageIO;
 
 import com.baidu.aip.ocr.AipOcr;
 import com.jfinal.core.Controller;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.twinkle.common.model.Post;
 import com.twinkle.common.model._MappingKit;
+import com.twinkle.entity.BmobPost;
 
-import static com.twinkle.utils.Constant.*;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public enum CommUtils {
 
@@ -182,6 +193,97 @@ public enum CommUtils {
 		// ImageIO.write(newBImage, "jpg", new File("E:\\TWINKLE\\Desktop\\1.jpg"));
 
 		return os.toByteArray();
+
+	}
+
+	public BmobPost generateBmobPost(com.twinkle.common.model.Post post) {
+
+		if (post == null)
+			return null;
+
+		BmobPost bmobPost = new BmobPost();
+
+		if (post.getAuthor() != null) {
+			bmobPost.setAuthor(bmobPost.new User("_User", post.getAuthor()));
+		}
+
+		if (post.getTitle() != null) {
+			bmobPost.setTitle(post.getTitle());
+		}
+
+		if (post.getContent() != null) {
+			bmobPost.setContent(post.getContent());
+		}
+
+		if (post.getPic() != null) {
+
+			String pic = post.getPic();
+
+			if (StrKit.notBlank(pic)) {
+
+				bmobPost.setPic(bmobPost.new Array(Arrays.asList(pic.replace("[", "").replace("]", "").split(","))));
+			}
+		}
+
+		if (post.getTopic() != null) {
+
+			bmobPost.setTopic(
+					bmobPost.new Array(Arrays.asList(post.getTopic().replace("[", "").replace("]", "").split(","))));
+
+		}
+
+		if (post.getHot() != null) {
+			bmobPost.setHot(post.getHot());
+		}
+
+		if (post.getPlace() != null) {
+			bmobPost.setPlace(post.getPlace());
+		}
+
+		if (post.getUrl() != null) {
+			bmobPost.setUrl(post.getUrl());
+		}
+
+		if (post.getTypes() != null) {
+			bmobPost.setTypes(Integer.parseInt(post.getTypes()));
+		}
+
+		if (post.getNewsdate() != null) {
+			bmobPost.setNewsdate(post.getNewsdate());
+		}
+
+		return bmobPost;
+
+	}
+
+	private OkHttpClient ok;
+
+	private final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+	public void postPostToBmobDatabase(Post post) {
+
+		if (post == null)
+			return;
+
+		BmobPost bmobPost = CommUtils.INSTANCE.generateBmobPost(post);
+
+		// System.out.println(com.alibaba.fastjson.JSON.toJSONString(bmobPost));
+
+		ok = new OkHttpClient();
+
+		RequestBody body = RequestBody.create(JSON, com.alibaba.fastjson.JSON.toJSONString(bmobPost));
+
+		Request insert = new Request.Builder().url(Constant.BmobAddPostUrl)
+				.addHeader("Content-Type", "application/json")
+				.addHeader("X-Bmob-Application-Id", Constant.X_Bmob_Application_Id)
+				.addHeader("X-Bmob-REST-API-Key", Constant.X_Bmob_REST_API_Key).post(body).build();
+
+		try {
+			ok.newCall(insert).execute();
+			// System.out.println(r.body().string());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

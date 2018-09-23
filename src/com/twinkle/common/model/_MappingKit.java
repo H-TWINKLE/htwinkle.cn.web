@@ -26,6 +26,7 @@ public class _MappingKit {
 		arp.addMapping("jwglscore", "id", Jwglscore.class);
 		arp.addMapping("jwglttb", "id", Jwglttb.class);
 		arp.addMapping("netmusic", "id", Netmusic.class);
+		arp.addMapping("post", "id", Post.class);
 	}
 }
 

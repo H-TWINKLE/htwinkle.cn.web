@@ -39,10 +39,55 @@ public interface Constant {
 
 	public final static String meiRiYiWenUrl = "https://meiriyiwen.com/random";
 
-	public static final String APP_ID = "11692607";       //百度orc sdk
+	public static final String APP_ID = "11692607"; // 百度orc sdk
 	public static final String API_KEY = "OoKiNeBN2YBc0l2W2T0NI83P";
 	public static final String SECRET_KEY = "OWrrF6mpueItSb16RPvpBH222LDydriu";
-	
+
 	public static final String LOCALIP = "0:0:0:0:0:0:0:1";
 
+	public static final String CDNUEDUCNNOTICES = "http://www.cdnu.edu.cn/channels/1433";
+
+	public static final String HTML = ".html";
+
+	public static final String CDNUWEIBOLIFESHARE = "kxz2BBBY"; // 成都师范学院生活分享
+
+	public static final String CDNUWEIBOYISHI = "eBt1RRRM"; // 成都师范轶事
+
+	public static final String CDNUNEWS = "n2YxBBBk"; // 成都师范学院官方新闻
+
+	public static final String CDNUTIEBASHARE = "VtYf666P"; // 成都师范学院贴吧吐槽
+
+	public static final String CDNU = "http://www.cdnu.edu.cn";
+
+	public static final String NEWS = "[新闻公告]";
+	
+	public static final String YISHI = "[成师轶事]";
+	
+	public static final String SHARE = "[生活分享]";
+	
+	public static final String TIEBASHARE = "[贴吧吐槽]";
+
+	public static final String TEXT = "1";
+	public static final String IMG_TEXT = "2";
+	public static final String ONE_ING_TEXT = "3";
+
+	public static final String X_Bmob_Application_Id = "efcec7fdecd3aefe199792559b33bf1b";
+
+	public static final String X_Bmob_REST_API_Key = "2f6e22943cb0acd32ca6c5d0dfa07b08";
+
+	public static final String BmobAddPostUrl = "https://api2.bmob.cn/1/classes/Post";
+	
+	public static final String WEIBOJSON = "https://m.weibo.cn/api/container/getIndex?containerid=";
+
+	public static final String WEIBOJSONBYYISHI = "1076033700687004&page=";
+
+	public static final String WEIBOJSONBYCDNU = "1076033963799894&page=";
+	
+	public static final String CDNUTIEBA = "成都师范学院";
+	
+	public static final String TieBaUrl = "https://tieba.baidu.com/f?kw=";
+	
+	public static final String TieBa = "https://tieba.baidu.com";
+	
+	
 }
