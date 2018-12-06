@@ -1,15 +1,18 @@
 package com.twinkle.service;
 
 import java.util.Date;
+import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.twinkle.common.model.Eol;
+import com.twinkle.common.model.Eoltip;
+import com.twinkle.plugin.EolSpiderByMobile;
 import com.twinkle.proxy.EolProxy;
 import com.twinkle.utils.Constant;
 
 public class EolService {
 
-	public Eol toLogin(String admin, String pass) {
+	public Eol toLoginAsOld(String admin, String pass) {
 
 		if (admin == null || "".equals(admin)) {
 			return null;
@@ -38,9 +41,62 @@ public class EolService {
 
 			checkEolLoginInDelete(admin);
 
+			List<Eoltip> list = eProxy.eolStudentWorkTip();
+
+			if (list == null) {
+				eol.setTip("您的所有作业都写完咯！");
+				eol.setCode(Constant.WORK_COMPLETE);
+				eol.save();
+				return eol;
+			}
+
+			eol.save();
+			eol.setList(eProxy.analClassTip(list));
+
+		}
+
+		return eol;
+	}
+
+	public Eol toLogin(String admin, String pass) {
+
+		if (admin == null || "".equals(admin)) {
+			return null;
+		}
+
+		if (pass == null || "".equals(pass)) {
+			return null;
+		}
+
+		EolSpiderByMobile e = new EolSpiderByMobile();
+
+		Eol eol = e.toLogin(admin, pass);
+
+		if (eol == null) {
+
+			eol = new Eol();
+			eol.setDates(new Date(System.currentTimeMillis()));
+			eol.setCode(Constant.SERVERERROR);
+			eol.setTip(Constant.FAILURESERVER);
+			return eol;
+		}
+
+		if (eol.getCode() == Constant.SUCCESS) {			
+
+			checkEolLoginInDelete(admin);
+			
 			eol.save();
 
-			eol.setList(eProxy.analClassTip());
+			List<List<Eoltip>> list = e.getListEolTip(eol);
+
+			if (list == null) {
+				eol.setTip("您的所有作业都写完咯！");
+				eol.setCode(Constant.WORK_COMPLETE);
+				eol.save();
+				return eol;
+			}
+
+			eol.setList(list);
 
 		}
 

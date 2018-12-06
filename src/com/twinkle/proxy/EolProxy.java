@@ -61,7 +61,9 @@ public class EolProxy {
 		eol.setAdmin(admin);
 		eol.setPass(pass);
 
-		RequestBody rbody = new FormBody.Builder().add("IPT_LOGINUSERNAME", admin).add("IPT_LOGINPASSWORD", pass)
+		RequestBody rbody = new FormBody.Builder().add("IPT_LOGINUSERNAME", admin)
+				.add("IPT_LOGINPASSWORD", pass)
+				.add("logintoken", String.valueOf(System.currentTimeMillis()))
 				.build();
 
 		Request request = new Request.Builder().url(Constant.eolLogin).post(rbody).header("Cookie", eolGetIndex()) // 调用预登录获取cookie
@@ -173,12 +175,51 @@ public class EolProxy {
 		return eol;
 
 	}
+	
+	public List<Eoltip> eolStudentWorkTip() { // eol主页 获取用户作业提示
 
-	public List<List<Eoltip>> analClassTip() { // 分别获取每科作业提示方法 3
+		Request request = new Request.Builder().url(Constant.eolTask).get().header("Cookie", eol.getCookies())
+				.build();
+
+		Call call = okHttpClient.newCall(request);
+
+		try {
+			response = call.execute();
+
+			byte[] bytes = response.body().bytes();
+
+			String text = "";
+
+			try {
+				text = new String(bytes, "gbk");
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+
+			if ("".equals(text)) {
+
+				return null;
+
+			} else {
+				return EolUtils.getInstance().analStudentClassTip(eol, text);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			response.close();
+		}
+
+		return null;
+
+	}
+	
+	
+
+	public List<List<Eoltip>> analClassTip(List<Eoltip> list) { // 分别获取每科作业提示方法 3
 
 		List<List<Eoltip>> li = new ArrayList<>();
-
-		List<Eoltip> list = EolUtils.getInstance().analStudentIndexClassTip(new ArrayList<>()); // 获取所有作业提示 4
 
 		if (list == null)
 			return null;
