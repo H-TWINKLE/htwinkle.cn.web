@@ -20,7 +20,7 @@ public class ImgProxy {
 
 			Document doc = Jsoup.connect(Constant.g3BiZhiUrl + types + "/").get();
 
-			Elements ele = doc.getElementById("load-img").getElementsByTag("img");
+			Elements ele = doc.select("ul.pic-list2.martop.clearfix").first().getElementsByTag("img");
 
 			if (ele == null || ele.size() == 0)
 				return null;
@@ -35,13 +35,13 @@ public class ImgProxy {
 
 				img.setHost(Constant.g3BiZhiUrl);
 
-				img.setName(e.attr("alt"));
+				img.setName(e.attr("title"));
 
 				img.setTypes(types);
 
-				img.setPic(e.attr("src").replace(".255.344.jpg", ""));
+				img.setPic(e.attr("src").replace("https", "http").replace("208x312c5", "1920x1080c"));
 
-				img.setDate(new Date(System.currentTimeMillis()));
+				img.setDate(new Date());
 
 				img.save();
 

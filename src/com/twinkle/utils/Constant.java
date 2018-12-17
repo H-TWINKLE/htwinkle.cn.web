@@ -51,7 +51,7 @@ public interface Constant {
 	public final static String NetMusicUrl = "http://music.163.com/discover/toplist?id=3778678";
 	public final static String NetMusicCommUrl = "http://music.163.com/api/v1/resource/comments/";
 
-	public final static String g3BiZhiUrl = "http://www.3gbizhi.com/";
+	public final static String g3BiZhiUrl = "http://sj.zol.com.cn/bizhi/";
 
 	public final static String meiRiYiWenUrl = "https://meiriyiwen.com/random";
 

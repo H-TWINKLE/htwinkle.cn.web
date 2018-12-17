@@ -54,12 +54,12 @@ public class ImgController extends BaseController {
 		String types = getPara("types");
 
 		if (types == null || "".equals(types)) {
-			return types = "wallQFJ";
+			return types = "fengjing";
 		}
 
-		if (!"wallQFJ".equals(types) || !"wallKA".equals(types) || !"wallJZ".equals(types) || !"wallZW".equals(types)
-				|| !"wallDW".equals(types))
-			return types = "wallQFJ";
+		if (!"fengjing".equals(types) || !"keai".equals(types) || !"jianzhu".equals(types) || !"zhiwu".equals(types)
+				|| !"dongwu".equals(types))
+			return types = "fengjing";
 
 		return types;
 

@@ -24,7 +24,7 @@ public class ArticleService {
 	
 	public List<Article> getListArticle(Integer num){
 		
-		List<Article> list = Article.dao.find("SELECT * FROM `article` AS t1 JOIN (SELECT ROUND(RAND() * ((SELECT MAX(id) FROM `article`)-(SELECT MIN(id) FROM `article`))+(SELECT MIN(id) FROM `article`)) AS id) AS t2 WHERE t1.id >= t2.id ORDER BY t1.id LIMIT 0,?",num);
+		List<Article> list = Article.dao.find("SELECT t1.id,t1.title,t1.author,t1.content,t1.dates FROM `article` AS t1 JOIN (SELECT ROUND(RAND() * ((SELECT MAX(id) FROM `article`)-(SELECT MIN(id) FROM `article`))+(SELECT MIN(id) FROM `article`)) AS id) AS t2 WHERE t1.id >= t2.id ORDER BY t1.id LIMIT 0,?",num);
 		
 		if(list==null) {
 			

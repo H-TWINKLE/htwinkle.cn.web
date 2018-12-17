@@ -16,9 +16,6 @@ public class TieBaTask implements ITask {
 
 		Post post = getTheNewestPost();
 
-		if (post == null)
-			return;
-
 		// System.out.println("----------标准url: " + post.getUrl() + " -- " +
 		// post.getNewsdate());
 
@@ -28,31 +25,39 @@ public class TieBaTask implements ITask {
 
 		List<Post> list = new ArrayList<>();
 
-		OUT: while (true) {
+		if (post == null) {
+			savePostWhenPostIsNull(proxy, list, pages);
+		} else {
+			OUT: while (true) {
 
-			List<Post> li = proxy.getTieBa(pages, Constant.CDNUTIEBA, Constant.CDNUTIEBASHARE, Constant.TIEBASHARE);
+				List<Post> li = proxy.getTieBa(pages, Constant.CDNUTIEBA, Constant.CDNUTIEBASHARE, Constant.TIEBASHARE);
 
-			for (int x = 0; x < li.size(); x++) {
+				for (int x = 0; x < li.size(); x++) {
 
-				Post post2 = li.get(x);
+					Post post2 = li.get(x);
 
-				if (post.getUrl().equals(post2.getUrl())) {
-					System.out.println(
-							"----------post url: " + post.getUrl() + "----------post url" + post2.getUrl() + " 相等，正在退出...");
+					if (post.getUrl().equals(post2.getUrl())) {
+						System.out.println("----------post url: " + post.getUrl() + "----------post url"
+								+ post2.getUrl() + " 相等，正在退出...");
 
+						break OUT;
+					} else {
+						System.out.println("----------post url: " + post.getUrl() + "----------posturl "
+								+ post2.getUrl() + " 不相等--" + post2.getNewsdate());
+						list.add(post2);
+						// post2.save();
+						// CommUtils.INSTANCE.postPostToBmobDatabase(post2);
+					}
+
+				}
+
+				pages++;
+
+				if (pages == 10) {
 					break OUT;
-				} else {
-					System.out.println("----------post url: " + post.getUrl() + "----------posturl " + post2.getUrl()
-							+ " 不相等--" + post2.getNewsdate());
-					list.add(post2);
-					// post2.save();
-					// CommUtils.INSTANCE.postPostToBmobDatabase(post2);
 				}
 
 			}
-
-			pages++;
-
 		}
 
 		for (int x = list.size() - 1; x >= 0; x--) {
@@ -70,6 +75,12 @@ public class TieBaTask implements ITask {
 	@Override
 	public void stop() {
 		// TODO 自动生成的方法存根
+
+	}
+
+	private void savePostWhenPostIsNull(TieBaProxy proxy, List<Post> li, int pages) {
+
+		li = proxy.getTieBa(pages, Constant.CDNUTIEBA, Constant.CDNUTIEBASHARE, Constant.TIEBASHARE);
 
 	}
 

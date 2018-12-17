@@ -23,7 +23,7 @@ public class ImgTask implements ITask {
 		deleteObsoluteImg();
 
 		try {
-			String[] str = new String[] { "wallQFJ", "wallKA", "wallJZ", "wallZW", "wallDW" }; // 风景，可爱，建筑，植物，动物
+			String[] str = new String[] { "fengjing", "keai", "jianzhu", "zhiwu", "dongwu" }; // 风景，可爱，建筑，植物，动物
 
 			ImgProxy i = new ImgProxy();
 
