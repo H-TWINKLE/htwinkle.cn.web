@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+
+<!--/*@thymesVar id="title" type="string"*/-->
+<!--_comm/_commLayout::_commHead(${title},~{::link})-->
+<head th:replace="_comm/_commLayout::_commHead(${title},~{})">
+
+</head>
+
+
+<body>
+
+<div data-vide-bg="http://vodkgeyttp8.vod.126.net/cloudmusic/cea6/core/b368/8db3ae83a7ab5cdf0bba1d8d2435a7f7.mp4?wsSecret=8367522c867e8ad08bf33f05cf36f648&wsTime=1572076949">
+    <div class="center-container">
+
+
+        <div class="container">
+
+            <th:block th:replace="_comm/_commLayout::_commNav('HOME')"/>
+
+
+            <div class="box_1-top">
+                <div class="banner-info">
+                    <h2>&nbsp;</h2>
+                    <h3>&nbsp;</h3>
+                    <!--<h2>风雨如晦，鸡鸣不已</h2>
+                    <h3>曾经沧海难为水，除却巫山不是云</h3>-->
+                    <!-- <a class="hvr-rectangle-out button" href="#">Check out our features</a>-->
+                </div>
+                <div class="arrow text-center"><a class="scroll" href="#banner-bottom">
+                    <img th:src="@{images/arrow.png}" alt=""/></a></div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/js/jquery.vide.min.js}"></script>
+
+<!--banner bottom-->
+<div id="banner-bottom" class="banner-bottom">
+    <div class="container">
+        <div class="bottom-grids">
+            <div class="col-md-3 bottom-grid text-center">
+                <h3>Weight Lifting</h3>
+                <img src="images/pic1.png" alt=""/>
+                <p>At vero eos et accusamus et iusto odio
+                    dignissimos ducimus qui blanditiis praesentium
+                    voluptatum deleniti.</p>
+            </div>
+            <div class="col-md-3 bottom-grid text-center">
+                <h3>Dumbbell</h3>
+                <img src="images/pic2.png" alt=""/>
+                <p>At vero eos et accusamus et iusto odio
+                    dignissimos ducimus qui blanditiis praesentium
+                    voluptatum deleniti.</p>
+            </div>
+            <div class="col-md-3 bottom-grid text-center">
+                <h3>Treadmill</h3>
+                <img src="images/pic3.png" alt=""/>
+                <p>At vero eos et accusamus et iusto odio
+                    dignissimos ducimus qui blanditiis praesentium
+                    voluptatum deleniti.</p>
+            </div>
+            <div class="col-md-3 bottom-grid text-center">
+                <h3>Bicycle</h3>
+                <img src="images/pic4.png" alt=""/>
+                <p>At vero eos et accusamus et iusto odio
+                    dignissimos ducimus qui blanditiis praesentium
+                    voluptatum deleniti.</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="content-grids">
+            <div class="col-md-4 content-left text-center">
+                <h4>Strength <span>Training</span></h4>
+                <p> Nam libero tempore, cum soluta nobis
+                    est eligendi optio cumque nihil impedit
+                    quo minus id quod maxime placeat
+                    assumenda est, omnis dolor repellendus. </p>
+            </div>
+            <div class="col-md-8 content-right">
+                <img class="img-responsive" src="images/pic9.jpg" alt=""/>
+            </div>
+            <div class="col-md-8 content-right">
+                <img class="img-responsive" src="images/pic5.jpg" alt=""/>
+            </div>
+            <div class="col-md-4 content-left text-center">
+                <h4>Weight <span>Loss</span></h4>
+                <p> Nam libero tempore, cum soluta nobis
+                    est eligendi optio cumque nihil impedit
+                    quo minus id quod maxime placeat
+                    assumenda est, omnis dolor repellendus. </p>
+            </div>
+            <div class="col-md-4 content-left text-center">
+                <h4>Best <span>Nutrition</span></h4>
+                <p> Nam libero tempore, cum soluta nobis
+                    est eligendi optio cumque nihil impedit
+                    quo minus id quod maxime placeat
+                    assumenda est, omnis dolor repellendus. </p>
+            </div>
+            <div class="col-md-8 content-right">
+                <img class="img-responsive" src="images/pic12.jpg" alt=""/>
+            </div>
+            <div class="col-md-8 content-right">
+                <img class="img-responsive" src="images/pic10.jpg" alt=""/>
+            </div>
+            <div class="col-md-4 content-left text-center">
+                <h4>Healthy <span>Diet</span></h4>
+                <p> Nam libero tempore, cum soluta nobis
+                    est eligendi optio cumque nihil impedit
+                    quo minus id quod maxime placeat
+                    assumenda est, omnis dolor repellendus. </p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--//banner bottom-->
+<div class="testimonials">
+    <div class="container">
+        <h3>风雨如晦，鸡鸣不已</h3>
+        <p>曾经沧海难为水<span>除却巫山不是云</span></p>
+    </div>
+</div>
+<!--training-->
+<!--<div class="training">
+    <div class="container">
+        <div class="col-md-8 training-grid">
+            <h3>Look and feel better in 30 days <span>,guaranteed.</span></h3>
+            <div class="train-left">
+                <img class="img-responsive" src="images/pic13.jpg" alt=""/>
+            </div>
+            <div class="train-right">
+                <p>Sed ut perspiciatis unde omnis
+                    iste natus _error sit voluptatem accusantium
+                    doloremque laudantium, totam rem aperiam,
+                    eaque ipsa quae ab illo inventore veritatis
+                    et quasi architecto beatae vitae dicta sunt explicabo.
+                    At vero eos et accusamus et iusto
+                    odio dignissimos ducimus qui blanditiis.
+                    Nemo enim ipsam voluptatem quia
+                    voluptas sit aspernatur aut odit aut fugit,
+                    sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>
+            </div>
+            <div class="clearfix"></div>
+            <div class="method-grids">
+                <h3>Fitness Instructions</h3>
+                <ul>
+                    <li><a href="#">voluptatem accusantium </a></li>
+                    <li><a href="#">dignissimos ducimus</a></li>
+                    <li><a href="#">doloremque laudantium</a></li>
+                    <li><a href="#">voluptatem accusantium </a></li>
+                    <li><a href="#">dignissimos ducimus</a></li>
+                    <li><a href="#">doloremque laudantium</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">dignissimos ducimus</a></li>
+                    <li><a href="#">voluptatem accusantium </a></li>
+                    <li><a href="#">doloremque laudantium</a></li>
+                    <li><a href="#">voluptatem accusantium </a></li>
+                    <li><a href="#">dignissimos ducimus</a></li>
+                    <li><a href="#">doloremque laudantium</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">voluptatem accusantium </a></li>
+                    <li><a href="#">dignissimos ducimus</a></li>
+                    <li><a href="#">doloremque laudantium</a></li>
+                    <li><a href="#">voluptatem accusantium </a></li>
+                    <li><a href="#">dignissimos ducimus</a></li>
+                    <li><a href="#">doloremque laudantium</a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-4 training-left">
+            <h3>Fitness</h3>
+            <p>At vero eos et accusamus et iusto
+                odio dignissimos ducimus qui blanditiis
+                praesentium voluptatum deleniti atque
+                corrupti quos dolores et quas molestias
+                excepturi sint occaecati cupiditate non
+                provident, similique sunt in culpa qui officia
+                deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+            <img class="img-responsive" src="images/pic14.jpg" alt=""/>
+            <p>Sed ut perspiciatis unde omnis
+                iste natus _error sit voluptatem accusantium
+                doloremque laudantium, totam rem aperiam,
+                eaque ipsa quae ab illo inventore veritatis</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>-->
+<!--//training-->
+<!--footer-top-->
+<!--<div class="footer-top">
+    <div class="container">
+        <div class="footer-left">
+            <h3>INFORMATION</h3>
+            <p>At vero eos et accusamus et iusto
+                odio dignissimos ducimus qui blanditiis
+                praesentium voluptatum deleniti atque
+                corrupti quos dolores et quas molestias
+                excepturi sint occaecati cupiditate non
+                provident, similique sunt in culpa qui officia
+                deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+            <ul>
+                <li>The company name <span>Lorem ipsum dolor,</span>Glasglow Dr 40 Fe 72.</li>
+                <li>1234567890</li>
+                <li><a href="mailto:info@example.com">contact@example.com</a></li>
+            </ul>
+        </div>
+        <div class="footer-middle">
+            <h3>FROM THE BLOG</h3>
+            <div class="foo-grids">
+                <a href="#"><img class="img-responsive" src="images/blog1.jpg" alt=""/></a>
+                <p><a href="#">Accusamus et iusto
+                    odio dignissimos ducimus et iusto odio qui blanditiis dignissimos</a></p>
+                <div class="clearfix"></div>
+            </div>
+            <div class="foo-grids">
+                <a href="#"><img class="img-responsive" src="images/blog2.jpg" alt=""/></a>
+                <p><a href="#">Odio dignissimos ducimus qui blanditiis
+                    praesentium voluptatum Accusamus et iusto</a></p>
+                <div class="clearfix"></div>
+            </div>
+            <div class="foo-grids">
+                <a href="#"><img class="img-responsive" src="images/blog3.jpg" alt=""/></a>
+                <p><a href="#">Dignissimos ducimus qui blanditiis
+                    praesentium voluptatum. Odio dignissimos ducimus</a></p>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="footer-right">
+            <h3>SUBSCRIBE NOW</h3>
+            <p>Sed ut perspiciatis
+                odio dignissimos ducimus qui blanditiis
+                praesentium voluptatum deleniti atque
+                corrupti quos dolores et quas molestias</p>
+            <form>
+                <input type="text" value="Email" onfocus="this.value = '';"
+                       onblur="if (this.value == '') {this.value = 'Email';}" required="">
+                <input type="submit" value=" ">
+            </form>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>-->
+
+<!--_comm/_commLayout::_commEnd(~{::script})-->
+<th:block th:replace="_comm/_commLayout::_commEnd(~{})">
+
+
+</th:block>
+
+</body>
+</html>

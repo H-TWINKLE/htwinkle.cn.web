@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>500 - 服务器内部错误</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Dosis:400,300,500,800'>
+
+  <link rel="stylesheet" th:href="@{/_error/css/style.css}">
+
+  <link th:href="@{/pic/logo.png}" rel="icon" type="image/png" sizes="32x32"/>
+
+  
+</head>
+
+<body>
+  
+<div class="content">
+  <canvas class="snow" id="snow"></canvas>
+  <div class="main-text">
+    <h1>先生.<br/>您好像把服务器弄崩溃了.</h1><a class="home-link" th:href="@{/}">返回主页.</a>
+  </div>
+  <div class="ground">
+    <div class="mound"> 
+      <div class="mound_text">500</div>
+      <div class="mound_spade"></div>
+    </div>
+  </div>
+</div>
+  
+    <script th:src="@{/_error/js/index.js}"></script>
+
+</body>
+</html>

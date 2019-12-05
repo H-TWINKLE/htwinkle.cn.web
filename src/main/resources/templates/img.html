@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--/*@thymesVar id="title" type="ch"*/-->
+<head th:include="_comm/_commLayout::_commHead(${title},~{::link})">
+
+    <link rel="stylesheet" th:href="@{/_pour/css/normalize.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/_pour/css/default.css}">
+
+</head>
+
+
+<body>
+
+<th:block th:include="_comm/_commPour::_commStyle"/>
+
+
+<div class="page-head">
+    <div class="container">
+        <th:block th:replace="_comm/_commLayout::_commNav"/>
+    </div>
+</div>
+
+<div class="about">
+    <div class="container">
+        <!--/*@thymesVar id="plist" type="ch"*/-->
+        <section id="gallery-wrapper" th:each="li:${plist}">
+
+            <article class="white-panel">
+                <!--/*@thymesVar id="pic" type="cn"*/-->
+                <!--/*@thymesVar id="name" type="cn"*/-->
+                <img th:src="*{pic}" class="thumb" th:alt="*{name}"/>
+
+                <h1>
+                    <a th:href="*{pic}" th:text="*{name}">图片名字</a>
+                </h1>
+
+                <!--/*@thymesVar id="date" type="cn"*/-->
+                <p th:text="${123}">#date(x.getDate()??, "yyyy-MM-dd HH:mm:ss")</p>
+            </article>
+
+        </section>
+    </div>
+</div>
+
+<th:block th:replace="_comm/_commPour::_commEnd"/>
+
+</body>
+
+</html>
