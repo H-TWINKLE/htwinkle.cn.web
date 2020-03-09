@@ -1,0 +1,30 @@
+#@layout() #define title()
+<title>每日一文</title>
+#end #define main()
+
+<div id="page-wrapper">
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="login_success_panel" style="margin: auto;">
+        <section class="panel spotlight large left color3-alt"
+                 style="width: 1000px;">
+
+            <div class="inner columns aligned" style="margin: auto;">
+
+                <div class="span-8">
+
+                    <h1 class="title">#(article.getTitle()??)</h1>
+                    <h3 class="author">作者&nbsp;&nbsp;#(article.getAuthor()??)</h3>
+                    <h5 class="dates">更新时间&nbsp;&nbsp;#date(article.getDates()??)
+
+                    </h5>
+                    <div class="contents">#(article.getContent()??)</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="#(base)/assets/css/mycss.css"/>
+#end

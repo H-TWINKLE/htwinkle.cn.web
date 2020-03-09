@@ -1,0 +1,23 @@
+#@pour() #define main()
+<section id="gallery-wrapper">
+    #for( x : netmusic??)
+    <article class="white-panel">
+        <img src="#(x.getNetpic()??)" class="thumb">
+        <h1>
+            <a href="https://music.163.com/#/song?id=#(x.getNetmusicurl()??)">#(x.getNetcomm()??)</a>
+        </h1>
+        <p>#(x.getNetname()??) --- #(x.getNetsinger()??)</p>
+    </article>
+    #end
+</section>
+
+<script type="text/javascript">
+    var ls = "#(netmusic??)";
+
+    if (ls == "") {
+        setTimeout(" window.location.reload()", 5000);
+    }
+</script>
+
+
+#end

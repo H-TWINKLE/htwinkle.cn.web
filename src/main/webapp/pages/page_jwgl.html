@@ -1,0 +1,60 @@
+#@layout() #define title()
+<title>教务管理系统</title>
+#end #define main()
+
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+
+    <!-- Wrapper -->
+    <div id="wrapper" style="margin: auto;">
+        <!-- Panel (Spotlight) -->
+        <section class="panel spotlight medium right" id="first">
+            <div class="content span-6">
+                <h2 class="major" style="margin-top: -100px;">登录</h2>
+                <div class="span-6">
+                    <form method="post" action="#(base)/jwgl/login">
+                        <div class="field ">
+                            <label for="name">学号</label> <input type="text" name="admin"
+                                                                placeholder="#(adminMsg)" id="admin"/>
+                        </div>
+                        <div class="field ">
+                            <label for="pass">教务管理系统密码</label> <input type="password"
+                                                                      placeholder="#(passMsg)" name="pass" id="pass"/>
+                        </div>
+                        <ul class="actions" style="margin: right; margin-top: 20px;">
+                            <li>
+                                <div class="field quarter">
+                                    <input type="checkbox" id="checks" name="checks" class="color2"/>
+                                    <label for="checks">新登录</label>
+                                </div>
+                            </li>
+                            <li><input type="submit" value="登录" class="button special"
+                                       style="font-size: 1.0em;"/></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+            <div class="image filtered tinted" data-position="top left">
+                <img src="http://#(key_of_image??)/2018/09/11/5ad73b074072a074801f2708408d3eeb.jpg" alt=""/>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    var data = "#(TipMsg)";
+
+    if (data != "") {
+        setTimeout("shows()", 1000);
+    }
+
+    function shows() {
+        toastr["warning"](data)
+    }
+
+</script>
+
+#end
+

@@ -1,0 +1,24 @@
+#@pour()
+#define main()
+<section id="gallery-wrapper">
+    #for( x : img??)
+    <article class="white-panel">
+        <img src="#(x.getPic()??)" class="thumb">
+        <h1>
+            <a href="#(x.getPic()??)">#(x.getName()??)</a>
+        </h1>
+        <p>#date(x.getDate()??, "yyyy-MM-dd HH:mm:ss")</p>
+    </article>
+    #end
+</section>
+
+
+<script type="text/javascript">
+    var ls = "#(img??)";
+
+    if (ls == "") {
+        setTimeout(" window.location.reload()", 5000);
+    }
+</script>
+
+#end

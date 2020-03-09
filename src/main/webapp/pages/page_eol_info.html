@@ -1,0 +1,95 @@
+#@layout() #define title()
+<title>网络教学平台 - 个人信息</title>
+#end #define main()
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="login_success_panel">
+        <section class="panel spotlight large left color4-alt">
+            <div class="content span-5">
+                <h2 class="major">
+                    <p style="text-indent: 0em;">个人信息</p>
+                </h2>
+                <p style="text-indent: 0em;">像梦一样的触动.</p>
+            </div>
+            <div class="inner columns aligned" style="margin: auto;">
+
+                <div class="span-8">
+
+                    <div class="table-wrapper">
+                        <table class="alt">
+                            <thead>
+                            <tr>
+                                <th>类别</th>
+                                <th>信息</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>我的学号：</td>
+                                <td>#(eol.getAdmin()??)</td>
+                            </tr>
+                            <tr>
+                                <td>登录次数：</td>
+                                <td>#(eol.getLoginfre()??)</td>
+                            </tr>
+                            <tr>
+                                <td>姓名：</td>
+                                <td>#(eol.getName()??)</td>
+                            </tr>
+                            <tr>
+                                <td>在线总时长：</td>
+                                <td>#(eol.getOnlinetime()??)</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- list -->
+
+        <section class="panel color2-alt">
+            <div class="inner columns aligned">
+                <div class="span-6">
+                    <h3 class="major">我的作业</h3>
+                    <div class="table-wrapper">
+                        <table id="tables" role="grid">
+                            <thead>
+                            <tr>
+                                <th>科目</th>
+                                <th>作业</th>
+                                <th>截止提交时间</th>
+                                <th>查询更新时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            #for(xy : eol.getList()) #for(x : xy)
+                            <tr>
+                                <td>#(x.getSubject()??)</td>
+                                <td>#(x.getTitle()??)</td>
+                                <td>#(x.getAbort()??)</td>
+                                <td>#date(x.getDates()??, "yyyy-MM-dd HH:mm:ss")</td>
+                            </tr>
+                            #end #end
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="#(base)/assets/css/mycss.css"/>
+<script src="#(base)/assets/js/jquery.dataTables.min.js"></script>
+<script src="#(base)/assets/js/myjs.js"></script>
+<script type="text/javascript">
+    $('#tables').DataTable(tablecss);
+</script>
+
+
+#end

@@ -1,0 +1,60 @@
+#@layout() #define title()
+<title>网络教学平台</title>
+#end #define main()
+
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+
+    <!-- Wrapper -->
+    <div id="wrapper" style="margin: auto;">
+        <!-- Panel (Spotlight) -->
+        <section class="panel color1">
+            <div class="intro joined" style="margin-left: 50px;">
+                <h2 class="major">
+                    <p>网络教学平台</p>
+                </h2>
+                <p>走走停停，不忘学习的初心。</p>
+            </div>
+            <div class="inner" style="margin-left: 0px;">
+                <div class="content span-3">
+                    <h2 class="major" style="margin-top: -20px;">登录</h2>
+                    <div class="span-2">
+                        <form method="post" action="#(base)/eol/login">
+                            <div class="field ">
+                                <label for="name">学号</label> <input type="text" name="admin"
+                                                                    placeholder="#(adminMsg)" id="admin"/>
+                            </div>
+                            <div class="field ">
+                                <label for="pass">网络教学平台密码</label> <input type="password"
+                                                                          placeholder="#(passMsg)" name="pass"
+                                                                          id="pass"/>
+                            </div>
+                            <ul class="actions" style="margin: right; margin-top: 20px;">
+                                <li><input type="submit" value="登录" class="button special"
+                                           style="font-size: 1.0em;"/></li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    var data = "#(TipMsg)";
+
+    if (data != "") {
+        setTimeout("shows()", 1000);
+    }
+
+    function shows() {
+        toastr["warning"](data)
+    }
+
+</script>
+
+#end
+
