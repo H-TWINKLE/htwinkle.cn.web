@@ -1,0 +1,74 @@
+#@_layout()
+#define _main()
+
+<link rel="stylesheet" href="#(base)/assets/css/mycss.css"/>
+
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="login_success_panel" style="margin-left: 80px;">
+        <!-- list -->
+        <section class="panel banner color2-alt center">
+            <div class="inner columns aligned" >
+                <div class="span-6">
+                    <h3 class="major">我的文件
+                        <span id="upFile" style="margin-left: 20px;font-size: 0.8em;color: #ffcc37">上传</span></h3>
+                    <div class="table-wrapper">
+                        <table id="tables" role="grid">
+                            <thead>
+                            <tr>
+                                <th>文件名称</th>
+                                <th>文件大小</th>
+                                <th>修改时间</th>
+                                <th>下载</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            #for(li : allFile??)
+                            <tr>
+                                <td>#(li.name??)</td>
+                                <td>#(li.size??)</td>
+                                <td>#date(li.date??)</td>
+                                <td><a target="_blank" href="#(base)#(li.path??)">下载</a></td>
+                            </tr>
+                            #end
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<form action="#(base??)/diao/uploadFile" method="post" enctype="multipart/form-data"
+      style="visibility: hidden">
+    <input type="file" id="realFile" name="uploadFile">
+</form>
+
+
+<script src="#(base)/assets/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tables').DataTable(tablecss);
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#upFile").click(function () {
+            $("#realFile").click();
+        });
+
+        $("#realFile").change(function () {
+            $("form")[0].submit();
+        });
+
+    });
+</script>
+
+
+#end

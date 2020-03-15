@@ -1,0 +1,27 @@
+#@_layout()
+
+#define _main()
+
+<link rel="stylesheet" href="#(base)/assets/css/mycss.css"/>
+
+<div id="page-wrapper">
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="login_success_panel" style="margin: auto;">
+        <section class="panel spotlight large left color3-alt"
+                 style="width: 1000px;">
+
+            <div class="inner columns aligned" style="margin: auto;">
+
+                <div class="span-8">
+                    <h1 class="title">#(article.articleTitle??)</h1>
+                    <h3 class="author">作者&nbsp;&nbsp;#(article.articleAuthor??)</h3>
+                    <h5 class="dates">更新时间&nbsp;&nbsp;#date(article.articleDate??)</h5>
+                    <div class="contents">#(article.articleContent??)</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+#end

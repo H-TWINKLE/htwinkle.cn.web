@@ -1,19 +1,44 @@
 package cn.htwinkle.devotion.base;
 
 import cn.htwinkle.devotion.constants.Constants;
+import cn.htwinkle.devotion.model.User;
 import com.jfinal.core.Controller;
+import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 
-import java.util.List;
-
 public abstract class BaseController extends Controller {
 
-    protected Integer getDefaultPages(Integer pages) {
-        if (pages == null || pages == 0) {
-            return 1;
+    /**
+     * 首页
+     */
+    public abstract void index();
+
+    /**
+     * api接口
+     */
+    public abstract void api();
+
+    protected User getSessionUser() {
+        return getAttr(Constants.SESSION_USER);
+    }
+
+    protected void setSessionUser(User user) {
+        setAttr(Constants.SESSION_USER, user);
+    }
+
+
+    /**
+     * 返回默认的请求条数为api负责
+     *
+     * @return Integer
+     */
+    protected Integer getDefaultNumForApi() {
+        Integer num = getParaToInt("num");
+        if (num == null || num == 0) {
+            return 10;
         }
-        return pages;
+        return null;
     }
 
 
@@ -32,134 +57,13 @@ public abstract class BaseController extends Controller {
         setAttr(Constants.TITLE, title);
     }
 
-    protected void setTitle(String title, Integer id) {
-        if (id == null) {
-            setAttr(Constants.TITLE, "修改" + title);
-        } else {
-            setAttr(Constants.TITLE, "新增" + title);
-        }
-    }
 
-    protected void vailObjectAsJson(Object... o) {
-
-        for (Object ob : o) {
-            if (ob == null) {
-                renderJson(Ret.fail("msg", "参数为空"));
-                return;
-            }
-
-        }
-
-    }
-
-    protected void vailObjectAsHtmlText(Object... o) {
-
-        for (Object ob : o) {
-
-            if (ob == null) {
-                renderText("请正确填写参数");
-                return;
-            }
-
-        }
-
-    }
-
-    protected <T> void vailT(T t) {
-        if (t == null)
-            renderError(404);
-        return;
-    }
-
-    protected void vailInteger(Integer para) {
-        if (para == null || para == 0) {
-            renderError(404);
-            return;
-        }
-
-    }
-
-    protected void vailStringParas(String... paras) {
-        for (String pa : paras) {
-            if (StrKit.isBlank(pa)) {
-                renderError(404);
-                return;
-            }
-        }
-
-    }
-
-    protected void vailParas(Object... paras) {
-        for (Object pa : paras) {
-            if (pa == null) {
-                renderError(404);
-                return;
-            }
-        }
-
-    }
-
-    protected void vailIntegerParas(Integer... paras) {
-
-        for (Integer pa : paras) {
-            if (pa == null || pa == 0) {
-                renderError(404);
-                return;
-            }
-        }
-
-    }
-
-    protected void vailParas(Integer... paras) {
-
-        for (Integer pa : paras) {
-            if (pa == null || pa == 0) {
-                renderError(404);
-                return;
-            }
-        }
-
-    }
-
-    protected boolean vailParasIsNull(Object... paras) {
-        for (Object pa : paras) {
-            if (pa == null) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    protected boolean vailIntegerParasIsNull(Integer... paras) {
-        for (Integer pa : paras) {
-            if (pa == null || pa == 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    protected <T extends List<?>> void vailListT(T t) {
-        if (t == null || t.size() == 0)
-            renderError(404);
-        return;
-    }
-
-    protected <T extends List<?>> boolean vailListIsNull(T t) {
-        return t == null || t.size() == 0;
-    }
-
-    protected void setTypesValidator(String types) {
-        if (types == null || "".equals(types)) {
-
-            renderError(404);
-            return;
-
-        }
-    }
-
+    /**
+     * 获得当前方法的名字
+     *
+     * @return String
+     */
     private String getNowMethodName() {
-
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
         StackTraceElement e = stacktrace[3];
         return e.getMethodName();
@@ -169,5 +73,24 @@ public abstract class BaseController extends Controller {
     protected String getLocalHostWithContext() {
         return getRequest().getServerName() + ":" + getRequest().getServerPort() + getRequest().getContextPath();
     }
+
+    /**
+     * 默认的返回的json的值
+     */
+    protected void renderDefaultJson() {
+        renderJson(Ret.ok("msg", "我们的生活"));
+    }
+
+    /**
+     * 返回默认的Json
+     *
+     * @param num  num
+     * @param list list
+     * @return Ret
+     */
+    protected Ret getDefaultJson(Integer num, Object list) {
+        return Ret.ok("msg", PropKit.get(Constants.RECORD_TITLE)).set("num", num).set("list", list);
+    }
+
 
 }

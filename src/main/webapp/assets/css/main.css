@@ -48,6 +48,10 @@ body {
     -webkit-text-size-adjust: none;
 }
 
+.record:hover{
+    color: rgb(0, 0, 0);
+}
+
 /* Box Model */
 
 *, *:before, *:after {
@@ -324,7 +328,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     color: inherit;
-    text-decoration: none;
+    border-bottom: 0;
 }
 
 h1.major, h2.major, h3.major {

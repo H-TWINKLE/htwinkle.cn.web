@@ -1,5 +1,6 @@
 package cn.htwinkle.devotion.config;
 
+import cn.htwinkle.devotion.interceptor.GolbalInterceptor;
 import cn.htwinkle.devotion.model._MappingKit;
 import cn.htwinkle.devotion.routes.FrontRoutes;
 import com.alibaba.druid.filter.stat.StatFilter;
@@ -9,7 +10,9 @@ import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
+import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.server.undertow.UndertowServer;
 import com.jfinal.template.Engine;
@@ -46,6 +49,7 @@ public class MainConfig extends JFinalConfig {
         me.setError404View(PropKit.get(VIEW_OF_ERROR));
         me.setError500View(PropKit.get(VIEW_OF_ABNORMAL));
         me.setJsonFactory(MixedJsonFactory.me());
+        me.setInjectDependency(true);
     }
 
 
@@ -82,7 +86,9 @@ public class MainConfig extends JFinalConfig {
         me.add(arp);
 
         /*CRON-PLUGIN*/
-        //me.add(new Cron4jPlugin(PropKit.use(CONFIG_DEV_FILE_NAME)));
+        me.add(new Cron4jPlugin(PropKit.use(CONFIG_DEV_FILE_NAME)));
+        /*EHCACHE-PLUGIN*/
+        me.add(new EhCachePlugin());
 
     }
 
@@ -91,16 +97,7 @@ public class MainConfig extends JFinalConfig {
      */
     @Override
     public void configInterceptor(Interceptors me) {
-    }
-
-    /**
-     * 存在则为本地环境 返回 2 即false
-     */
-    public static boolean isProEnviron() {
-        if (IS_PRO_ENV == 0) {
-            IS_PRO_ENV = System.getProperty("os.name").toLowerCase().contains("windows") ? 2 : 1;
-        }
-        return IS_PRO_ENV == 1;
+        me.add(new GolbalInterceptor());
     }
 
     /**
@@ -119,13 +116,30 @@ public class MainConfig extends JFinalConfig {
         me.setDevMode(PropKit.getBoolean(DEV_MODE));
         //template
         me.addSharedFunction("/template/comm/_layout.html");
+        me.addSharedFunction("/template/comm/_pour.html");
         //value
         me.addSharedObject(RECORD_NUMBER, PropKit.get(RECORD_NUMBER));
         me.addSharedObject(RECORD_URL, PropKit.get(RECORD_URL));
         me.addSharedObject(RECORD_TITLE, PropKit.get(RECORD_TITLE));
         me.addSharedObject(KEY_OF_IMAGE, PropKit.get(KEY_OF_IMAGE));
+        me.addSharedObject(RECORD_LINK_URL, PropKit.get(RECORD_LINK_URL));
     }
 
+    /**
+     * 存在则为本地环境 返回 2 即false
+     */
+    public static boolean isProEnviron() {
+        if (IS_PRO_ENV == 0) {
+            IS_PRO_ENV = System.getProperty("os.name").toLowerCase().contains("windows") ? 2 : 1;
+        }
+        return IS_PRO_ENV == 1;
+    }
+
+    /**
+     * 运行程序
+     *
+     * @param args 传入参数
+     */
     public static void main(String[] args) {
         UndertowServer.create(MainConfig.class, CONFIG_DEV_FILE_NAME).start();
     }

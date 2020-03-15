@@ -1,0 +1,71 @@
+Table: article
+----------------+--------------+------+-----+---------+---------
+ Field          | Type         | Null | Key | Default | Remarks 
+----------------+--------------+------+-----+---------+---------
+ articleId      | INT(10)      | NO   | PRI |         |         
+ articleTitle   | VARCHAR(255) | YES  |     |         |         
+ articleAuthor  | VARCHAR(255) | YES  |     |         |         
+ articleContent | TEXT(65535)  | YES  |     |         |         
+ articleDate    | DATETIME(19) | YES  |     |         |         
+----------------+--------------+------+-----+---------+---------
+
+Table: picture
+--------------+--------------+------+-----+---------+---------
+ Field        | Type         | Null | Key | Default | Remarks 
+--------------+--------------+------+-----+---------+---------
+ pictureId    | INT(10)      | NO   | PRI |         |         
+ pictureHost  | VARCHAR(255) | YES  |     |         |         
+ pictureName  | VARCHAR(255) | YES  |     |         |         
+ pictureTypes | VARCHAR(255) | YES  |     |         |         
+ pictureUrl   | VARCHAR(255) | YES  |     |         |         
+ pictureDate  | DATETIME(19) | YES  |     |         |         
+--------------+--------------+------+-----+---------+---------
+
+Table: project
+-------------------------------+--------------+------+-----+---------+---------
+ Field                         | Type         | Null | Key | Default | Remarks 
+-------------------------------+--------------+------+-----+---------+---------
+ projectId                     | INT(10)      | NO   | PRI |         | 背景ID    
+ projectName                   | VARCHAR(255) | YES  |     |         | 项目名称    
+ projectUrl                    | VARCHAR(255) | YES  |     |         | 项目url地址 
+ projectStyle                  | VARCHAR(255) | YES  |     |         | 项目整体样式  
+ projectIndex                  | INT(10)      | YES  |     |         | 项目排序，从0开始
+ projectTitle                  | VARCHAR(255) | YES  |     |         | 项目标题    
+ projectTitleStyle             | VARCHAR(255) | YES  |     |         | 项目标题样式  
+ projectBriefIntroduction      | VARCHAR(255) | YES  |     |         | 项目简介    
+ projectBriefIntroductionStyle | VARCHAR(255) | YES  |     |         | 项目简介样式  
+ projectPicUrl                 | VARCHAR(255) | YES  |     |         | 背景图片地址  
+ projectPicStyle               | VARCHAR(255) | YES  |     |         | 背景图片样式  
+ projectPicPosition            | VARCHAR(255) | YES  |     |         | 背景图片位置  
+ projectDate                   | DATETIME(19) | YES  |     |         |         
+-------------------------------+--------------+------+-----+---------+---------
+
+Table: user
+--------------+--------------+------+-----+---------+---------
+ Field        | Type         | Null | Key | Default | Remarks 
+--------------+--------------+------+-----+---------+---------
+ userId       | INT(10)      | NO   | PRI |         |         
+ userAdmin    | VARCHAR(255) | YES  |     |         |         
+ userPass     | VARCHAR(255) | YES  |     |         |         
+ userSalt     | VARCHAR(255) | YES  |     |         |         
+ userNickname | VARCHAR(255) | YES  |     |         |         
+ userSex      | VARCHAR(255) | YES  |     |         |         
+ userYear     | DATETIME(19) | YES  |     |         |         
+ userAuto     | VARCHAR(255) | YES  |     |         |         
+ userHeadPic  | VARCHAR(255) | YES  |     |         |         
+ userTel      | VARCHAR(255) | YES  |     |         |         
+ userUpdate   | DATETIME(19) | YES  |     |         |         
+ usersaveDate | DATETIME(19) | YES  |     |         |         
+--------------+--------------+------+-----+---------+---------
+
+Table: visit
+----------------+--------------+------+-----+---------+---------
+ Field          | Type         | Null | Key | Default | Remarks 
+----------------+--------------+------+-----+---------+---------
+ visitId        | INT(10)      | NO   | PRI |         |         
+ visitIp        | VARCHAR(255) | YES  |     |         |         
+ visitPlace     | VARCHAR(255) | YES  |     |         |         
+ visitUserAgent | VARCHAR(255) | YES  |     |         |         
+ visitDate      | DATETIME(19) | YES  |     |         |         
+----------------+--------------+------+-----+---------+---------
+

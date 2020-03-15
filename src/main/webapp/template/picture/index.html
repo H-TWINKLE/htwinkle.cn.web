@@ -1,0 +1,24 @@
+#@_pour()
+
+
+#define _main()
+<section id="gallery-wrapper">
+    #for( li : picture??)
+    <article class="white-panel">
+        <img src="#(li.pictureUrl??)" class="thumb">
+        <h1>
+            <a target="_blank" href="#(li.pictureUrl??)">#(li.pictureName??)</a>
+        </h1>
+        <p>#date(li.pictureDate??)</p>
+    </article>
+    #end
+</section>
+
+
+<script type="text/javascript">
+    var ls = "#(picture??)";
+    if (ls == null || ls == "") {
+        setTimeout(" window.location.reload()", 5000);}
+</script>
+
+#end
