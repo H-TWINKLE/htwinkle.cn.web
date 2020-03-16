@@ -4,10 +4,7 @@ import cn.htwinkle.devotion.base.BaseService;
 import cn.htwinkle.devotion.constants.Constants;
 import cn.htwinkle.devotion.kit.FileKit;
 import cn.htwinkle.devotion.model.User;
-import com.jfinal.kit.HashKit;
-import com.jfinal.kit.Kv;
-import com.jfinal.kit.PathKit;
-import com.jfinal.kit.PropKit;
+import com.jfinal.kit.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -85,6 +82,24 @@ public class DiAoService extends BaseService {
     public boolean fileRenameToDiAoPath(File file) {
         return file.renameTo(new File(DI_AO_PATH, file.getName()));
 
+    }
+
+    /**
+     * 删除指定的文件
+     *
+     * @param fileName fileName
+     * @return
+     */
+    public boolean deleteFile(String fileName) {
+        if (StrKit.isBlank(fileName)) {
+            return false;
+        }
+        File file = new File(DI_AO_PATH, fileName);
+
+        if (!file.exists()) {
+            return false;
+        }
+        return file.delete();
     }
 
 

@@ -1,6 +1,7 @@
 package cn.htwinkle.devotion.interceptor;
 
 import cn.htwinkle.devotion._front.CommService;
+import cn.htwinkle.devotion.kit.PoolExecutorKit;
 import com.jfinal.aop.Inject;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
@@ -32,6 +33,7 @@ public class GolbalInterceptor implements Interceptor {
             ATOMIC_INTEGER.getAndIncrement();
         }
 
+        PoolExecutorKit.INSTANCE.asyncSaveVisitorInfo(invocation.getController());
         invocation.invoke();
     }
 

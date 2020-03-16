@@ -12,7 +12,7 @@
         <section class="panel banner color2-alt center">
             <div class="inner columns aligned" >
                 <div class="span-6">
-                    <h3 class="major">我的文件
+                    <h3 class="major"><a href="#(base??)/diao">我的文件</a>
                         <span id="upFile" style="margin-left: 20px;font-size: 0.8em;color: #ffcc37">上传</span></h3>
                     <div class="table-wrapper">
                         <table id="tables" role="grid">
@@ -21,6 +21,7 @@
                                 <th>文件名称</th>
                                 <th>文件大小</th>
                                 <th>修改时间</th>
+                                <th>删除</th>
                                 <th>下载</th>
                             </tr>
                             </thead>
@@ -30,6 +31,7 @@
                                 <td>#(li.name??)</td>
                                 <td>#(li.size??)</td>
                                 <td>#date(li.date??)</td>
+                                <td><a href="#(base)/diao/deleteFile?fileName=#(li.name??)">删除</a></td>
                                 <td><a target="_blank" href="#(base)#(li.path??)">下载</a></td>
                             </tr>
                             #end

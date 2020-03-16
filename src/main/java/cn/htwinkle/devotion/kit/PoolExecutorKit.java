@@ -44,7 +44,7 @@ public enum PoolExecutorKit {
      *
      * @param controller controller
      */
-    public void asyncSaveVistorInfo(Controller controller) {
+    public void asyncSaveVisitorInfo(Controller controller) {
         String ip = IpPlaceKit.INSTANCE.getRemoteAddrIp(controller);
 
         if (skipRecord(ip))
@@ -66,7 +66,6 @@ public enum PoolExecutorKit {
 
     private boolean skipRecord(String ip) {
         return StrKit.isBlank(ip) ||
-                ip.startsWith("192.168") ||
                 ip.contains("127.0.0.1") ||
                 ip.contains("localhost");
     }

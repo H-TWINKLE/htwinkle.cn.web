@@ -74,6 +74,15 @@ public class DiAoController extends BaseController {
         }
     }
 
+    public void deleteFile(String fileName) {
+        if (service.deleteFile(fileName)) {
+            setMsgTip("删除文件成功！");
+        } else {
+            setMsgTip("删除文件失败！");
+        }
+        forwardAction("/diao");
+    }
+
 
     @Override
     @Clear(DiAoInterceptor.class)
