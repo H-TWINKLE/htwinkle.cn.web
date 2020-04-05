@@ -2,7 +2,6 @@ package cn.htwinkle.devotion.kit;
 
 import cn.htwinkle.devotion.model.Visit;
 import com.jfinal.core.Controller;
-import com.jfinal.kit.StrKit;
 
 import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -10,7 +9,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * TODO 描述用途
+ * PoolExecutorKit
  *
  * @author : twinkle
  * @date : 2020/3/10 18:17
@@ -46,13 +45,8 @@ public enum PoolExecutorKit {
      */
     public void asyncSaveVisitorInfo(Controller controller) {
         String ip = IpPlaceKit.INSTANCE.getRemoteAddrIp(controller);
-
-        if (skipRecord(ip))
-            return;
-
         String userAgent = IpPlaceKit.INSTANCE.getUserAgent(controller);
-
-        Runnable runnable = () -> {
+        POOL_EXECUTOR.execute(() -> {
             String place = IpPlaceKit.INSTANCE.getIpPlace(ip);
             Visit visit = new Visit()
                     .setVisitIp(ip)
@@ -60,15 +54,7 @@ public enum PoolExecutorKit {
                     .setVisitPlace(place)
                     .setVisitDate(new Date());
             visit.save();
-        };
-        POOL_EXECUTOR.execute(runnable);
+        });
     }
-
-    private boolean skipRecord(String ip) {
-        return StrKit.isBlank(ip) ||
-                ip.contains("127.0.0.1") ||
-                ip.contains("localhost");
-    }
-
 
 }
