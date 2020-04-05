@@ -26,14 +26,14 @@ public class DiAoController extends BaseController {
 
     @Override
     public void index() {
-        setTitle("地奥制药");
+        setTitle("HD");
         setAttr("allFile", service.getAllFileFromDiAoPath());
         render("index.html");
     }
 
     @Clear(DiAoInterceptor.class)
     public void login() {
-        setTitle("地奥制药");
+        setTitle("HD");
         render("login.html");
     }
 

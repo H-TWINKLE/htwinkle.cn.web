@@ -19,7 +19,8 @@ import java.util.List;
  */
 public class DiAoService extends BaseService {
 
-    public static final String DI_AO_PATH = PathKit.getWebRootPath() + File.separator + PropKit.get(Constants.DIAO_PATH);
+    public static final String DI_AO_PATH =
+            PathKit.getWebRootPath() + File.separator + PropKit.get(Constants.DIAO_PATH);
 
     public User toLogin(String admin, String pass) {
         User user = User.dao.findFirst("SELECT * FROM user " +
