@@ -21,13 +21,16 @@
         <chartset.UTF8>UTF-8</chartset.UTF8>
         <jdk.version>1.8</jdk.version>
         <junit.version>4.12</junit.version>
-        <jfinal.version>4.8</jfinal.version>
-        <cos.version>2019.8</cos.version>
+        <jfinal.version>4.9</jfinal.version>
+        <cos.version>2020.4</cos.version>
         <jfinalundertow.version>2.0</jfinalundertow.version>
         <apachelog4j.version>2.11.1</apachelog4j.version>
         <log4j.version>1.2.17</log4j.version>
         <druid.version>1.0.29</druid.version>
         <mysql.version>5.1.46</mysql.version>
+        <io.undertow.version>2.0.30.Final</io.undertow.version>
+        <org.slf4j.version>1.7.25</org.slf4j.version>
+        <com.alibaba.version>1.2.68</com.alibaba.version>
     </properties>
 
     <dependencies>
@@ -56,7 +59,7 @@
         <dependency>
             <groupId>io.undertow</groupId>
             <artifactId>undertow-websockets-jsr</artifactId>
-            <version>2.0.28.Final</version>
+            <version>${io.undertow.version}</version>
         </dependency>
 
         <!--文件上传组件-->
@@ -69,7 +72,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.55</version>
+            <version>${com.alibaba.version}</version>
         </dependency>
 
         <!--定时器-->
@@ -108,6 +111,14 @@
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-core</artifactId>
             <version>2.6.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>${org.slf4j.version}</version>
+            <!-- 打包前改成 provided，此处使用 compile 仅为支持 IDEA -->
+<!--            <scope>provided</scope>-->
         </dependency>
 
 

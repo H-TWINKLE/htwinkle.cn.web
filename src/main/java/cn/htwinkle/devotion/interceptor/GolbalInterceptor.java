@@ -27,14 +27,17 @@ public class GolbalInterceptor implements Interceptor {
     @Override
     public void intercept(Invocation invocation) {
 
+        toAddAtomicNumber();
+        PoolExecutorKit.INSTANCE.asyncSaveVisitorInfo(invocation.getController());
+        invocation.invoke();
+    }
+
+    private void toAddAtomicNumber() {
         if (ATOMIC_INTEGER == null || ATOMIC_INTEGER.getAndIncrement() == 0) {
             ATOMIC_INTEGER = new AtomicInteger(service.getAllVisitUserNum());
         } else {
             ATOMIC_INTEGER.getAndIncrement();
         }
-
-        PoolExecutorKit.INSTANCE.asyncSaveVisitorInfo(invocation.getController());
-        invocation.invoke();
     }
 
 

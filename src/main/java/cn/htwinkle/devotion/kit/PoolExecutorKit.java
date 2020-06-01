@@ -46,6 +46,7 @@ public enum PoolExecutorKit {
     public void asyncSaveVisitorInfo(Controller controller) {
         String ip = IpPlaceKit.INSTANCE.getRemoteAddrIp(controller);
         String userAgent = IpPlaceKit.INSTANCE.getUserAgent(controller);
+        PrintKit.INSTANCE.printHeader(controller);
         POOL_EXECUTOR.execute(() -> {
             String place = IpPlaceKit.INSTANCE.getIpPlace(ip);
             Visit visit = new Visit()
