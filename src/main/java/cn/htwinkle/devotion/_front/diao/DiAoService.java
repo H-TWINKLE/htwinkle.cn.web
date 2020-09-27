@@ -1,12 +1,15 @@
 package cn.htwinkle.devotion._front.diao;
 
 import cn.htwinkle.devotion.base.BaseService;
+import cn.htwinkle.devotion.config.MainConfig;
 import cn.htwinkle.devotion.constants.Constants;
 import cn.htwinkle.devotion.kit.FileKit;
 import cn.htwinkle.devotion.model.User;
 import com.jfinal.kit.*;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -81,6 +84,7 @@ public class DiAoService extends BaseService {
      * @return boolean
      */
     public boolean fileRenameToDiAoPath(File file) {
+        copyFile(file);
         return file.renameTo(new File(DI_AO_PATH, file.getName()));
 
     }
@@ -101,6 +105,26 @@ public class DiAoService extends BaseService {
             return false;
         }
         return file.delete();
+    }
+
+    /**
+     * 复制文件
+     *
+     * @param file file
+     * @return boolean
+     */
+    public boolean copyFile(File file) {
+        String copyPath = PropKit.get("copyFilePath");
+        if (!(StrKit.notBlank(copyPath) && MainConfig.isProEnviron())) {
+            return false;
+        }
+        try {
+            FileUtils.copyFile(file, new File(copyPath + File.separator + file.getName()));
+            return true;
+        } catch (IOException e) {
+            LogKit.error(e.getMessage());
+            return false;
+        }
     }
 
 
