@@ -2,6 +2,7 @@ package cn.htwinkle.devotion.routes;
 
 import cn.htwinkle.devotion._front.article.ArticleController;
 import cn.htwinkle.devotion._front.diao.DiAoController;
+import cn.htwinkle.devotion._front.idea.IdeaController;
 import cn.htwinkle.devotion._front.index.IndexController;
 import cn.htwinkle.devotion._front.picture.PictureController;
 import com.jfinal.config.Routes;
@@ -20,5 +21,6 @@ public class FrontRoutes extends Routes {
         add("/picture", PictureController.class, "/picture");
         add("/article", ArticleController.class, "/article");
         add("/diao", DiAoController.class, "/diao");
+        add("/idea", IdeaController.class, "/idea");
     }
 }
