@@ -3,6 +3,7 @@ package cn.htwinkle.devotion._front.idea;
 import cn.htwinkle.devotion.base.BaseService;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.Ret;
+import com.jfinal.kit.StrKit;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -28,15 +31,16 @@ public class IdeaService extends BaseService {
 
     /**
      * 获取所以的激活码
+     *
      * @return Ret
      */
-    public Ret getListCode() {
+    public Ret getListCode(String filter, String key) {
         List<String> list = new ArrayList<>();
-        Ret ret = getRetCode();
+        Ret ret = getRetCode(key);
         if (ret.isOk()) {
             list.add(ret.getStr("code"));
         }
-        ret = getZipFile();
+        ret = getZipFile(filter);
         if (ret.isOk()) {
             list.addAll(ret.getAs("list"));
         }
@@ -51,10 +55,10 @@ public class IdeaService extends BaseService {
      *
      * @return Ret
      */
-    public Ret getRetCode() {
+    public Ret getRetCode(String key) {
         try {
             Document doc = Jsoup.connect("http://lookdiv.com/index/index/indexcode.html")
-                    .data("key", "lookdiv.com").post();
+                    .data("key", key).post();
             Elements text = doc.getElementsByTag("textarea");
             if (text.size() > 0) {
                 return Ret.create().setOk().set("code", text.get(0).text());
@@ -71,7 +75,7 @@ public class IdeaService extends BaseService {
      *
      * @return Ret
      */
-    public Ret getZipFile() {
+    public Ret getZipFile(String filter) {
         Ret ret = Ret.create();
         try {
             Connection.Response connection =
@@ -79,7 +83,7 @@ public class IdeaService extends BaseService {
                             .ignoreContentType(true)
                             .execute();
             InputStream in = connection.bodyStream();
-            try (ZipInputStream zipInputStream = new ZipInputStream(in)) {
+            try (ZipInputStream zipInputStream = new ZipInputStream(in, StandardCharsets.ISO_8859_1)) {
                 List<String> list = new ArrayList<>();
                 ZipEntry zipFile;
                 //循环读取zip中的cvs/txt文件，zip文件名不能包含中文
@@ -87,7 +91,7 @@ public class IdeaService extends BaseService {
                     //获得cvs名字
                     String fileName = zipFile.getName();
                     //检测文件是否存在
-                    if (fileName != null && fileName.contains(".")) {
+                    if (StrKit.notBlank(filter) && !fileName.contains(filter) && fileName.contains(".")) {
                         LogKit.info("---------------------开始解析文件："
                                 + fileName + "-----------------------------");
                         //读取
@@ -101,9 +105,9 @@ public class IdeaService extends BaseService {
                             stringBuilder.append(line);
                         }
                         list.add(stringBuilder.toString());
-                        //一定记得关闭流
-                        zipInputStream.closeEntry();
                     }
+                    //一定记得关闭流
+                    zipInputStream.closeEntry();
                 }
                 ret.set("list", list).setOk();
                 return ret;
