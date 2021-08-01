@@ -27,7 +27,7 @@
         <apachelog4j.version>2.11.1</apachelog4j.version>
         <log4j.version>1.2.17</log4j.version>
         <druid.version>1.0.29</druid.version>
-        <mysql.version>5.1.46</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <io.undertow.version>2.0.30.Final</io.undertow.version>
         <org.slf4j.version>1.7.25</org.slf4j.version>
         <com.alibaba.version>1.2.68</com.alibaba.version>
