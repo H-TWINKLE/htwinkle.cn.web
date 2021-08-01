@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.htwinkle</groupId>
-    <artifactId>devotion</artifactId>
+    <artifactId>HTwinkeWeb</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -134,7 +134,7 @@
     </dependencies>
 
     <build>
-        <finalName>H_Devotion</finalName>
+        <finalName>HTwinkeWeb</finalName>
         <plugins>
 
             <!--加上时间戳-->

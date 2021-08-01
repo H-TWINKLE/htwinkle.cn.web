@@ -61,27 +61,27 @@ class SshClient:
 
 if __name__ == "__main__":
     ssh = SshClient()
-    if ssh.ssh_login(host_ip="39.108.48.227", username="root", password="WANan13038132020.") == 1000:
+    if ssh.ssh_login(host_ip="39.108.48.227", username="root", password="***") == 1000:
         print('---------- ssl login success ! ----------')
         print('---------- start package ----------')
         ssh.execute_cmd('mvn clean package -Dmaven.test.skip=true')
-        ssh.execute_command('chmod +755 /root/app_web/devotion/h_devotion.sh')
+        ssh.execute_command('chmod +755 /root/app_web/HTwinkleWeb/runServer.sh')
         print('---------- stop h_devotion ----------')
-        ssh.execute_command('/root/app_web/devotion/h_devotion.sh stop')
+        ssh.execute_command('/root/app_web/HTwinkleWeb/runServer.sh stop')
         print('---------- remove h_devotion package ----------')
-        ssh.execute_command('rm -rf /root/app_web/devotion/config/')
-        ssh.execute_command('rm -rf /root/app_web/devotion/lib/')
-        ssh.execute_command('rm -rf /root/app_web/devotion/h_devotion.sh')
-        ssh.execute_command('rm -rf /root/app_web/devotion/h_devotion.bat')
-        ssh.execute_command('rm -rf /root/app_web/devotion/deploy.py')
+        ssh.execute_command('rm -rf /root/app_web/HTwinkleWeb/config/')
+        ssh.execute_command('rm -rf /root/app_web/HTwinkleWeb/lib/')
+        ssh.execute_command('rm -rf /root/app_web/HTwinkleWeb/runServer.sh')
+        ssh.execute_command('rm -rf /root/app_web/HTwinkleWeb/runServer.bat')
+        ssh.execute_command('rm -rf /root/app_web/HTwinkleWeb/deploy.py')
         print('---------- upload h_devotion  package ----------')
         ## 先获取到文件路径
-        path = get_file_package('E:/MyMajor/myidea/H_Devotion/target', 'release')
+        path = get_file_package('E:/MyMajor/myidea/HTwinkleWeb/target', 'release')
         ssh.execute_cmd(
-            'pscp -r -pw WANan13038132020. ././target/{0}/devotion root@39.108.48.227:/root/app_web/'.format(path))
-        ssh.execute_command('chmod +755 /root/app_web/devotion/h_devotion.sh')
+            'pscp -r -pw *** ././target/{0}/HTwinkleWeb root@39.108.48.227:/root/app_web/'.format(path))
+        ssh.execute_command('chmod +755 /root/app_web/HTwinkleWeb/runServer.sh')
         print('---------- start cuss_tool ----------')
-        ssh.execute_command('/root/app_web/devotion/h_devotion.sh start')
+        ssh.execute_command('/root/app_web/HTwinkleWeb/runServer.sh restart')
         print('---------- ssl login out ----------')
         ssh.ssh_logout()
 
