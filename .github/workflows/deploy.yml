@@ -25,4 +25,8 @@ jobs:
         
       - name: package
         run: mvn clean package
+        
+      - name: show package dir
+        run: ls  
+        
 
