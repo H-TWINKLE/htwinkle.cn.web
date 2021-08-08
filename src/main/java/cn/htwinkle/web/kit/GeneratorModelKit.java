@@ -10,23 +10,23 @@ public class GeneratorModelKit {
     /**
      * model 所使用的包名
      */
-    private static final String MODEL_PKG = "cn.htwinkle.devotion.model";
+    public static final String MODEL_PKG = "cn.htwinkle.web.model";
 
     /**
      * base model 所使用的包名
      */
-    private static final String BASE_MODEL_PKG = MODEL_PKG + ".base";
+    public static final String BASE_MODEL_PKG = MODEL_PKG + ".base";
 
     /**
      * model 文件保存路径
      */
-    private static final String MODEL_DIR = getNowPath() +
+    public static final String MODEL_DIR = getNowPath() +
             "/src/main/java/" + MODEL_PKG.replaceAll("\\.", "/");
 
     /**
      * base model 文件保存路径
      */
-    private static final String BASE_MODEL_DIR = MODEL_DIR + "/base";
+    public static final String BASE_MODEL_DIR = MODEL_DIR + "/base";
 
 
     private static String getNowPath() {

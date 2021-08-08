@@ -45,4 +45,27 @@ public interface Constants {
      */
     int MAX_SESSION_DATE = 60 * 60 * 24 * 5;
 
+    /**
+     * 榜单链接
+     */
+    String NET_MUSIC_BASE_TOP_LIST_URL = "https://music.163.com/discover/toplist?id=";
+
+
+    /**
+     * 榜单链接
+     */
+    String NET_MUSIC_BASE_PLAY_LIST_URL = "https://music.163.com/playlist?id=";
+
+    /**
+     * 排行榜
+     * 3778678 热歌榜
+     */
+    String[] NET_MUSIC_TOP_LIST = {"3778678"};
+
+    /**
+     * 歌单
+     * 6907590247 热爱可抵岁月漫长
+     */
+    String[] NET_MUSIC_PLAY_LIST = {"6907590247"};
+
 }

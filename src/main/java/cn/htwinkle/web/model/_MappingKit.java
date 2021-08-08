@@ -17,6 +17,8 @@ public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
 		arp.addMapping("article", "articleId", Article.class);
+		arp.addMapping("netMusic", "netMusicId", NetMusic.class);
+		arp.addMapping("netMusicPlayList", "netMusicPlayListId", NetMusicPlayList.class);
 		arp.addMapping("picture", "pictureId", Picture.class);
 		arp.addMapping("project", "projectId", Project.class);
 		arp.addMapping("user", "userId", User.class);

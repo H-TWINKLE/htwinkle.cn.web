@@ -9,6 +9,35 @@ Table: article
  articleDate    | DATETIME(19) | YES  |     |         |         
 ----------------+--------------+------+-----+---------+---------
 
+Table: netMusic
+--------------------+--------------+------+-----+---------+---------
+ Field              | Type         | Null | Key | Default | Remarks 
+--------------------+--------------+------+-----+---------+---------
+ netMusicId         | INT(10)      | NO   | PRI |         | 主键      
+ netMusicSongId     | VARCHAR(255) | NO   |     |         | 歌曲的id   
+ netMusicSongType   | VARCHAR(255) | NO   |     |         | 歌曲列表的类型（toplist、playlist）
+ netMusicSongTypeId | VARCHAR(255) | YES  |     |         | 歌曲列表类型的id
+ netMusicSongName   | VARCHAR(255) | YES  |     |         | 歌曲名称    
+ netMusicSongAuthor | VARCHAR(255) | YES  |     |         | 歌曲演唱者   
+ netMusicSongTime   | VARCHAR(255) | YES  |     |         | 歌曲时长    
+ netMusicSongAlbum  | VARCHAR(255) | YES  |     |         | 歌曲专辑    
+ netMusicSongMvId   | VARCHAR(255) | YES  |     |         | 歌曲mvId  
+ netMusicSongDate   | DATETIME(19) | NO   |     |         | 抓取时间    
+--------------------+--------------+------+-----+---------+---------
+
+Table: netMusicPlayList
+------------------------+--------------+------+-----+---------+---------
+ Field                  | Type         | Null | Key | Default | Remarks 
+------------------------+--------------+------+-----+---------+---------
+ netMusicPlayListId     | INT(10)      | NO   | PRI |         | 网易云音乐歌单列表id
+ netMusicPlayListDirId  | VARCHAR(255) | YES  |     |         | 歌单列表网页id
+ netMusicPlayListName   | VARCHAR(255) | YES  |     |         | 歌单列表网页名字
+ netMusicPlayListType   | VARCHAR(255) | YES  |     |         | 歌单列表类型（toplist、playlist）
+ netMusicPlayListUpdate | VARCHAR(255) | YES  |     |         | 歌单列表最新更新时间
+ netMusicPlayListCount  | VARCHAR(255) | YES  |     |         | 歌单列表播放次数
+ netMusicPlayListDate   | DATETIME(19) | YES  |     |         | 歌单列表抓取时间
+------------------------+--------------+------+-----+---------+---------
+
 Table: picture
 --------------+--------------+------+-----+---------+---------
  Field        | Type         | Null | Key | Default | Remarks 
