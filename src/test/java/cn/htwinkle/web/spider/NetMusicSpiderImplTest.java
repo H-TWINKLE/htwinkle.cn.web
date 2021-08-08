@@ -1,8 +1,10 @@
 package cn.htwinkle.web.spider;
 
 import kit.TestKit;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class NetMusicSpiderImplTest extends TestKit {
 
 
