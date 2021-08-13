@@ -21,7 +21,7 @@
         <chartset.UTF8>UTF-8</chartset.UTF8>
         <jdk.version>1.8</jdk.version>
         <junit.version>4.12</junit.version>
-        <jfinal.version>4.9</jfinal.version>
+        <jfinal.version>4.9.11</jfinal.version>
         <cos.version>2020.4</cos.version>
         <jfinalundertow.version>2.0</jfinalundertow.version>
         <apachelog4j.version>2.11.1</apachelog4j.version>
