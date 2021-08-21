@@ -43,6 +43,7 @@
      
     function start()
     {
+        echo "starting htwinkle.cn.web undertow"
         # 运行为后台进程，并在控制台输出信息
         java -Xverify:none ${JAVA_OPTS} -cp ${CP} ${MAIN_CLASS} &
      
@@ -58,6 +59,7 @@
      
     function stop()
     {
+        echo "stop htwinkle.cn.web undertow"
         # 支持集群部署
         kill `pgrep -f ${APP_BASE_PATH}` 2>/dev/null
         

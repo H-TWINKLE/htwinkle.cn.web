@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ArticleService extends BaseService {
 
-    private ISpider<Article> spider = Aop.get(ArticleSpiderImpl.class);
+    private final ISpider<Article> spider = Aop.get(ArticleSpiderImpl.class);
 
     /**
      * 获取到一篇文章

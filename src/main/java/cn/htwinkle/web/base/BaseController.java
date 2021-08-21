@@ -14,11 +14,6 @@ public abstract class BaseController extends Controller {
      */
     public abstract void index();
 
-    /**
-     * api接口
-     */
-    public abstract void api();
-
     protected User getSessionUser() {
         return getAttr(Constants.SESSION_USER);
     }

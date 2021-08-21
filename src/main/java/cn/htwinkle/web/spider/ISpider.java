@@ -2,6 +2,8 @@ package cn.htwinkle.web.spider;
 
 import com.jfinal.plugin.activerecord.Model;
 
+import java.util.List;
+
 /**
  * 爬虫所用的接口
  *
@@ -20,10 +22,23 @@ public interface ISpider<T extends Model<T>> {
     /**
      * 返回一个需要类型的爬虫实体对象
      *
-     * @param types 类型
+     * @param type 类型
      * @return T
      */
-    T get(String types);
+    T get(String type);
 
+    /**
+     * 获取爬虫的 数据列表
+     *
+     * @return return
+     */
+    List<T> getList();
+
+    /**
+     * 获取爬虫的 数据列表
+     *
+     * @return return
+     */
+    List<T> getList(String type);
 
 }

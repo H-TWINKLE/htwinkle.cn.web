@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 /**
- * TODO 描述用途
+ * 通过图片的类型爬取图片的实现类
  *
  * @author : twinkle
  * @date : 2020/3/15 11:15
@@ -27,22 +27,48 @@ public class PictureSpiderImpl implements ISpider<Picture> {
 
     @Override
     public Picture get() {
-        String types = Constants.G3_BIZHI_TYPES[new Random().nextInt(4)];
-        List<Picture> list = getPictureFromHtml(types);
+        String type = getRandomType();
+        List<Picture> list = getPictureFromHtml(type);
         return list == null ? null : list.get(0);
     }
 
     @Override
-    public Picture get(String types) {
-        List<Picture> list = getPictureFromHtml(types);
+    public Picture get(String type) {
+        List<Picture> list = getPictureFromHtml(type);
         return list == null ? null : list.get(0);
     }
 
-    private List<Picture> getPictureFromHtml(String types) {
+    @Override
+    public List<Picture> getList() {
+        String type = getRandomType();
+        return getPictureFromHtml(type);
+    }
+
+    @Override
+    public List<Picture> getList(String type) {
+        return getPictureFromHtml(type);
+    }
+
+    /**
+     * 获取随机图片类型
+     *
+     * @return String
+     */
+    private String getRandomType() {
+        return Constants.G3_BIZHI_TYPES[new Random().nextInt(4)];
+    }
+
+    /**
+     * 解析数据
+     *
+     * @param type type
+     * @return List<Picture>
+     */
+    private List<Picture> getPictureFromHtml(String type) {
         Document doc;
 
         try {
-            doc = Jsoup.connect(Constants.G3_BIZHI_URL + types + "/").get();
+            doc = Jsoup.connect(Constants.G3_BIZHI_URL + type + "/").get();
         } catch (Exception e) {
             LOGGER.info("PictureSpiderImpl - getPictureFromHtml : " + e.getMessage());
             return null;
@@ -60,7 +86,7 @@ public class PictureSpiderImpl implements ISpider<Picture> {
             picture = new Picture();
             picture.setPictureHost(Constants.G3_BIZHI_URL);
             picture.setPictureName(e.attr("title"));
-            picture.setPictureTypes(types);
+            picture.setPictureTypes(type);
             picture.setPictureUrl(e.attr("src").replace("https", "http")
                     .replace("208x312c5", "1920x1080c"));
             picture.setPictureDate(new Date());

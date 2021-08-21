@@ -20,7 +20,8 @@ import java.util.Random;
 import static cn.htwinkle.web.constants.Constants.NET_MUSIC_BASE_TOP_LIST_URL;
 
 /**
- * 网易云音乐解析类
+ * 网易云音乐榜单列表的解析类
+ * 通过榜单的id获取对应的音乐列表
  *
  * @author : twinkle
  * @date : 2021/8/8 11:30
@@ -37,13 +38,28 @@ public class NetMusicTopListImpl implements ISpider<NetMusic> {
 
     @Override
     public NetMusic get() {
-        String types = Constants.NET_MUSIC_TOP_LIST[new Random().nextInt(1)];
-        return getNetMusicList(types);
+        String topListId = getRandomTopListId();
+        return getNetMusicList(topListId);
     }
 
     @Override
-    public NetMusic get(String types) {
-        return getNetMusicList(types);
+    public NetMusic get(String topListId) {
+        return getNetMusicList(topListId);
+    }
+
+    @Override
+    public List<NetMusic> getList() {
+        String topListId = getRandomTopListId();
+        return getMusicListByHtml(topListId);
+    }
+
+    @Override
+    public List<NetMusic> getList(String topListId) {
+        return getMusicListByHtml(topListId);
+    }
+
+    private String getRandomTopListId() {
+        return Constants.NET_MUSIC_TOP_LIST[new Random().nextInt(1)];
     }
 
     /**

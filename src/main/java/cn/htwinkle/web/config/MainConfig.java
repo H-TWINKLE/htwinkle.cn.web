@@ -16,6 +16,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import org.leon.swagger.plugin.SwaggerPlugin;
 
 import static cn.htwinkle.web.constants.Constants.*;
 
@@ -89,7 +90,8 @@ public class MainConfig extends JFinalConfig {
         me.add(new Cron4jPlugin(PropKit.use(CONFIG_DEV_FILE_NAME)));
         /*EHCACHE-PLUGIN*/
         me.add(new EhCachePlugin());
-
+        /*SWAGGER组件*/
+        me.add(new SwaggerPlugin(CONFIG_DEV_FILE_NAME));
     }
 
     /**

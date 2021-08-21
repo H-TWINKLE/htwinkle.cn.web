@@ -17,7 +17,6 @@ public class ArticleController extends BaseController {
     @Inject
     ArticleService articleService;
 
-
     @Override
     public void index() {
         setTitle("每日一文");
@@ -25,7 +24,7 @@ public class ArticleController extends BaseController {
         render("index.html");
     }
 
-    @Override
+
     public void api() {
         Integer num = getDefaultNumForApi();
         List<Article> list = articleService.getArticleList(num);

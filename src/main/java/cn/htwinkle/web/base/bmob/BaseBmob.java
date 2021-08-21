@@ -16,7 +16,7 @@ public class BaseBmob {
 
 	{
 
-		if ("user".equals(this.getClass().getSimpleName().toLowerCase())) {
+		if ("user".equalsIgnoreCase(this.getClass().getSimpleName())) {
 			className = "_User";
 		} else {
 			className = this.getClass().getSimpleName().toLowerCase();

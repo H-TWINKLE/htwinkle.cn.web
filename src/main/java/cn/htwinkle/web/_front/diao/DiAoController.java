@@ -84,7 +84,7 @@ public class DiAoController extends BaseController {
     }
 
 
-    @Override
+
     @Clear(DiAoInterceptor.class)
     public void api() {
         renderDefaultJson();

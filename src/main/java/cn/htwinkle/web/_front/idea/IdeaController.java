@@ -50,7 +50,7 @@ public class IdeaController extends BaseController {
         renderJson(ideaService.getListCode(DEFAULT_FILTER, DEFAULT_KEY));
     }
 
-    @Override
+
     public void api() {
 
     }

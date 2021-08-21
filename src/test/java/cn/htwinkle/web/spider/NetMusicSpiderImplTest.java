@@ -1,6 +1,6 @@
 package cn.htwinkle.web.spider;
 
-import kit.TestKit;
+import cn.htwinkle.web.kit.TestKit;
 import org.junit.Ignore;
 import org.junit.Test;
 

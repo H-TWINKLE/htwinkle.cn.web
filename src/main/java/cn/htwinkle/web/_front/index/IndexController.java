@@ -21,7 +21,7 @@ public class IndexController extends BaseController {
         render("index.html");
     }
 
-    @Override
+
     public void api() {
         renderDefaultJson();
     }

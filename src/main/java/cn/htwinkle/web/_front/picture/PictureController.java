@@ -26,7 +26,7 @@ public class PictureController extends BaseController {
         render("index.html");
     }
 
-    @Override
+
     public void api() {
         Integer num = getDefaultNumForApi();
         renderJson(
@@ -50,6 +50,12 @@ public class PictureController extends BaseController {
         return Constants.G3_BIZHI_TYPES[0];
     }
 
+    /**
+     * 获取图片列表
+     *
+     * @param num num
+     * @return List<Picture>
+     */
     private List<Picture> getPictureList(Integer num) {
         String type = getDefaultTypesFromParams();
         return pictureService.getPictureList(num, type);

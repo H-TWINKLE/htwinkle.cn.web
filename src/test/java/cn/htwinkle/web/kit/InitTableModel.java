@@ -2,7 +2,6 @@ package cn.htwinkle.web.kit;
 
 import cn.htwinkle.web.plugin.TestPlugin;
 import com.jfinal.plugin.activerecord.generator.Generator;
-import kit.TestKit;
 import org.junit.Ignore;
 import org.junit.Test;
 
