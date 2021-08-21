@@ -8,7 +8,7 @@ import cn.htwinkle.web._front.picture.PictureController;
 import com.jfinal.config.Routes;
 
 /**
- * TODO 描述用途
+ * 前端路由器
  *
  * @author : twinkle
  * @date : 2020/3/9 21:53

@@ -20,11 +20,4 @@ public class IndexController extends BaseController {
         set("globalCount", ATOMIC_INTEGER.get());
         render("index.html");
     }
-
-
-    public void api() {
-        renderDefaultJson();
-    }
-
-
 }
