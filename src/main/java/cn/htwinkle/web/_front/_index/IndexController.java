@@ -1,4 +1,4 @@
-package cn.htwinkle.web._front.index;
+package cn.htwinkle.web._front._index;
 
 import cn.htwinkle.web.base.BaseController;
 import cn.htwinkle.web.constants.Constants;

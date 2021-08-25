@@ -52,6 +52,12 @@
             <version>2.2.9.Final</version>
         </dependency>
 
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
         <!--文件上传组件-->
         <dependency>
             <groupId>com.jfinal</groupId>
@@ -108,7 +114,7 @@
             <artifactId>slf4j-nop</artifactId>
             <version>1.7.32</version>
             <!-- 打包前改成 provided，此处使用 compile 仅为支持 IDEA -->
-<!--            <scope>provided</scope>-->
+            <!--            <scope>provided</scope>-->
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->

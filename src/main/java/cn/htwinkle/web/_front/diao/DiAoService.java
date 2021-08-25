@@ -7,6 +7,7 @@ import cn.htwinkle.web.kit.FileKit;
 import cn.htwinkle.web.model.User;
 import com.jfinal.kit.*;
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,12 +26,19 @@ public class DiAoService extends BaseService {
     public static final String DI_AO_PATH =
             PathKit.getWebRootPath() + File.separator + PropKit.get(Constants.DIAO_PATH);
 
+    /**
+     * DiAoService的输出日志对象
+     */
+    private static final Logger LOGGER = Logger.getLogger(DiAoService.class.getName());
+
     public User toLogin(String admin, String pass) {
         User user = User.dao.findFirst("SELECT * FROM user " +
                 "WHERE userAdmin=? LIMIT 1", admin);
 
         if (user == null)
             return null;
+
+        LOGGER.info("DiAoService - toLogin : " + user);
 
         String salt = user.getUserSalt();
         String realPass = getRealPass(salt, pass);

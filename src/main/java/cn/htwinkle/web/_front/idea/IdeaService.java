@@ -8,6 +8,8 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,6 +29,11 @@ import java.util.zip.ZipInputStream;
  * @date : 2020/9/27 20:26
  */
 public class IdeaService extends BaseService {
+
+    /**
+     * IdeaService的输出日志对象
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(IdeaService.class.getName());
 
     /**
      * 获取所以的激活码
@@ -112,7 +119,7 @@ public class IdeaService extends BaseService {
                 return ret;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("IdeaService - getZipFile : " + e.getLocalizedMessage());
             return ret.setFail();
         }
     }

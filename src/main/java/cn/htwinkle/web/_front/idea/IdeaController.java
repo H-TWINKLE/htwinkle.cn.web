@@ -12,11 +12,17 @@ import com.jfinal.kit.StrKit;
  */
 public class IdeaController extends BaseController {
 
-    public static final String DEFAULT_KEY = "5263";
+    public static final String DEFAULT_KEY = "lookdiv.com";
 
     public static final String DEFAULT_FILTER = "jpg";
+
     @Inject
     private IdeaService ideaService;
+
+    @Override
+    public void index() {
+        renderJson(ideaService.getListCode(DEFAULT_FILTER, DEFAULT_KEY));
+    }
 
     public void filter(String filter, String key) {
         filter = getDefault(filter, DEFAULT_FILTER);
@@ -43,15 +49,5 @@ public class IdeaController extends BaseController {
             return defaultValue;
         }
         return key;
-    }
-
-    @Override
-    public void index() {
-        renderJson(ideaService.getListCode(DEFAULT_FILTER, DEFAULT_KEY));
-    }
-
-
-    public void api() {
-
     }
 }

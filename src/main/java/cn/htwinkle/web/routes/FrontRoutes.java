@@ -3,7 +3,7 @@ package cn.htwinkle.web.routes;
 import cn.htwinkle.web._front.article.ArticleController;
 import cn.htwinkle.web._front.diao.DiAoController;
 import cn.htwinkle.web._front.idea.IdeaController;
-import cn.htwinkle.web._front.index.IndexController;
+import cn.htwinkle.web._front._index.IndexController;
 import cn.htwinkle.web._front.picture.PictureController;
 import com.jfinal.config.Routes;
 
