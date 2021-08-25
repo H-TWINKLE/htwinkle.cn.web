@@ -5,11 +5,10 @@ import cn.htwinkle.web.model.NetMusic;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.kit.StrKit;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class NetMusicTopListImpl implements ISpider<NetMusic> {
     /**
      * ArticleSpiderImpl的输出日志对象
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(NetMusicTopListImpl.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(NetMusicTopListImpl.class.getName());
     /**
      * 排榜
      */

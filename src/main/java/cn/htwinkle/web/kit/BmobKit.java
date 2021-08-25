@@ -7,9 +7,9 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.upload.UploadFile;
 import okhttp3.*;
 import okhttp3.Request.Builder;
+import org.apache.log4j.Logger;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 public enum BmobKit {
 

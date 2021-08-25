@@ -5,8 +5,7 @@ import cn.htwinkle.web.spider.ArticleSpiderImpl;
 import cn.htwinkle.web.spider.ISpider;
 import com.jfinal.aop.Aop;
 import com.jfinal.plugin.cron4j.ITask;
-
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 /**
  * Article定时任务

@@ -2,6 +2,7 @@ package cn.htwinkle.web.spider;
 
 import cn.htwinkle.web.constants.Constants;
 import cn.htwinkle.web.model.Article;
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,7 +11,6 @@ import org.jsoup.nodes.Element;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * 爬取文章的工具实现类

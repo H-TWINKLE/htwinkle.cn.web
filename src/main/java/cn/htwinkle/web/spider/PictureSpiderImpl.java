@@ -2,6 +2,7 @@ package cn.htwinkle.web.spider;
 
 import cn.htwinkle.web.constants.Constants;
 import cn.htwinkle.web.model.Picture;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Logger;
 
 /**
  * 通过图片的类型爬取图片的实现类

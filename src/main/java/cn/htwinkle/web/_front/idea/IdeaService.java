@@ -4,12 +4,11 @@ import cn.htwinkle.web.base.BaseService;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
+import org.apache.log4j.Logger;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +32,7 @@ public class IdeaService extends BaseService {
     /**
      * IdeaService的输出日志对象
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(IdeaService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(IdeaService.class.getName());
 
     /**
      * 获取所以的激活码

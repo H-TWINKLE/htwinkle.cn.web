@@ -7,8 +7,7 @@ import cn.htwinkle.web.spider.PictureSpiderImpl;
 import com.jfinal.aop.Aop;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.cron4j.ITask;
-
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 /**
  * Picture定时任务
