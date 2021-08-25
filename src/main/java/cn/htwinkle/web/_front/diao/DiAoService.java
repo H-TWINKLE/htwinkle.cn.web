@@ -76,7 +76,7 @@ public class DiAoService extends BaseService {
         for (File file : files) {
             list.add(Kv.create()
                     .set("name", file.getName())
-                    .set("path", PropKit.get(Constants.DIAO_PATH) + file.getName())
+                    .set("path", "/" + PropKit.get(Constants.DIAO_PATH) + file.getName())
                     .set("date", new Date(file.lastModified()))
                     .set("size", FileKit.getPrintSize(file.length())));
         }
