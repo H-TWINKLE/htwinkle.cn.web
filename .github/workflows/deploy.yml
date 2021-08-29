@@ -37,10 +37,10 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           run: |
-              echo 'stop server'
               cd /root/app_web/htwinkle.cn.web/web
               ls
-              ./runServer.sh stop
+              echo 'stop server'
+              . runServer.sh stop
               
       - name: delete service dir
         uses: matheusvanzan/sshpass-action@v2
