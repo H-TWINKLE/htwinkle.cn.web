@@ -74,13 +74,13 @@ jobs:
               chmod +777 runServer.sh
               
       - name: start server
-        uses: cross-the-world/ssh-pipeline@master
+        uses: tarunjangra/ssh-remote-cmd@v1
         with:
           host: ${{ secrets.SERVER_HOST }}
           port: ${{ secrets.SERVER_PORT }}
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
-          script: |
+          command: |
             /root/app_web/htwinkle.cn.web/web/runServer.sh start
       
         
