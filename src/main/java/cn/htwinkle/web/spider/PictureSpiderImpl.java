@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -89,7 +90,7 @@ public class PictureSpiderImpl implements ISpider<Picture> {
             picture.setPictureTypes(type);
             picture.setPictureUrl(e.attr("src").replace("https", "http")
                     .replace("208x312c5", "1920x1080c"));
-            picture.setPictureDate(new Date());
+            picture.setPictureDate(LocalDateTime.now());
             picture.save();
             list.add(picture);
         }

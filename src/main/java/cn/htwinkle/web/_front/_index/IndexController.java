@@ -17,6 +17,7 @@ public class IndexController extends BaseController {
     @Override
     public void index() {
         setTitle(PropKit.get(Constants.RECORD_TITLE));
+        set("indexPage", true);
         set("globalCount", ATOMIC_INTEGER.get());
         render("index.html");
     }

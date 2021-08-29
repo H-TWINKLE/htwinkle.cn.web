@@ -23,7 +23,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.Integer getProjectId() {
 		return getInt("projectId");
 	}
-
+	
 	/**
 	 * 项目名称
 	 */
@@ -38,7 +38,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.String getProjectName() {
 		return getStr("projectName");
 	}
-
+	
 	/**
 	 * 项目url地址
 	 */
@@ -53,7 +53,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.String getProjectUrl() {
 		return getStr("projectUrl");
 	}
-
+	
 	/**
 	 * 项目整体样式
 	 */
@@ -68,7 +68,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.String getProjectStyle() {
 		return getStr("projectStyle");
 	}
-
+	
 	/**
 	 * 项目排序，从0开始
 	 */
@@ -83,7 +83,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.Integer getProjectIndex() {
 		return getInt("projectIndex");
 	}
-
+	
 	/**
 	 * 项目标题
 	 */
@@ -98,7 +98,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.String getProjectTitle() {
 		return getStr("projectTitle");
 	}
-
+	
 	/**
 	 * 项目标题样式
 	 */
@@ -113,7 +113,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.String getProjectTitleStyle() {
 		return getStr("projectTitleStyle");
 	}
-
+	
 	/**
 	 * 项目简介
 	 */
@@ -128,7 +128,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.String getProjectBriefIntroduction() {
 		return getStr("projectBriefIntroduction");
 	}
-
+	
 	/**
 	 * 项目简介样式
 	 */
@@ -143,7 +143,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.String getProjectBriefIntroductionStyle() {
 		return getStr("projectBriefIntroductionStyle");
 	}
-
+	
 	/**
 	 * 背景图片地址
 	 */
@@ -158,7 +158,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.String getProjectPicUrl() {
 		return getStr("projectPicUrl");
 	}
-
+	
 	/**
 	 * 背景图片样式
 	 */
@@ -173,7 +173,7 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.String getProjectPicStyle() {
 		return getStr("projectPicStyle");
 	}
-
+	
 	/**
 	 * 背景图片位置
 	 */
@@ -188,14 +188,15 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 	public java.lang.String getProjectPicPosition() {
 		return getStr("projectPicPosition");
 	}
-
-	public M setProjectDate(java.util.Date projectDate) {
+	
+	public M setProjectDate(java.time.LocalDateTime projectDate) {
 		set("projectDate", projectDate);
 		return (M)this;
 	}
 	
-	public java.util.Date getProjectDate() {
-		return get("projectDate");
+	public java.time.LocalDateTime getProjectDate() {
+		return getLocalDateTime("projectDate");
 	}
-
+	
 }
+

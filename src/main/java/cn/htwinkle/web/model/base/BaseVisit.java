@@ -17,7 +17,7 @@ public abstract class BaseVisit<M extends BaseVisit<M>> extends Model<M> impleme
 	public java.lang.Integer getVisitId() {
 		return getInt("visitId");
 	}
-
+	
 	public M setVisitIp(java.lang.String visitIp) {
 		set("visitIp", visitIp);
 		return (M)this;
@@ -26,7 +26,7 @@ public abstract class BaseVisit<M extends BaseVisit<M>> extends Model<M> impleme
 	public java.lang.String getVisitIp() {
 		return getStr("visitIp");
 	}
-
+	
 	public M setVisitPlace(java.lang.String visitPlace) {
 		set("visitPlace", visitPlace);
 		return (M)this;
@@ -35,7 +35,7 @@ public abstract class BaseVisit<M extends BaseVisit<M>> extends Model<M> impleme
 	public java.lang.String getVisitPlace() {
 		return getStr("visitPlace");
 	}
-
+	
 	public M setVisitUserAgent(java.lang.String visitUserAgent) {
 		set("visitUserAgent", visitUserAgent);
 		return (M)this;
@@ -44,14 +44,15 @@ public abstract class BaseVisit<M extends BaseVisit<M>> extends Model<M> impleme
 	public java.lang.String getVisitUserAgent() {
 		return getStr("visitUserAgent");
 	}
-
-	public M setVisitDate(java.util.Date visitDate) {
+	
+	public M setVisitDate(java.time.LocalDateTime visitDate) {
 		set("visitDate", visitDate);
 		return (M)this;
 	}
 	
-	public java.util.Date getVisitDate() {
-		return get("visitDate");
+	public java.time.LocalDateTime getVisitDate() {
+		return getLocalDateTime("visitDate");
 	}
-
+	
 }
+

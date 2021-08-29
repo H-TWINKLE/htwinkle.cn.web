@@ -123,6 +123,7 @@ public class MainConfig extends JFinalConfig {
         //template
         me.addSharedFunction("/template/comm/_layout.html");
         me.addSharedFunction("/template/comm/_pour.html");
+        me.addSharedFunction("/template/comm/_toolBox.html");
         //value
         me.addSharedObject(RECORD_NUMBER, PropKit.get(RECORD_NUMBER));
         me.addSharedObject(RECORD_URL, PropKit.get(RECORD_URL));

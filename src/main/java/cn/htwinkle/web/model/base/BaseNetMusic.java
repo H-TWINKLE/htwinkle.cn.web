@@ -23,7 +23,7 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	public java.lang.Integer getNetMusicId() {
 		return getInt("netMusicId");
 	}
-
+	
 	/**
 	 * 歌曲的id
 	 */
@@ -38,7 +38,7 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	public java.lang.String getNetMusicSongId() {
 		return getStr("netMusicSongId");
 	}
-
+	
 	/**
 	 * 歌曲列表的类型（toplist、playlist）
 	 */
@@ -53,7 +53,7 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	public java.lang.String getNetMusicSongType() {
 		return getStr("netMusicSongType");
 	}
-
+	
 	/**
 	 * 歌曲列表类型的id
 	 */
@@ -68,7 +68,7 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	public java.lang.String getNetMusicSongTypeId() {
 		return getStr("netMusicSongTypeId");
 	}
-
+	
 	/**
 	 * 歌曲名称
 	 */
@@ -83,7 +83,7 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	public java.lang.String getNetMusicSongName() {
 		return getStr("netMusicSongName");
 	}
-
+	
 	/**
 	 * 歌曲演唱者
 	 */
@@ -98,7 +98,7 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	public java.lang.String getNetMusicSongAuthor() {
 		return getStr("netMusicSongAuthor");
 	}
-
+	
 	/**
 	 * 歌曲时长
 	 */
@@ -113,7 +113,7 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	public java.lang.String getNetMusicSongTime() {
 		return getStr("netMusicSongTime");
 	}
-
+	
 	/**
 	 * 歌曲专辑
 	 */
@@ -128,7 +128,7 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	public java.lang.String getNetMusicSongAlbum() {
 		return getStr("netMusicSongAlbum");
 	}
-
+	
 	/**
 	 * 歌曲mvId
 	 */
@@ -143,11 +143,11 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	public java.lang.String getNetMusicSongMvId() {
 		return getStr("netMusicSongMvId");
 	}
-
+	
 	/**
 	 * 抓取时间
 	 */
-	public M setNetMusicSongDate(java.util.Date netMusicSongDate) {
+	public M setNetMusicSongDate(java.time.LocalDateTime netMusicSongDate) {
 		set("netMusicSongDate", netMusicSongDate);
 		return (M)this;
 	}
@@ -155,8 +155,9 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	/**
 	 * 抓取时间
 	 */
-	public java.util.Date getNetMusicSongDate() {
-		return get("netMusicSongDate");
+	public java.time.LocalDateTime getNetMusicSongDate() {
+		return getLocalDateTime("netMusicSongDate");
 	}
-
+	
 }
+

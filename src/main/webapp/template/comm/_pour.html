@@ -58,6 +58,9 @@
 <body>
 
 #@_main()
+#if(!indexPage)
+    #@_toolBox()?
+#end
 
 <script src="#(base)/assets/js/jquery.min.js" type="text/javascript"></script>
 <script src="#(base)/assets/js/pinterest_grid.js"></script>
@@ -70,7 +73,6 @@
             margin_bottom: 50,
             single_column_breakpoint: 700
         });
-
     });
 </script>
 </body>

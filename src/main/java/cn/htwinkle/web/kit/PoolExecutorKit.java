@@ -3,7 +3,7 @@ package cn.htwinkle.web.kit;
 import cn.htwinkle.web.model.Visit;
 import com.jfinal.core.Controller;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -53,7 +53,7 @@ public enum PoolExecutorKit {
                     .setVisitIp(ip)
                     .setVisitUserAgent(userAgent)
                     .setVisitPlace(place)
-                    .setVisitDate(new Date());
+                    .setVisitDate(LocalDateTime.now());
             visit.save();
         });
     }

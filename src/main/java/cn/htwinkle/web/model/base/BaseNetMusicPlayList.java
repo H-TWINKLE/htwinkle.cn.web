@@ -23,7 +23,7 @@ public abstract class BaseNetMusicPlayList<M extends BaseNetMusicPlayList<M>> ex
 	public java.lang.Integer getNetMusicPlayListId() {
 		return getInt("netMusicPlayListId");
 	}
-
+	
 	/**
 	 * 歌单列表网页id
 	 */
@@ -38,7 +38,7 @@ public abstract class BaseNetMusicPlayList<M extends BaseNetMusicPlayList<M>> ex
 	public java.lang.String getNetMusicPlayListDirId() {
 		return getStr("netMusicPlayListDirId");
 	}
-
+	
 	/**
 	 * 歌单列表网页名字
 	 */
@@ -53,7 +53,7 @@ public abstract class BaseNetMusicPlayList<M extends BaseNetMusicPlayList<M>> ex
 	public java.lang.String getNetMusicPlayListName() {
 		return getStr("netMusicPlayListName");
 	}
-
+	
 	/**
 	 * 歌单列表类型（toplist、playlist）
 	 */
@@ -68,7 +68,7 @@ public abstract class BaseNetMusicPlayList<M extends BaseNetMusicPlayList<M>> ex
 	public java.lang.String getNetMusicPlayListType() {
 		return getStr("netMusicPlayListType");
 	}
-
+	
 	/**
 	 * 歌单列表最新更新时间
 	 */
@@ -83,7 +83,7 @@ public abstract class BaseNetMusicPlayList<M extends BaseNetMusicPlayList<M>> ex
 	public java.lang.String getNetMusicPlayListUpdate() {
 		return getStr("netMusicPlayListUpdate");
 	}
-
+	
 	/**
 	 * 歌单列表播放次数
 	 */
@@ -98,11 +98,11 @@ public abstract class BaseNetMusicPlayList<M extends BaseNetMusicPlayList<M>> ex
 	public java.lang.String getNetMusicPlayListCount() {
 		return getStr("netMusicPlayListCount");
 	}
-
+	
 	/**
 	 * 歌单列表抓取时间
 	 */
-	public M setNetMusicPlayListDate(java.util.Date netMusicPlayListDate) {
+	public M setNetMusicPlayListDate(java.time.LocalDateTime netMusicPlayListDate) {
 		set("netMusicPlayListDate", netMusicPlayListDate);
 		return (M)this;
 	}
@@ -110,8 +110,9 @@ public abstract class BaseNetMusicPlayList<M extends BaseNetMusicPlayList<M>> ex
 	/**
 	 * 歌单列表抓取时间
 	 */
-	public java.util.Date getNetMusicPlayListDate() {
-		return get("netMusicPlayListDate");
+	public java.time.LocalDateTime getNetMusicPlayListDate() {
+		return getLocalDateTime("netMusicPlayListDate");
 	}
-
+	
 }
+

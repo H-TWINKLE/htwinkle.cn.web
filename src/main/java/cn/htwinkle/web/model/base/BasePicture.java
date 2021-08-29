@@ -17,7 +17,7 @@ public abstract class BasePicture<M extends BasePicture<M>> extends Model<M> imp
 	public java.lang.Integer getPictureId() {
 		return getInt("pictureId");
 	}
-
+	
 	public M setPictureHost(java.lang.String pictureHost) {
 		set("pictureHost", pictureHost);
 		return (M)this;
@@ -26,7 +26,7 @@ public abstract class BasePicture<M extends BasePicture<M>> extends Model<M> imp
 	public java.lang.String getPictureHost() {
 		return getStr("pictureHost");
 	}
-
+	
 	public M setPictureName(java.lang.String pictureName) {
 		set("pictureName", pictureName);
 		return (M)this;
@@ -35,7 +35,7 @@ public abstract class BasePicture<M extends BasePicture<M>> extends Model<M> imp
 	public java.lang.String getPictureName() {
 		return getStr("pictureName");
 	}
-
+	
 	public M setPictureTypes(java.lang.String pictureTypes) {
 		set("pictureTypes", pictureTypes);
 		return (M)this;
@@ -44,7 +44,7 @@ public abstract class BasePicture<M extends BasePicture<M>> extends Model<M> imp
 	public java.lang.String getPictureTypes() {
 		return getStr("pictureTypes");
 	}
-
+	
 	public M setPictureUrl(java.lang.String pictureUrl) {
 		set("pictureUrl", pictureUrl);
 		return (M)this;
@@ -53,14 +53,15 @@ public abstract class BasePicture<M extends BasePicture<M>> extends Model<M> imp
 	public java.lang.String getPictureUrl() {
 		return getStr("pictureUrl");
 	}
-
-	public M setPictureDate(java.util.Date pictureDate) {
+	
+	public M setPictureDate(java.time.LocalDateTime pictureDate) {
 		set("pictureDate", pictureDate);
 		return (M)this;
 	}
 	
-	public java.util.Date getPictureDate() {
-		return get("pictureDate");
+	public java.time.LocalDateTime getPictureDate() {
+		return getLocalDateTime("pictureDate");
 	}
-
+	
 }
+

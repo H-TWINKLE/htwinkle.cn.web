@@ -291,7 +291,6 @@ a {
     -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
     transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
     color: inherit;
-    border-bottom: dotted 1px;
     text-decoration: none;
 }
 
@@ -3559,7 +3558,7 @@ button:disabled,
 
 #wrapper > .scrollZone {
     position: fixed;
-    width: 6rem;
+    width: 3rem;
     height: inherit;
     cursor: -moz-grab;
     cursor: -webkit-grab;

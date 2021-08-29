@@ -12,6 +12,8 @@ import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.upload.UploadFile;
 
+import java.io.File;
+
 /**
  * 黄丹的需求
  *
@@ -21,19 +23,24 @@ import com.jfinal.upload.UploadFile;
 @Before(DiAoInterceptor.class)
 public class DiAoController extends BaseController {
 
+    /**
+     * 标题
+     */
+    public static final String HD_TITLE = "HD @ 一二三";
+
     @Inject
     DiAoService service;
 
     @Override
     public void index() {
-        setTitle("HD");
-        setAttr("allFile", service.getAllFileFromDiAoPath());
+        setTitle(HD_TITLE);
+        setAttr("allFile", service.getAllCanDownloadFile());
         render("index.html");
     }
 
     @Clear(DiAoInterceptor.class)
     public void login() {
-        setTitle("HD");
+        setTitle(HD_TITLE);
         render("login.html");
     }
 
@@ -83,11 +90,18 @@ public class DiAoController extends BaseController {
         forwardAction("/diao");
     }
 
-
-
-    @Clear(DiAoInterceptor.class)
-    public void api() {
-        renderDefaultJson();
+    /**
+     * 下载文件的地址
+     *
+     * @param fileName fileName
+     */
+    public void downloadFile(String fileName) {
+        File downloadFile = service.getDownloadFile(fileName);
+        if (null != downloadFile) {
+            renderFile(downloadFile);
+            return;
+        }
+        renderError(404);
     }
 
     private void successToLogin(User user) {
@@ -119,6 +133,4 @@ public class DiAoController extends BaseController {
         }
         forwardAction("/diao");
     }
-
-
 }

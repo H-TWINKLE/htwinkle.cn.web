@@ -2,7 +2,7 @@
 
 #define _main()
 
-<link rel="stylesheet" href="#(base)/assets/css/mycss.css"/>
+<link rel="stylesheet" href="#(base)/assets/css/main_web.css"/>
 
 <div id="page-wrapper">
 
@@ -14,10 +14,10 @@
             <div class="inner columns aligned" style="margin: auto;">
 
                 <div class="span-8">
-                    <h1 class="title">#(article.articleTitle??)</h1>
+                    <h2 class="title">#(article.articleTitle??)</h2>
                     <h3 class="author">作者&nbsp;&nbsp;#(article.articleAuthor??)</h3>
                     <h5 class="dates">更新时间&nbsp;&nbsp;#date(article.articleDate??)</h5>
-                    <div class="contents">#(article.articleContent??)</div>
+                    <div class="contents" style="font-size: 1.0rem">#(article.articleContent??)</div>
                 </div>
             </div>
         </section>
