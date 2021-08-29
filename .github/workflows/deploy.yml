@@ -30,13 +30,13 @@ jobs:
         run: ls  
               
       - name: delete service dir
-        uses: matheusvanzan/sshpass-action@v2
+        uses: cross-the-world/ssh-pipeline@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           port: ${{ secrets.SERVER_PORT }}
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
-          run: |
+          script: |
               rm -rf /root/app_web_htwinkle.cn.web/web
 
       - name: upload to server
@@ -50,24 +50,24 @@ jobs:
           remote: "/root/app_web/app_web_htwinkle.cn/"
           
       - name: chmod shell file
-        uses: matheusvanzan/sshpass-action@v2
+        uses: cross-the-world/ssh-pipeline@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           port: ${{ secrets.SERVER_PORT }}
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
-          run: |
+          script: |
               cd /root/app_web/htwinkle.cn.web/web
               chmod +755 runServer.sh
               
       - name: start server
-        uses: matheusvanzan/sshpass-action@v2
+        uses: cross-the-world/ssh-pipeline@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           port: ${{ secrets.SERVER_PORT }}
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
-          run: |
+          script: |
               cd /root/app_web/htwinkle.cn.web/web
               ./runServer.sh start              
       
