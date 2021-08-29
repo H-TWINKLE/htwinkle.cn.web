@@ -61,7 +61,7 @@ public class DiAoController extends BaseController {
 
         successToLogin(user);
         setMsgTip(String.format("欢迎您，%s ", user.getUserNickname()));
-        redirect("/diao");
+        this.index();
     }
 
     @Clear(DiAoInterceptor.class)
