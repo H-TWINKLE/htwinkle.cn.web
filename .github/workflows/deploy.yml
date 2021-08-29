@@ -50,7 +50,7 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           script: |
-              rm -rf /root/app_web_htwinkle.cn.web/web
+              rm -rf /root/app_web/htwinkle.cn.web/web
 
       - name: upload to server
         uses: cross-the-world/scp-pipeline@master
@@ -60,7 +60,7 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           local: "./target/web-release*/web"
-          remote: "/root/app_web/app_web_htwinkle.cn/"
+          remote: "/root/app_web/htwinkle.cn.web/"
           
       - name: chmod shell file
         uses: cross-the-world/ssh-pipeline@master
