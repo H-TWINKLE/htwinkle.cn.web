@@ -71,7 +71,7 @@ jobs:
           pass: ${{ secrets.SERVER_PASS }}
           script: |
               cd /root/app_web/htwinkle.cn.web/web
-              chmod +755 runServer.sh
+              chmod +777 runServer.sh
               
       - name: start server
         uses: cross-the-world/ssh-pipeline@master
