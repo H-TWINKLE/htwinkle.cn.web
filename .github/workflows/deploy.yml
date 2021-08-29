@@ -39,7 +39,6 @@ jobs:
           run: |
               cd /root/app_web/htwinkle.cn.web/web
               ls
-              echo 'stop server'
               kill `pgrep -f cn.htwinkle.web.App` 2>/dev/null
               
       - name: delete service dir
