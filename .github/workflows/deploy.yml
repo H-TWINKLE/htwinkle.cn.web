@@ -40,7 +40,7 @@ jobs:
               cd /root/app_web/htwinkle.cn.web/web
               ls
               echo 'stop server'
-              . runServer.sh stop
+              ./runServer.sh stop
               
       - name: delete service dir
         uses: matheusvanzan/sshpass-action@v2
