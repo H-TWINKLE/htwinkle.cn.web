@@ -28,18 +28,6 @@ jobs:
         
       - name: show package dir
         run: ls  
-        
-      - name: stop service app
-        uses: matheusvanzan/sshpass-action@v2
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          port: ${{ secrets.SERVER_PORT }}
-          user: ${{ secrets.SERVER_USER }}
-          pass: ${{ secrets.SERVER_PASS }}
-          run: |
-              cd /root/app_web/htwinkle.cn.web/web
-              ls
-              kill `pgrep -f cn.htwinkle.web.App` 2>/dev/null
               
       - name: delete service dir
         uses: matheusvanzan/sshpass-action@v2
