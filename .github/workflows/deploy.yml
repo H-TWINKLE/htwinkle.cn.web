@@ -81,8 +81,9 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           script: |
-              cd /root/app_web/htwinkle.cn.web/web/
-              ./runServer.sh restart
+              cd /root/app_web/htwinkle.cn.web/web
+              ls
+              ./runServer.sh start
       
         
         
