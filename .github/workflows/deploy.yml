@@ -40,7 +40,7 @@ jobs:
               echo 'stop server'
               cd /root/app_web/htwinkle.cn.web/web
               ls
-              runServer.sh stop
+              ./runServer.sh stop
               
       - name: delete service dir
         uses: matheusvanzan/sshpass-action@v2
@@ -62,7 +62,7 @@ jobs:
           local: "./target/web-release*/web"
           remote: "/root/app_web/app_web_htwinkle.cn/"
           
-      - name: chown shell file
+      - name: chmod shell file
         uses: matheusvanzan/sshpass-action@v2
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -71,7 +71,7 @@ jobs:
           pass: ${{ secrets.SERVER_PASS }}
           run: |
               cd /root/app_web/htwinkle.cn.web/web
-              chomd +755 runServer.sh
+              chmod +755 runServer.sh
               
       - name: start server
         uses: matheusvanzan/sshpass-action@v2
@@ -82,7 +82,7 @@ jobs:
           pass: ${{ secrets.SERVER_PASS }}
           run: |
               cd /root/app_web/htwinkle.cn.web/web
-              runServer.sh start              
+              ./runServer.sh start              
       
         
         
