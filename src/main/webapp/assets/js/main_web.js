@@ -4,7 +4,7 @@ $(document).ready(function () {
             heading: '消息提示',
             text: TipMsg,
             showHideTransition: 'slide',
-            position: 'bottom-right',
+            position: 'top-right',
             icon: 'info',
             hideAfter: 4000,
         })
