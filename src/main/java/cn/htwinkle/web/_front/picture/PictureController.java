@@ -4,6 +4,7 @@ import cn.htwinkle.web.base.BaseController;
 import cn.htwinkle.web.constants.Constants;
 import cn.htwinkle.web.model.Picture;
 import com.jfinal.aop.Inject;
+import com.jfinal.kit.StrKit;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,9 +30,8 @@ public class PictureController extends BaseController {
 
     public void api() {
         Integer num = getDefaultNumForApi();
-        renderJson(
-                getDefaultJson(num, getPictureList(num)).
-                        set("type", getDefaultTypesFromParams()));
+        renderJson(getDefaultJson(num, getPictureList(num))
+                .set("type", getDefaultTypesFromParams()));
     }
 
 
@@ -42,7 +42,7 @@ public class PictureController extends BaseController {
      */
     private String getDefaultTypesFromParams() {
         String types = getPara("types");
-        if (types == null || "".equals(types)) {
+        if (StrKit.isBlank(types)) {
             return Constants.G3_BIZHI_TYPES[0];
         }
         if (Arrays.toString(Constants.G3_BIZHI_TYPES).contains(types))

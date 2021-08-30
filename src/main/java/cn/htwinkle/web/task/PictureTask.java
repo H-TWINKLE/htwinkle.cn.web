@@ -31,11 +31,11 @@ public class PictureTask implements ITask {
 
     @Override
     public void run() {
+        deleteOldImg();
         getListImg();
     }
 
     private void getListImg() {
-        deleteOldImg();
         try {
             for (String s : Constants.G3_BIZHI_TYPES) {
                 spider.get(s);
@@ -46,7 +46,7 @@ public class PictureTask implements ITask {
     }
 
     private void deleteOldImg() {
-        Db.update("DELETE FROM picture WHERE to_days(`date`)!=to_days(now());");
+        Db.update("DELETE FROM picture WHERE to_days(`pictureDate`)!=to_days(now())");
     }
 
 

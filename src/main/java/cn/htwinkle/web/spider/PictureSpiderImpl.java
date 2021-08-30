@@ -10,8 +10,8 @@ import org.jsoup.select.Elements;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 /**
@@ -30,13 +30,13 @@ public class PictureSpiderImpl implements ISpider<Picture> {
     public Picture get() {
         String type = getRandomType();
         List<Picture> list = getPictureFromHtml(type);
-        return list == null ? null : list.get(0);
+        return list == null || list.isEmpty() ? null : list.get(0);
     }
 
     @Override
     public Picture get(String type) {
         List<Picture> list = getPictureFromHtml(type);
-        return list == null ? null : list.get(0);
+        return list == null || list.isEmpty() ? null : list.get(0);
     }
 
     @Override
@@ -60,16 +60,36 @@ public class PictureSpiderImpl implements ISpider<Picture> {
     }
 
     /**
-     * 解析数据
+     * 轮询获取多张图片
      *
      * @param type type
      * @return List<Picture>
      */
     private List<Picture> getPictureFromHtml(String type) {
+        List<Picture> list = new ArrayList<>();
+        for (int i = 0; i <= 5; i++) {
+            List<Picture> temp = getPictureFromHtml(type, i);
+            list.addAll(Optional.of(temp).orElse(new ArrayList<>()));
+        }
+        return list;
+    }
+
+    private List<Picture> getPictureFromHtml(String type, int page) {
+        String url = Constants.G3_BIZHI_URL + type + "/" + page + ".html";
+        return getPictureByType(type, url);
+    }
+
+    /**
+     * 解析数据
+     *
+     * @param type type
+     * @return List<Picture>
+     */
+    private List<Picture> getPictureByType(String type, String url) {
         Document doc;
 
         try {
-            doc = Jsoup.connect(Constants.G3_BIZHI_URL + type + "/").get();
+            doc = Jsoup.connect(url).get();
         } catch (Exception e) {
             LOGGER.info("PictureSpiderImpl - getPictureFromHtml : " + e.getMessage());
             return null;

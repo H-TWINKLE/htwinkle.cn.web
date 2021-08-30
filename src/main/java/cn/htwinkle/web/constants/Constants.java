@@ -1,5 +1,7 @@
 package cn.htwinkle.web.constants;
 
+import com.jfinal.kit.PropKit;
+
 /**
  * 常量
  *
@@ -12,7 +14,6 @@ public interface Constants {
     String POST_FILE_SIZE = "postFileSize";
     String CONFIG_DEV_FILE_NAME = "config-dev.properties";
     String CONFIG_PRO_FILE_NAME = "config-pro.properties";
-    String CONFIG_EHCACHE_FILE_NAME = "ehcache.xml";
     String UPLOAD_PATH = "uploadPath";
     String DOWNLOAD_PATH = "downloadPath";
     String DIAO_PATH = "diaoPath";
@@ -68,4 +69,12 @@ public interface Constants {
      */
     String[] NET_MUSIC_PLAY_LIST = {"6907590247"};
 
+    /**
+     * 获取默认app应用展示的图片
+     */
+    String[] DEFAULT_APP_PIC_ARR = {
+            "http://" + PropKit.get(KEY_OF_IMAGE) + "/2020/03/15/226d1a7240f6d357809665ac5d151c2a.jpg",
+            "http://" + PropKit.get(KEY_OF_IMAGE) + "/2020/03/15/665675de407a6b4980c3e40c4edc60b8.jpg",
+            "http://" + PropKit.get(KEY_OF_IMAGE) + "/2020/03/15/2b0a5a5a409933ac80df18f7a0c5f5e2.jpg",
+            "http://" + PropKit.get(KEY_OF_IMAGE) + "/2020/03/15/46428d0440c06b6c8051b6dd749699be.jpg"};
 }

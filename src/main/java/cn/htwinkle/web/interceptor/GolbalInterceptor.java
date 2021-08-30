@@ -36,7 +36,7 @@ public class GolbalInterceptor implements Interceptor {
         if (ATOMIC_INTEGER == null || ATOMIC_INTEGER.getAndIncrement() == 0) {
             ATOMIC_INTEGER = new AtomicInteger(service.getAllVisitUserNum());
         } else {
-            ATOMIC_INTEGER.getAndIncrement();
+            ATOMIC_INTEGER.getAndAdd(0);
         }
     }
 
