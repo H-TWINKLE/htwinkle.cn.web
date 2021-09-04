@@ -33,6 +33,8 @@ public class IdeaService extends BaseService {
      * IdeaService的输出日志对象
      */
     private static final Logger LOGGER = Logger.getLogger(IdeaService.class.getName());
+    public static final String JIHUOMA_ZIP = "https://idea.medeming.com/a/jihuoma1.zip";
+    public static final String LOOKDIV_COM_INDEX = "http://lookdiv.com/index/index/indexcode.html";
 
     /**
      * 获取所以的激活码
@@ -62,7 +64,7 @@ public class IdeaService extends BaseService {
      */
     public Ret getRetCode(String key) {
         try {
-            Document doc = Jsoup.connect("http://lookdiv.com/index/index/indexcode.html")
+            Document doc = Jsoup.connect(LOOKDIV_COM_INDEX)
                     .data("key", key).post();
             Elements text = doc.getElementsByTag("textarea");
             if (text.size() > 0) {
@@ -84,7 +86,7 @@ public class IdeaService extends BaseService {
         Ret ret = Ret.create();
         try {
             Connection.Response connection =
-                    Jsoup.connect("http://idea.medeming.com/jihuoma/images/jihuoma.zip")
+                    Jsoup.connect(JIHUOMA_ZIP)
                             .ignoreContentType(true)
                             .execute();
             InputStream in = connection.bodyStream();
@@ -97,8 +99,7 @@ public class IdeaService extends BaseService {
                     String fileName = zipFile.getName();
                     //检测文件是否存在
                     if (StrKit.notBlank(filter) && !fileName.contains(filter) && fileName.contains(".")) {
-                        LogKit.info("---------------------开始解析文件："
-                                + fileName + "-----------------------------");
+                        LogKit.info("开始解析文件：" + fileName);
                         //读取
                         BufferedReader br =
                                 new BufferedReader(
@@ -118,7 +119,7 @@ public class IdeaService extends BaseService {
                 return ret;
             }
         } catch (IOException e) {
-            LOGGER.error("IdeaService - getZipFile : " + e.getLocalizedMessage());
+            LOGGER.error("解析激活码文件失败 : " + e.getLocalizedMessage());
             return ret.setFail();
         }
     }

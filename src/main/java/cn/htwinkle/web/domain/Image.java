@@ -1,4 +1,4 @@
-package cn.htwinkle.web.bean;
+package cn.htwinkle.web.domain;
 
 import cn.htwinkle.web.base.bmob.BaseBmob;
 

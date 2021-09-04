@@ -51,8 +51,8 @@ public class ArticleService extends BaseService {
                         "((SELECT MAX(articleId) FROM `article`)-(SELECT MIN(articleId) FROM `article`))+" +
                         "(SELECT MIN(articleId) FROM `article`)) AS id) AS t2 " +
                         "WHERE t1.articleId >= t2.id ORDER BY t1.articleId LIMIT 0,?", num);
-        if (list == null) {
-            PoolExecutorKit.INSTANCE.execute(() -> spider.get());
+        if (list == null || list.isEmpty()) {
+            PoolExecutorKit.INSTANCE.execute(spider::get);
             return null;
         }
         return list;

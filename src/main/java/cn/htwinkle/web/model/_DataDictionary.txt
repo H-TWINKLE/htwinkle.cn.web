@@ -45,9 +45,10 @@ Table: picture
  pictureId    | INT(10)      | NO   | PRI |         |         
  pictureHost  | VARCHAR(255) | YES  |     |         |         
  pictureName  | VARCHAR(255) | YES  |     |         |         
- pictureTypes | VARCHAR(255) | YES  |     |         |         
+ pictureTypes | VARCHAR(255) | YES  |     |         | 图片的类型   
+ picturePlate | INT(10)      | YES  |     |         | 图片的分类1：手机 2：电脑
  pictureUrl   | VARCHAR(255) | YES  |     |         |         
- pictureDate  | DATETIME(19) | YES  |     |         |         
+ pictureDate  | DATETIME(19) | YES  |     |         | 抓取的时间   
 --------------+--------------+------+-----+---------+---------
 
 Table: project

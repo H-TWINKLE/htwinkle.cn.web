@@ -2,6 +2,7 @@ package cn.htwinkle.web.spider;
 
 import cn.htwinkle.web.constants.Constants;
 import cn.htwinkle.web.model.Article;
+import com.jfinal.kit.Kv;
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 import org.jsoup.Jsoup;
@@ -10,7 +11,6 @@ import org.jsoup.nodes.Element;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,7 +67,7 @@ public class ArticleSpiderImpl implements ISpider<Article> {
     }
 
     @Override
-    public Article get(String types) {
+    public Article get(Kv kv) {
         return get();
     }
 
@@ -84,9 +84,7 @@ public class ArticleSpiderImpl implements ISpider<Article> {
     }
 
     @Override
-    public List<Article> getList(String types) {
+    public List<Article> getList(Kv kv) {
         return getList();
     }
-
-
 }

@@ -7,5 +7,7 @@ import cn.htwinkle.web.model.base.BasePicture;
  */
 @SuppressWarnings("serial")
 public class Picture extends BasePicture<Picture> {
-	public static final Picture dao = new Picture().dao();
+    public static final Picture dao = new Picture().dao();
+    public static final int PLATE_MOBILE = 1;
+    public static final int PLATE_DESK = 2;
 }

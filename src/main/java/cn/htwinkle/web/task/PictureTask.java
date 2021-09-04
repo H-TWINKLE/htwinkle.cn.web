@@ -5,6 +5,7 @@ import cn.htwinkle.web.model.Picture;
 import cn.htwinkle.web.spider.ISpider;
 import cn.htwinkle.web.spider.PictureSpiderImpl;
 import com.jfinal.aop.Aop;
+import com.jfinal.kit.Kv;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.cron4j.ITask;
 import org.apache.log4j.Logger;
@@ -37,8 +38,8 @@ public class PictureTask implements ITask {
 
     private void getListImg() {
         try {
-            for (String s : Constants.G3_BIZHI_TYPES) {
-                spider.get(s);
+            for (String type : Constants.G3_BIZHI_TYPES) {
+                spider.getList(Kv.create().set("type", type));
             }
         } catch (Exception e) {
             LOGGER.info("PictureTask - getListImg : " + e.getMessage());

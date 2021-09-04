@@ -94,9 +94,10 @@ public class DiAoService extends BaseService {
         if (StrKit.isBlank(fileName)) {
             return false;
         }
-
         File file = getFileNameBy(fileName);
-        return null != file && file.exists() && file.delete();
+        boolean flag = null != file && file.exists() && file.delete();
+        LOGGER.info(String.format("删除文件状态 %s", flag));
+        return flag;
     }
 
     /**

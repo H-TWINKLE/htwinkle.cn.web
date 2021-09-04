@@ -8,6 +8,8 @@ import cn.htwinkle.web.model.base.BasePicture;
 import cn.htwinkle.web.spider.ISpider;
 import cn.htwinkle.web.spider.PictureSpiderImpl;
 import com.jfinal.aop.Aop;
+import com.jfinal.kit.Kv;
+import com.jfinal.kit.StrKit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,8 +25,6 @@ import java.util.stream.Collectors;
  */
 public class PictureService extends BaseService {
 
-    public static final String DESKTOP_TAG = "1920x1080";
-
     private ISpider<Picture> spider = Aop.get(PictureSpiderImpl.class);
 
     /**
@@ -35,19 +35,23 @@ public class PictureService extends BaseService {
     public List<String> getPictureListIndexBy() {
         List<Picture> list = Picture.dao.find(
                 "SELECT * from picture " +
-                        "where to_days(`pictureDate`) = to_days(now()) AND pictureTypes = ? ",
-                Constants.G3_BIZHI_TYPES[0]);
+                        "where to_days(`pictureDate`) = to_days(now()) AND " +
+                        "pictureTypes = ? AND " +
+                        "picturePlate = ? ",
+                Constants.G3_BIZHI_TYPES[0], Picture.PLATE_DESK);
         if (list.size() == 0) {
             PoolExecutorKit.INSTANCE.execute(() -> spider.get());
             return getDefaultPicArr();
         }
         List<String> filterList = list
                 .stream()
-                .filter(item -> null != item.getPictureUrl() && item.getPictureUrl().contains(DESKTOP_TAG))
+                .filter(item -> StrKit.notBlank(item.getPictureUrl()))
                 .map(BasePicture::getPictureUrl)
                 .collect(Collectors.toList());
         Collections.shuffle(filterList);
-        return filterList.size() > Constants.DEFAULT_APP_PIC_ARR.length ? filterList : getDefaultPicArr();
+        Collections.shuffle(filterList);
+        return filterList.size() >= Constants.DEFAULT_APP_PIC_ARR.length ?
+                new ArrayList<>(filterList.subList(0, Constants.DEFAULT_APP_PIC_ARR.length)) : getDefaultPicArr();
     }
 
     /**
@@ -57,16 +61,31 @@ public class PictureService extends BaseService {
      * @return List<Picture>
      */
     public List<Picture> getPictureList(int num) {
-        return getPictureList(num, Constants.G3_BIZHI_TYPES[0]);
+        return getPictureList(num, Picture.PLATE_DESK, Constants.G3_BIZHI_TYPES[0]);
     }
 
-    public List<Picture> getPictureList(int num, String types) {
+    public List<Picture> getPictureList(int num, int plate, String type) {
         List<Picture> list = Picture.dao.find(
                 "SELECT * from picture " +
-                        "where to_days(`pictureDate`) = to_days(now()) AND pictureTypes = ? " +
-                        "ORDER BY rand() LIMIT 0," + num, types);
-        if (list.size() == 0) {
-            PoolExecutorKit.INSTANCE.execute(() -> spider.get());
+                        "where to_days(`pictureDate`) = to_days(now()) AND " +
+                        "pictureTypes = ? AND" +
+                        "picturePlate = ? " +
+                        "ORDER BY rand() LIMIT 0," + num, type, plate);
+        if (list.isEmpty()) {
+            PoolExecutorKit.INSTANCE.execute(() ->
+                    spider.getList(Kv.create().set("type", type).set("plate", plate)));
+        }
+        return list;
+    }
+
+    public List<Picture> getPictureList(int num, String type) {
+        List<Picture> list = Picture.dao.find(
+                "SELECT * from picture " +
+                        "where to_days(`pictureDate`) = to_days(now()) AND " +
+                        "pictureTypes = ? " +
+                        "ORDER BY rand() LIMIT 0," + num, type);
+        if (list.isEmpty()) {
+            PoolExecutorKit.INSTANCE.execute(() -> spider.getList(Kv.create().set("type", type)));
             return null;
         }
         return list;
@@ -76,7 +95,8 @@ public class PictureService extends BaseService {
     public Picture getOnePicture() {
         List<Picture> list = Picture.dao
                 .find("SELECT * FROM picture " +
-                        "WHERE to_days(`pictureDate`) = to_days(now()) ORDER BY rand() LIMIT 1");
+                        "WHERE to_days(`pictureDate`) = to_days(now()) " +
+                        "ORDER BY rand() LIMIT 1");
         if (list.size() == 0) {
             PoolExecutorKit.INSTANCE.execute(() -> spider.get());
             return null;

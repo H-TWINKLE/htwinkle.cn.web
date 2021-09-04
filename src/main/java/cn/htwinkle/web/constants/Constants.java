@@ -33,10 +33,13 @@ public interface Constants {
     String LOCALIP = "0:0:0:0:0:0:0:1";
 
     String MEI_RI_YI_WEN_URL = "https://meiriyiwen.com/random";
-    String G3_BIZHI_URL = "http://sj.zol.com.cn/bizhi/";
+    String MOBILE_G3_BIZHI_URL = "http://sj.zol.com.cn/bizhi/";
+    String COMPUTER_G3_BIZHI_URL = "http://desk.zol.com.cn/";
 
-    // 风景，可爱，建筑，植物，动物
-    String[] G3_BIZHI_TYPES = {"fengjing", "keai", "jianzhu", "zhiwu", "dongwu"};
+    /**
+     * 风景，可爱，建筑，植物，动物，美食
+     */
+    String[] G3_BIZHI_TYPES = {"fengjing", "keai", "jianzhu", "zhiwu", "dongwu", "meishi"};
 
     String SESSION_USER = "_user";
     String SESSION__DIAO_KEY = "_hd";

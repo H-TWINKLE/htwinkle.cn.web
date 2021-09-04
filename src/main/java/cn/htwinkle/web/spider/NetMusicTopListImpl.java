@@ -4,6 +4,7 @@ import cn.htwinkle.web.constants.Constants;
 import cn.htwinkle.web.model.NetMusic;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
@@ -13,7 +14,6 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -43,8 +43,8 @@ public class NetMusicTopListImpl implements ISpider<NetMusic> {
     }
 
     @Override
-    public NetMusic get(String topListId) {
-        return getNetMusicList(topListId);
+    public NetMusic get(Kv kv) {
+        return getNetMusicList(kv.getStr("type"));
     }
 
     @Override
@@ -54,8 +54,8 @@ public class NetMusicTopListImpl implements ISpider<NetMusic> {
     }
 
     @Override
-    public List<NetMusic> getList(String topListId) {
-        return getMusicListByHtml(topListId);
+    public List<NetMusic> getList(Kv kv) {
+        return getMusicListByHtml(kv.getStr("type"));
     }
 
     private String getRandomTopListId() {

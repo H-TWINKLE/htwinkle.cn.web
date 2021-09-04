@@ -36,13 +36,34 @@ public abstract class BasePicture<M extends BasePicture<M>> extends Model<M> imp
 		return getStr("pictureName");
 	}
 	
+	/**
+	 * 图片的类型
+	 */
 	public M setPictureTypes(java.lang.String pictureTypes) {
 		set("pictureTypes", pictureTypes);
 		return (M)this;
 	}
 	
+	/**
+	 * 图片的类型
+	 */
 	public java.lang.String getPictureTypes() {
 		return getStr("pictureTypes");
+	}
+	
+	/**
+	 * 图片的分类1：手机 2：电脑
+	 */
+	public M setPicturePlate(java.lang.Integer picturePlate) {
+		set("picturePlate", picturePlate);
+		return (M)this;
+	}
+	
+	/**
+	 * 图片的分类1：手机 2：电脑
+	 */
+	public java.lang.Integer getPicturePlate() {
+		return getInt("picturePlate");
 	}
 	
 	public M setPictureUrl(java.lang.String pictureUrl) {
@@ -54,11 +75,17 @@ public abstract class BasePicture<M extends BasePicture<M>> extends Model<M> imp
 		return getStr("pictureUrl");
 	}
 	
+	/**
+	 * 抓取的时间
+	 */
 	public M setPictureDate(java.time.LocalDateTime pictureDate) {
 		set("pictureDate", pictureDate);
 		return (M)this;
 	}
 	
+	/**
+	 * 抓取的时间
+	 */
 	public java.time.LocalDateTime getPictureDate() {
 		return getLocalDateTime("pictureDate");
 	}

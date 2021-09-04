@@ -1,6 +1,6 @@
 package cn.htwinkle.web.kit;
 
-import cn.htwinkle.web.bean.User;
+import cn.htwinkle.web.domain.User;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;

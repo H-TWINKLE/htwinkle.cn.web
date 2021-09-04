@@ -1,5 +1,6 @@
 package cn.htwinkle.web.spider;
 
+import com.jfinal.kit.Kv;
 import com.jfinal.plugin.activerecord.Model;
 
 import java.util.List;
@@ -22,10 +23,10 @@ public interface ISpider<T extends Model<T>> {
     /**
      * 返回一个需要类型的爬虫实体对象
      *
-     * @param type 类型
+     * @param kv 类型
      * @return T
      */
-    T get(String type);
+    T get(Kv kv);
 
     /**
      * 获取爬虫的 数据列表
@@ -39,6 +40,6 @@ public interface ISpider<T extends Model<T>> {
      *
      * @return return
      */
-    List<T> getList(String type);
+    List<T> getList(Kv kv);
 
 }

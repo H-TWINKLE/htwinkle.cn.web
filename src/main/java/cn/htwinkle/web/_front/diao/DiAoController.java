@@ -11,6 +11,11 @@ import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.upload.UploadFile;
+import org.leon.swagger.annotation.Api;
+import org.leon.swagger.annotation.ApiOperation;
+import org.leon.swagger.annotation.Param;
+import org.leon.swagger.annotation.Params;
+import org.leon.swagger.model.constant.HttpMethod;
 
 import java.io.File;
 
@@ -21,6 +26,7 @@ import java.io.File;
  * @date : 2020/3/15 14:06
  */
 @Before(DiAoInterceptor.class)
+@Api(tag = "DiAo", description = "文件上传")
 public class DiAoController extends BaseController {
 
     /**
@@ -58,29 +64,34 @@ public class DiAoController extends BaseController {
             forwardAction("/diao/login");
             return;
         }
-
         successToLogin(user);
         setMsgTip(String.format("欢迎您，%s ", user.getUserNickname()));
         this.index();
     }
 
     @Clear(DiAoInterceptor.class)
+    @ApiOperation(url = "/diao/uploadFile",
+            tag = "DiAo",
+            httpMethod = HttpMethod.POST,
+            description = "上传文件")
+    @Params({
+            @Param(name = "uploadFile", description = "需要上传的文件", required = true, dataType = "file"),
+            @Param(name = "isApi", description = "返回是否为json,只要存在值就是返回json", defaultValue = "1")
+    })
     public void uploadFile() {
         UploadFile uploadFile = getFile("uploadFile");
         if (uploadFile == null) {
             renderJson(Ret.fail("msg", "文件为空"));
             return;
         }
-
-        String isApi = get("isApi");
-
-        if (StrKit.notBlank(isApi)) {
-            renderUploadFileAsApi(uploadFile);
-        } else {
-            renderUploadFileAsHtml(uploadFile);
-        }
+        renderByIsApi(uploadFile);
     }
 
+    /**
+     * 删除文件
+     *
+     * @param fileName fileName
+     */
     public void deleteFile(String fileName) {
         if (service.deleteFile(fileName)) {
             setMsgTip("删除文件成功！");
@@ -102,6 +113,20 @@ public class DiAoController extends BaseController {
             return;
         }
         renderError(404);
+    }
+
+    /**
+     * 通过条件判断返回
+     *
+     * @param uploadFile uploadFile
+     */
+    private void renderByIsApi(UploadFile uploadFile) {
+        String isApi = get("isApi");
+        if (StrKit.notBlank(isApi)) {
+            renderUploadFileAsApi(uploadFile);
+        } else {
+            renderUploadFileAsHtml(uploadFile);
+        }
     }
 
     private void successToLogin(User user) {
