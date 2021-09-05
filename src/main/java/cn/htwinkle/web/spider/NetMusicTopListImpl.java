@@ -1,10 +1,10 @@
 package cn.htwinkle.web.spider;
 
 import cn.htwinkle.web.constants.Constants;
+import cn.htwinkle.web.domain.BaseOption;
 import cn.htwinkle.web.model.NetMusic;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
@@ -26,7 +26,7 @@ import static cn.htwinkle.web.constants.Constants.NET_MUSIC_BASE_TOP_LIST_URL;
  * @author : twinkle
  * @date : 2021/8/8 11:30
  */
-public class NetMusicTopListImpl implements ISpider<NetMusic> {
+public class NetMusicTopListImpl implements ISpider<NetMusic, BaseOption> {
     /**
      * ArticleSpiderImpl的输出日志对象
      */
@@ -38,39 +38,27 @@ public class NetMusicTopListImpl implements ISpider<NetMusic> {
 
     @Override
     public NetMusic get() {
-        String topListId = getRandomTopListId();
-        return getNetMusicList(topListId);
+        return this.get(new BaseOption().setType(getRandomTopListId()));
     }
 
     @Override
-    public NetMusic get(Kv kv) {
-        return getNetMusicList(kv.getStr("type"));
+    public NetMusic get(BaseOption option) {
+        List<NetMusic> list = getList(option);
+        return list.isEmpty() ? null : list.get(0);
     }
 
     @Override
     public List<NetMusic> getList() {
-        String topListId = getRandomTopListId();
-        return getMusicListByHtml(topListId);
+        return getList(new BaseOption().setType(getRandomTopListId()));
     }
 
     @Override
-    public List<NetMusic> getList(Kv kv) {
-        return getMusicListByHtml(kv.getStr("type"));
+    public List<NetMusic> getList(BaseOption option) {
+        return getMusicListByHtml(option.getType());
     }
 
     private String getRandomTopListId() {
         return Constants.NET_MUSIC_TOP_LIST[new Random().nextInt(1)];
-    }
-
-    /**
-     * 获取歌曲信息
-     *
-     * @param types types
-     * @return NetMusic
-     */
-    private NetMusic getNetMusicList(String types) {
-        List<NetMusic> musicList = this.getMusicListByHtml(types);
-        return null == musicList ? null : musicList.get(0);
     }
 
 

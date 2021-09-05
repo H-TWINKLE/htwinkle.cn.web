@@ -1,6 +1,7 @@
 package cn.htwinkle.web.spider;
 
-import com.jfinal.kit.Kv;
+import cn.htwinkle.web.domain.IOption;
+import cn.htwinkle.web.domain.PictureOption;
 import com.jfinal.plugin.activerecord.Model;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * @author : twinkle
  * @date : 2020/3/15 10:51
  */
-public interface ISpider<T extends Model<T>> {
+public interface ISpider<T extends Model<T>, V extends IOption> {
 
     /**
      * 返回一个爬虫的实体对象
@@ -23,10 +24,10 @@ public interface ISpider<T extends Model<T>> {
     /**
      * 返回一个需要类型的爬虫实体对象
      *
-     * @param kv 类型
+     * @param v 类型
      * @return T
      */
-    T get(Kv kv);
+    T get(V v);
 
     /**
      * 获取爬虫的 数据列表
@@ -40,6 +41,6 @@ public interface ISpider<T extends Model<T>> {
      *
      * @return return
      */
-    List<T> getList(Kv kv);
+    List<T> getList(V v);
 
 }

@@ -8,6 +8,8 @@ import cn.htwinkle.web.model.base.BasePicture;
 @SuppressWarnings("serial")
 public class Picture extends BasePicture<Picture> {
     public static final Picture dao = new Picture().dao();
+    // 所有类型，不存入数据库
+    public static final int PLATE_All = 0;
     public static final int PLATE_MOBILE = 1;
     public static final int PLATE_DESK = 2;
 }

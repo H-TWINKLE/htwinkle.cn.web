@@ -2,13 +2,13 @@ package cn.htwinkle.web._front.picture;
 
 import cn.htwinkle.web.base.BaseService;
 import cn.htwinkle.web.constants.Constants;
+import cn.htwinkle.web.domain.PictureOption;
 import cn.htwinkle.web.kit.PoolExecutorKit;
 import cn.htwinkle.web.model.Picture;
 import cn.htwinkle.web.model.base.BasePicture;
 import cn.htwinkle.web.spider.ISpider;
 import cn.htwinkle.web.spider.PictureSpiderImpl;
 import com.jfinal.aop.Aop;
-import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 public class PictureService extends BaseService {
 
-    private ISpider<Picture> spider = Aop.get(PictureSpiderImpl.class);
+    private final ISpider<Picture, PictureOption> spider = Aop.get(PictureSpiderImpl.class);
 
     /**
      * 获取1920*1080的电脑桌面级别的图片资源地址
@@ -33,20 +33,20 @@ public class PictureService extends BaseService {
      * @return List<String>
      */
     public List<String> getPictureListIndexBy() {
+        String type = Constants.G3_BIZHI_TYPES[0];
         List<Picture> list = Picture.dao.find(
                 "SELECT * from picture " +
                         "where to_days(`pictureDate`) = to_days(now()) AND " +
                         "pictureTypes = ? AND " +
-                        "picturePlate = ? ",
-                Constants.G3_BIZHI_TYPES[0], Picture.PLATE_DESK);
-        if (list.size() == 0) {
-            PoolExecutorKit.INSTANCE.execute(() -> spider.get());
+                        "picturePlate = ? ", type, Picture.PLATE_DESK);
+        if (null == list || list.isEmpty()) {
+            asyncGetList(type, Picture.PLATE_DESK);
             return getDefaultPicArr();
         }
         List<String> filterList = list
                 .stream()
-                .filter(item -> StrKit.notBlank(item.getPictureUrl()))
                 .map(BasePicture::getPictureUrl)
+                .filter(StrKit::notBlank)
                 .collect(Collectors.toList());
         Collections.shuffle(filterList);
         Collections.shuffle(filterList);
@@ -71,9 +71,8 @@ public class PictureService extends BaseService {
                         "pictureTypes = ? AND" +
                         "picturePlate = ? " +
                         "ORDER BY rand() LIMIT 0," + num, type, plate);
-        if (list.isEmpty()) {
-            PoolExecutorKit.INSTANCE.execute(() ->
-                    spider.getList(Kv.create().set("type", type).set("plate", plate)));
+        if (null == list || list.isEmpty()) {
+            asyncGetList(type, plate);
         }
         return list;
     }
@@ -84,8 +83,8 @@ public class PictureService extends BaseService {
                         "where to_days(`pictureDate`) = to_days(now()) AND " +
                         "pictureTypes = ? " +
                         "ORDER BY rand() LIMIT 0," + num, type);
-        if (list.isEmpty()) {
-            PoolExecutorKit.INSTANCE.execute(() -> spider.getList(Kv.create().set("type", type)));
+        if (null == list || list.isEmpty()) {
+            asyncGetList(type, Picture.PLATE_All);
             return null;
         }
         return list;
@@ -97,8 +96,8 @@ public class PictureService extends BaseService {
                 .find("SELECT * FROM picture " +
                         "WHERE to_days(`pictureDate`) = to_days(now()) " +
                         "ORDER BY rand() LIMIT 1");
-        if (list.size() == 0) {
-            PoolExecutorKit.INSTANCE.execute(() -> spider.get());
+        if (null == list || list.isEmpty()) {
+            PoolExecutorKit.INSTANCE.execute(spider::get);
             return null;
         }
         return list.get(0);
@@ -111,5 +110,18 @@ public class PictureService extends BaseService {
      */
     private List<String> getDefaultPicArr() {
         return new ArrayList<>(Arrays.asList(Constants.DEFAULT_APP_PIC_ARR));
+    }
+
+    /**
+     * 异步的获取数据
+     *
+     * @param type type
+     * @param plate plate
+     */
+    private void asyncGetList(String type, int plate) {
+        PoolExecutorKit.INSTANCE.execute(() ->
+                spider.getList(new PictureOption()
+                        .setType(type)
+                        .setPlate(plate)));
     }
 }

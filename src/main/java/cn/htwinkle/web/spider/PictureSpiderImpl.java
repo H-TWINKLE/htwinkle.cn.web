@@ -1,8 +1,8 @@
 package cn.htwinkle.web.spider;
 
 import cn.htwinkle.web.constants.Constants;
+import cn.htwinkle.web.domain.PictureOption;
 import cn.htwinkle.web.model.Picture;
-import com.jfinal.kit.Kv;
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
@@ -22,7 +22,7 @@ import java.util.stream.IntStream;
  * @author : twinkle
  * @date : 2020/3/15 11:15
  */
-public class PictureSpiderImpl implements ISpider<Picture> {
+public class PictureSpiderImpl implements ISpider<Picture, PictureOption> {
     /**
      * PictureSpiderImpl的输出日志对象
      */
@@ -30,25 +30,27 @@ public class PictureSpiderImpl implements ISpider<Picture> {
 
     @Override
     public Picture get() {
-        Kv kv = Kv.create().set("type", getDefaultType());
-        return get(kv);
+        List<Picture> list = getList();
+        return list.isEmpty() ? null : list.get(0);
     }
 
     @Override
-    public Picture get(Kv kv) {
-        List<Picture> list = getList(kv);
+    public Picture get(PictureOption option) {
+        List<Picture> list = getList(option);
         return list.isEmpty() ? null : list.get(0);
     }
 
     @Override
     public List<Picture> getList() {
-        Kv kv = Kv.create().set("type", getDefaultType());
-        return getList(kv);
+        PictureOption option = new PictureOption();
+        option.setPlate(Picture.PLATE_All);
+        option.setType(getDefaultType());
+        return getList(option);
     }
 
     @Override
-    public List<Picture> getList(Kv kv) {
-        return getPictureFromHtml(kv);
+    public List<Picture> getList(PictureOption option) {
+        return getPictureFromHtml(option);
     }
 
     private String getDefaultType() {
@@ -61,14 +63,18 @@ public class PictureSpiderImpl implements ISpider<Picture> {
      *
      * @return List<Picture>
      */
-    private List<Picture> getPictureFromHtml(Kv kv) {
+    private List<Picture> getPictureFromHtml(PictureOption option) {
         List<Picture> list = new ArrayList<>();
-        fillerMobilePicList(kv.getStr("type"), list);
-        fillerComputerPicList(kv.getStr("type"), list);
+        if (Picture.PLATE_All == option.getPlate() || Picture.PLATE_MOBILE == option.getPlate()) {
+            fillerMobilePicList(option.getType(), list);
+        }
+        if (Picture.PLATE_All == option.getPlate() || Picture.PLATE_DESK == option.getPlate()) {
+            fillerDeskPicList(option.getType(), list);
+        }
         return list;
     }
 
-    private void fillerComputerPicList(String picType, List<Picture> list) {
+    private void fillerDeskPicList(String picType, List<Picture> list) {
         IntStream.range(1, 10).forEach(index -> {
             try {
                 List<Picture> temp = getPictureFromHtmlComputerBy(picType, index);

@@ -1,8 +1,8 @@
 package cn.htwinkle.web.spider;
 
 import cn.htwinkle.web.constants.Constants;
+import cn.htwinkle.web.domain.IOption;
 import cn.htwinkle.web.model.Article;
-import com.jfinal.kit.Kv;
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 import org.jsoup.Jsoup;
@@ -20,7 +20,7 @@ import java.util.List;
  * @author : twinkle
  * @date : 2020/3/15 11:04
  */
-public class ArticleSpiderImpl implements ISpider<Article> {
+public class ArticleSpiderImpl implements ISpider<Article, IOption> {
 
     /**
      * ArticleSpiderImpl的输出日志对象
@@ -35,6 +35,28 @@ public class ArticleSpiderImpl implements ISpider<Article> {
     @Override
     public Article get() {
         return getArticle();
+    }
+
+    @Override
+    public Article get(IOption option) {
+        return get();
+    }
+
+    @Override
+    public List<Article> getList() {
+        List<Article> articleList = new ArrayList<>();
+        for (int i = 0; i < DEFAULT_SPIDER_COUNT; i++) {
+            Article article = getArticle();
+            if (null != article) {
+                articleList.add(article);
+            }
+        }
+        return articleList;
+    }
+
+    @Override
+    public List<Article> getList(IOption option) {
+        return getList();
     }
 
     @Nullable
@@ -64,27 +86,5 @@ public class ArticleSpiderImpl implements ISpider<Article> {
         art.setArticleDate(LocalDateTime.now());
         art.save();
         return art;
-    }
-
-    @Override
-    public Article get(Kv kv) {
-        return get();
-    }
-
-    @Override
-    public List<Article> getList() {
-        List<Article> articleList = new ArrayList<>();
-        for (int i = 0; i < DEFAULT_SPIDER_COUNT; i++) {
-            Article article = getArticle();
-            if (null != article) {
-                articleList.add(article);
-            }
-        }
-        return articleList;
-    }
-
-    @Override
-    public List<Article> getList(Kv kv) {
-        return getList();
     }
 }

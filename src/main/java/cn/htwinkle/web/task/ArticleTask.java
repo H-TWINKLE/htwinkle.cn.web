@@ -1,5 +1,6 @@
 package cn.htwinkle.web.task;
 
+import cn.htwinkle.web.domain.IOption;
 import cn.htwinkle.web.model.Article;
 import cn.htwinkle.web.spider.ArticleSpiderImpl;
 import cn.htwinkle.web.spider.ISpider;
@@ -15,7 +16,7 @@ import org.apache.log4j.Logger;
  */
 public class ArticleTask implements ITask {
 
-    private ISpider<Article> spider = Aop.get(ArticleSpiderImpl.class);
+    private ISpider<Article, IOption> spider = Aop.get(ArticleSpiderImpl.class);
     /**
      * ArticleTask的输出日志对象
      */
