@@ -68,7 +68,7 @@ public class PictureService extends BaseService {
         List<Picture> list = Picture.dao.find(
                 "SELECT * from picture " +
                         "where to_days(`pictureDate`) = to_days(now()) AND " +
-                        "pictureTypes = ? AND" +
+                        "pictureTypes = ? AND " +
                         "picturePlate = ? " +
                         "ORDER BY rand() LIMIT 0," + num, type, plate);
         if (null == list || list.isEmpty()) {

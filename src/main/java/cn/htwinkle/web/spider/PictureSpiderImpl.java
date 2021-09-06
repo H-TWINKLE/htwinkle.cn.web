@@ -3,6 +3,7 @@ package cn.htwinkle.web.spider;
 import cn.htwinkle.web.constants.Constants;
 import cn.htwinkle.web.domain.PictureOption;
 import cn.htwinkle.web.model.Picture;
+import com.jfinal.kit.StrKit;
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
@@ -77,7 +78,8 @@ public class PictureSpiderImpl implements ISpider<Picture, PictureOption> {
     private void fillerDeskPicList(String picType, List<Picture> list) {
         IntStream.range(1, 10).forEach(index -> {
             try {
-                List<Picture> temp = getPictureFromHtmlComputerBy(picType, index);
+                String url = getHost(Picture.PLATE_DESK) + picType + "/1920x1080/" + index + ".html";
+                List<Picture> temp = analyzePictureList(picType, url, Picture.PLATE_DESK);
                 list.addAll(Optional.ofNullable(temp).orElse(new ArrayList<>()));
             } catch (Exception e) {
                 LOGGER.error("解析电脑壁纸失败 : " + e.getLocalizedMessage());
@@ -88,24 +90,13 @@ public class PictureSpiderImpl implements ISpider<Picture, PictureOption> {
     private void fillerMobilePicList(String picType, List<Picture> list) {
         IntStream.range(0, 10).forEach(index -> {
             try {
-                List<Picture> temp = getPictureFromHtmlMobileBy(picType, index);
+                String url = getHost(Picture.PLATE_MOBILE) + "/bizhi/" + picType + "/1080x1920/" + index + ".html";
+                List<Picture> temp = analyzePictureList(picType, url, Picture.PLATE_MOBILE);
                 list.addAll(Optional.ofNullable(temp).orElse(new ArrayList<>()));
             } catch (Exception e) {
                 LOGGER.error("解析手机壁纸失败 : " + e.getLocalizedMessage());
             }
         });
-    }
-
-    /**
-     * 获取图片通过手机
-     *
-     * @param type type
-     * @param page page
-     * @return List<Picture>
-     */
-    private List<Picture> getPictureFromHtmlMobileBy(String type, int page) {
-        String url = Constants.MOBILE_G3_BIZHI_URL + type + "/1080x1920/" + page + ".html";
-        return analyzePictureList(type, url, Picture.PLATE_MOBILE);
     }
 
     /**
@@ -115,9 +106,9 @@ public class PictureSpiderImpl implements ISpider<Picture, PictureOption> {
      * @param page page
      * @return List<Picture>
      */
-    private List<Picture> getPictureFromHtmlComputerBy(String type, int page) {
-        String url = Constants.COMPUTER_G3_BIZHI_URL + type + "/1920x1080/" + page + ".html";
-        return analyzePictureList(type, url, Picture.PLATE_DESK);
+    private List<Picture> getPictureFromHtmlBy(String type, String width, int plate, int page) {
+        String url = getHost(plate) + type + width + page + ".html";
+        return analyzePictureList(type, url, plate);
     }
 
     /**
@@ -132,42 +123,124 @@ public class PictureSpiderImpl implements ISpider<Picture, PictureOption> {
         try {
             doc = Jsoup.connect(url).get();
         } catch (Exception e) {
-            LOGGER.info("PictureSpiderImpl - getPictureFromHtml : " + e.getMessage());
+            LOGGER.info(String.format("获取图片失败：地址 %s 原因 %s", url, e.getMessage()));
             return null;
         }
 
-        Elements ele = doc.select("ul.pic-list2.clearfix").first()
-                .getElementsByTag("img");
+        Elements aLinks = doc.select("ul.pic-list2.clearfix").first()
+                .getElementsByTag("a");
 
-        if (ele == null || ele.size() == 0)
+        if (aLinks == null || aLinks.size() == 0)
             return null;
 
         List<Picture> list = new ArrayList<>();
-        Picture picture;
-        for (Element e : ele) {
-            picture = new Picture();
-            picture.setPictureHost(Constants.MOBILE_G3_BIZHI_URL);
-            picture.setPictureName(e.attr("title"));
-            picture.setPictureTypes(type);
-            picture.setPicturePlate(plate);
-            picture.setPictureUrl(getReplaceSrc(e, plate));
-            picture.setPictureDate(LocalDateTime.now());
-            picture.save();
-            list.add(picture);
+
+        for (Element aLink : aLinks) {
+            Elements imgEles = aLink.getElementsByTag("img");
+            if (imgEles != null && !aLink.attr("href").contains("exe")) {
+                List<Picture> childList = analyzePictureDetailList(imgEles.first().attr("title"),
+                        getHost(plate) + aLink.attr("href"), type, plate);
+                if (null != childList && !childList.isEmpty()) {
+                    list.addAll(childList);
+                }
+            }
         }
         return list;
     }
 
+    /**
+     * 获取子页面具体的图片信息
+     *
+     * @param title title
+     * @param url   url
+     * @param type  type
+     * @param plate plate
+     * @return List<Picture>
+     */
+    private List<Picture> analyzePictureDetailList(String title, String url, String type, int plate) {
+        Document doc;
+
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (Exception e) {
+            LOGGER.info(String.format("获取图片失败：地址 %s 原因 %s", url, e.getMessage()));
+            return null;
+        }
+
+        Element ele = doc.getElementById("showImg");
+
+        if (ele == null)
+            return null;
+
+        Elements imgEles = ele.getElementsByTag("img");
+
+        if (imgEles == null || imgEles.isEmpty())
+            return null;
+
+        List<Picture> list = new ArrayList<>();
+        for (Element imgEle : imgEles) {
+            fillerPicture(title, type, plate, list, imgEle);
+        }
+        return list;
+    }
+
+    /**
+     * 填充picture
+     *
+     * @param title  title
+     * @param type   type
+     * @param plate  plate
+     * @param list   list
+     * @param imgEle imgEle
+     */
+    private void fillerPicture(String title, String type, int plate, List<Picture> list, Element imgEle) {
+        Picture picture = new Picture();
+        picture.setPictureHost(getHost(plate));
+        picture.setPictureTypes(type);
+        picture.setPicturePlate(plate);
+        picture.setPictureDate(LocalDateTime.now());
+        picture.setPictureName(title);
+        picture.setPictureUrl(getReplaceSrcDetailBy(imgEle, plate));
+        if (StrKit.notBlank(picture.getPictureUrl())) {
+            picture.save();
+            list.add(picture);
+        }
+    }
+
     @NotNull
-    private String getReplaceSrc(Element e, int plate) {
-        if (e.hasAttr("src")) {
-            String value = e.attr("src").replace("https", "http");
-            return plate == Picture.PLATE_MOBILE ?
-                    value.replace("208x312c5", "1080x1920c") :
-                    value.replace("208x130c5", "1920x1080c");
+    private String getReplaceSrcDetailBy(Element e, int plate) {
+        String src = getSrc(e);
+        if (null == src) {
+            return "";
+        }
+        if (plate == Picture.PLATE_MOBILE) {
+            return src.replace("120x90c5", "1080x1920c")
+                    .replace("120x90", "1080x1920");
+        }
+        if (plate == Picture.PLATE_DESK) {
+            return src.replace("144x90c5", "1920x1080c")
+                    .replace("144x90", "1920x1080");
         }
         return "";
     }
 
+    private String getSrc(Element e) {
+        if (e.hasAttr("src")) {
+            return e.attr("src").replace("https", "http");
+        }
+        if (e.hasAttr("srcs")) {
+            return e.attr("srcs").replace("https", "http");
+        }
+        return null;
+    }
 
+    /**
+     * 获取houst
+     *
+     * @param plate plate
+     * @return String
+     */
+    private String getHost(int plate) {
+        return plate == Picture.PLATE_MOBILE ? Constants.SJ_ZOL_COM_CN_BIZHI : Constants.DESK_ZOL_COM_CN;
+    }
 }
