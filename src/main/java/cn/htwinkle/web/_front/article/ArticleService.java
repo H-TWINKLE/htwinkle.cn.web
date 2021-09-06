@@ -1,6 +1,7 @@
 package cn.htwinkle.web._front.article;
 
 import cn.htwinkle.web.base.BaseService;
+import cn.htwinkle.web.domain.IOption;
 import cn.htwinkle.web.kit.PoolExecutorKit;
 import cn.htwinkle.web.model.Article;
 import cn.htwinkle.web.spider.ArticleSpiderImpl;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class ArticleService extends BaseService {
 
-    private final ISpider<Article> spider = Aop.get(ArticleSpiderImpl.class);
+    private final ISpider<Article, IOption> spider = Aop.get(ArticleSpiderImpl.class);
 
     /**
      * 获取到一篇文章

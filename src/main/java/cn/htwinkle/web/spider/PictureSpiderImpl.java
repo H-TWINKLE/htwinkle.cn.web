@@ -136,7 +136,7 @@ public class PictureSpiderImpl implements ISpider<Picture, PictureOption> {
             return null;
         }
 
-        Elements ele = doc.select("ul.pic-list2.martop.clearfix").first()
+        Elements ele = doc.select("ul.pic-list2.clearfix").first()
                 .getElementsByTag("img");
 
         if (ele == null || ele.size() == 0)
