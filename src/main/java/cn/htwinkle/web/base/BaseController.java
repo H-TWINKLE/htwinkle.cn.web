@@ -9,6 +9,8 @@ import com.jfinal.kit.StrKit;
 
 public abstract class BaseController extends Controller {
 
+    public static final int DEFAULT_NUMBER = 10;
+
     /**
      * 首页
      */
@@ -31,7 +33,7 @@ public abstract class BaseController extends Controller {
     protected Integer getDefaultNumForApi() {
         Integer num = getParaToInt("num");
         if (num == null || num == 0) {
-            return 10;
+            return DEFAULT_NUMBER;
         }
         return num;
     }

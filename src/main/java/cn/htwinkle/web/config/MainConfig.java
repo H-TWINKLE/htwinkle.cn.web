@@ -4,8 +4,7 @@ import cn.htwinkle.web.interceptor.AllowOriginInterceptor;
 import cn.htwinkle.web.interceptor.GolbalInterceptor;
 import cn.htwinkle.web.model._MappingKit;
 import cn.htwinkle.web.routes.FrontRoutes;
-import cn.htwinkle.web.routes.ApiRoutes;
-import com.alibaba.druid.filter.logging.Slf4jLogFilter;
+import cn.htwinkle.web.routes.ToolRoutes;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
@@ -62,7 +61,7 @@ public class MainConfig extends JFinalConfig {
     @Override
     public void configRoute(Routes me) {
         me.add(new FrontRoutes());
-        me.add(new ApiRoutes());
+        me.add(new ToolRoutes());
     }
 
     /**

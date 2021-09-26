@@ -1,7 +1,7 @@
 package cn.htwinkle.web.spider;
 
 import cn.htwinkle.web.constants.Constants;
-import cn.htwinkle.web.domain.IOption;
+import cn.htwinkle.web.domain.ArticleOption;
 import cn.htwinkle.web.model.Article;
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
@@ -20,16 +20,12 @@ import java.util.List;
  * @author : twinkle
  * @date : 2020/3/15 11:04
  */
-public class ArticleSpiderImpl implements ISpider<Article, IOption> {
+public class ArticleSpiderImpl implements ISpider<Article, ArticleOption> {
 
     /**
      * ArticleSpiderImpl的输出日志对象
      */
     private static final Logger LOGGER = Logger.getLogger(ArticleSpiderImpl.class.getName());
-    /**
-     * 默认列表爬虫次数
-     */
-    public static final int DEFAULT_SPIDER_COUNT = 10;
 
 
     @Override
@@ -38,25 +34,25 @@ public class ArticleSpiderImpl implements ISpider<Article, IOption> {
     }
 
     @Override
-    public Article get(IOption option) {
+    public Article get(ArticleOption option) {
         return get();
     }
 
     @Override
     public List<Article> getList() {
+        return getList(new ArticleOption());
+    }
+
+    @Override
+    public List<Article> getList(ArticleOption option) {
         List<Article> articleList = new ArrayList<>();
-        for (int i = 0; i < DEFAULT_SPIDER_COUNT; i++) {
+        for (int i = 0; i < option.getNumber(); i++) {
             Article article = getArticle();
             if (null != article) {
                 articleList.add(article);
             }
         }
         return articleList;
-    }
-
-    @Override
-    public List<Article> getList(IOption option) {
-        return getList();
     }
 
     @Nullable
