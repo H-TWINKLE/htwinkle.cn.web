@@ -1,7 +1,7 @@
 package cn.htwinkle.web.routes;
 
 import cn.htwinkle.web._end.SwaggerController;
-import cn.htwinkle.web._end._api.ToolController;
+import cn.htwinkle.web._end._api.ApiToolController;
 import com.jfinal.config.Routes;
 
 /**
@@ -14,6 +14,6 @@ public class ToolRoutes extends Routes {
     @Override
     public void config() {
         add("/swagger", SwaggerController.class);
-        add("/tool", ToolController.class);
+        add("/api", ApiToolController.class);
     }
 }

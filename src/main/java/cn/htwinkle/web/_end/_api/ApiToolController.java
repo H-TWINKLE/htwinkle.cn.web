@@ -13,24 +13,24 @@ import org.leon.swagger.model.constant.HttpMethod;
  * @author : twinkle
  * @date : 2021/8/21 18:14
  */
-@Api(tag = "ToolCenter", description = "API工具类")
-public class ToolController extends BaseController {
+@Api(tag = "ApiToolCenter", description = "API工具类")
+public class ApiToolController extends BaseController {
 
     @Inject
-    private ToolService toolService;
+    private ApiToolService toolService;
 
-    @ApiOperation(url = "/tool", tag = "ToolCenter",
+    @ApiOperation(url = "/api", tag = "ApiToolCenter",
             httpMethod = HttpMethod.GET, description = "获取接口基本信息")
     @Override
     public void index() {
         renderDefaultJson();
     }
 
-    @ApiOperation(url = "/tool/transferUrl", tag = "ToolCenter",
+    @ApiOperation(url = "/api/transferUrl", tag = "ApiToolCenter",
             httpMethod = HttpMethod.POST, description = "接口转换工具，避免跨域问题")
     @Param(name = "url", description = "需要进行代理的地址", required = true)
     public void transferUrl(String url) {
         String resp = toolService.transferUrl(url);
-        renderText(resp);
+        renderJson(resp);
     }
 }
