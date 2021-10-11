@@ -141,6 +141,25 @@
 
     <build>
         <finalName>htwinkle.cn.web</finalName>
+
+        <!--        打包的时候自动替换占位符-->
+        <resources>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
 
             <!--加上时间戳-->
