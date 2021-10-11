@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 /**
@@ -138,8 +140,9 @@ public class PictureSpiderImpl implements ISpider<Picture, PictureOption> {
         for (Element aLink : aLinks) {
             Elements imgEles = aLink.getElementsByTag("img");
             if (imgEles != null && !aLink.attr("href").contains("exe")) {
-                List<Picture> childList = analyzePictureDetailList(imgEles.first().attr("title"),
-                        getHost(plate) + aLink.attr("href"), type, plate);
+                List<Picture> childList =
+                        analyzePictureDetailList(imgEles.first().attr("title"),
+                                getHost(plate) + aLink.attr("href"), type, plate);
                 if (null != childList && !childList.isEmpty()) {
                     list.addAll(childList);
                 }
@@ -199,7 +202,7 @@ public class PictureSpiderImpl implements ISpider<Picture, PictureOption> {
         picture.setPictureTypes(type);
         picture.setPicturePlate(plate);
         picture.setPictureDate(LocalDateTime.now());
-        picture.setPictureName(title);
+        picture.setPictureName(getRealTitle(title));
         picture.setPictureUrl(getReplaceSrcDetailBy(imgEle, plate));
         if (StrKit.notBlank(picture.getPictureUrl())) {
             picture.save();
@@ -242,5 +245,24 @@ public class PictureSpiderImpl implements ISpider<Picture, PictureOption> {
      */
     private String getHost(int plate) {
         return plate == Picture.PLATE_MOBILE ? Constants.SJ_ZOL_COM_CN_BIZHI : Constants.DESK_ZOL_COM_CN;
+    }
+
+    /**
+     * 获取标题
+     *
+     * @param oldText oldText
+     * @return String
+     */
+    private String getRealTitle(String oldText) {
+        if (null == oldText)
+            return "";
+        Pattern p = Pattern.compile("[\\d]");
+        Matcher matcher = p.matcher(oldText);
+        String result = matcher.replaceAll("");
+        return result
+                .replaceAll("高清", "")
+                .replaceAll("精美", "")
+                .replaceAll("图片", "")
+                .replaceAll("壁纸", "");
     }
 }
