@@ -26,6 +26,7 @@
     <fileSets>
         <!-- src/main/resources 全部 copy 到 config 目录下 -->
         <fileSet>
+            <filtered>true</filtered>
             <directory>${basedir}/src/main/resources</directory>
             <outputDirectory>config</outputDirectory>
         </fileSet>
