@@ -31,6 +31,7 @@ public interface Constants {
     String RECORD_LINK_URL = "recordLinkUrl";
     String USER_AGENT = "user-agent";
     String LOCALIP = "0:0:0:0:0:0:0:1";
+    String UPDATE_TIME = "updateTime";
 
     String MEI_RI_YI_WEN_URL = "https://meiriyiwen.com/random";
     String SJ_ZOL_COM_CN_BIZHI = "http://sj.zol.com.cn/";

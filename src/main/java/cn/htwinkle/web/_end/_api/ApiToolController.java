@@ -2,10 +2,13 @@ package cn.htwinkle.web._end._api;
 
 import cn.htwinkle.web.base.BaseController;
 import com.jfinal.aop.Inject;
+import com.jfinal.kit.PropKit;
 import org.leon.swagger.annotation.Api;
 import org.leon.swagger.annotation.ApiOperation;
 import org.leon.swagger.annotation.Param;
 import org.leon.swagger.model.constant.HttpMethod;
+
+import static cn.htwinkle.web.constants.Constants.UPDATE_TIME;
 
 /**
  * 实现api接口的类型
@@ -32,5 +35,11 @@ public class ApiToolController extends BaseController {
     public void transferUrl(String url) {
         String resp = toolService.transferUrl(url);
         renderJson(resp);
+    }
+
+    @ApiOperation(url = "/api/updateTime", tag = "ApiToolCenter",
+            httpMethod = HttpMethod.GET, description = "获取当前版本信息")
+    public void updateTime() {
+        renderText(PropKit.get(UPDATE_TIME));
     }
 }
