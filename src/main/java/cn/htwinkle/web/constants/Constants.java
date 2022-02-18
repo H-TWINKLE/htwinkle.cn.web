@@ -78,6 +78,7 @@ public interface Constants {
      */
     String[] DEFAULT_APP_PIC_ARR = {
             "http://" + PropKit.get(KEY_OF_IMAGE) + "/2020/03/15/226d1a7240f6d357809665ac5d151c2a.jpg",
+            "http://" + PropKit.get(KEY_OF_IMAGE) + "/2022/02/18/f65d95c44092ca3c80355d33a7af85f3.jpg",
             "http://" + PropKit.get(KEY_OF_IMAGE) + "/2020/03/15/665675de407a6b4980c3e40c4edc60b8.jpg",
             "http://" + PropKit.get(KEY_OF_IMAGE) + "/2020/03/15/2b0a5a5a409933ac80df18f7a0c5f5e2.jpg",
             "http://" + PropKit.get(KEY_OF_IMAGE) + "/2020/03/15/46428d0440c06b6c8051b6dd749699be.jpg"};
