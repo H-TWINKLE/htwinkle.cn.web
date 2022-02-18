@@ -71,7 +71,7 @@ jobs:
           pass: ${{ secrets.SERVER_PASS }}
           script: |
               cd /root/app_web/htwinkle.cn.web/web
-              chmod +777 runServer.sh
+              chmod +755 runServer.sh
               
       - name: start server
         uses: tarunjangra/ssh-remote-cmd@v1
