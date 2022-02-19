@@ -129,7 +129,7 @@ public class MainConfig extends JFinalConfig {
         me.addSharedObject(RECORD_TITLE, PropKit.get(RECORD_TITLE));
         me.addSharedObject(KEY_OF_IMAGE, PropKit.get(KEY_OF_IMAGE));
         me.addSharedObject(RECORD_LINK_URL, PropKit.get(RECORD_LINK_URL));
-        me.addSharedObject(UPDATE_TIME, PropKit.get(UPDATE_TIME, "00000000"));
+        me.addSharedObject(UPDATE_TIME, PropKit.get(UPDATE_TIME, ""));
     }
 
     /**

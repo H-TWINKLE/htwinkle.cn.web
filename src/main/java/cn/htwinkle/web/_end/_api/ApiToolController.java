@@ -16,20 +16,20 @@ import static cn.htwinkle.web.constants.Constants.UPDATE_TIME;
  * @author : twinkle
  * @date : 2021/8/21 18:14
  */
-@Api(tag = "ApiToolCenter", description = "API工具类")
+@Api(tag = "Api", description = "API工具类")
 public class ApiToolController extends BaseController {
 
     @Inject
     private ApiToolService toolService;
 
-    @ApiOperation(url = "/api", tag = "ApiToolCenter",
+    @ApiOperation(url = "/api", tag = "Api",
             httpMethod = HttpMethod.GET, description = "获取接口基本信息")
     @Override
     public void index() {
         renderDefaultJson();
     }
 
-    @ApiOperation(url = "/api/transferUrl", tag = "ApiToolCenter",
+    @ApiOperation(url = "/api/transferUrl", tag = "Api",
             httpMethod = HttpMethod.POST, description = "接口转换工具，避免跨域问题")
     @Param(name = "url", description = "需要进行代理的地址", required = true)
     public void transferUrl(String url) {
@@ -37,7 +37,7 @@ public class ApiToolController extends BaseController {
         renderJson(resp);
     }
 
-    @ApiOperation(url = "/api/updateTime", tag = "ApiToolCenter",
+    @ApiOperation(url = "/api/updateTime", tag = "Api",
             httpMethod = HttpMethod.GET, description = "获取当前版本信息")
     public void updateTime() {
         renderText(PropKit.get(UPDATE_TIME));
