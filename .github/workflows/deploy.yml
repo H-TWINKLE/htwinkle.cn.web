@@ -37,9 +37,7 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           script: |
-              cd /root/app_web/htwinkle.cn.web/web
-              ls
-              ./runServer.sh stop      
+              docker rm -f htwinkle.cn.web     
         
               
       - name: delete server dir
@@ -50,7 +48,7 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           script: |
-              rm -rf /root/app_web/htwinkle.cn.web/web
+              rm -rf /home/app/htwinkle.cn.web/web
 
       - name: upload to server
         uses: cross-the-world/scp-pipeline@master
@@ -60,7 +58,7 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           local: "./target/web-release*/web"
-          remote: "/root/app_web/htwinkle.cn.web/"
+          remote: "/home/app/htwinkle.cn.web/"
           
       - name: chmod shell file
         uses: cross-the-world/ssh-pipeline@master
@@ -81,7 +79,12 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           command: |
-            /root/app_web/htwinkle.cn.web/web/runServer.sh start
+            docker run -p 9011:9011 --name jdk1.8 \
+                --network host \
+                -v /home/app/htwinkle.cn.web/:/home \
+                -d -it majiajue/jdk1.8
+            docker exec -it jdk1.8 /bin/bash
+            cd /home/web/ && ./runServer.sh start
       
         
         
