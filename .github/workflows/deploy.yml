@@ -68,7 +68,7 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           script: |
-              cd /root/app_web/htwinkle.cn.web/web
+              cd /home/app/htwinkle.cn.web/web
               chmod +755 runServer.sh
               
       - name: start server
@@ -79,13 +79,13 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           command: |
-            docker run -p 9011:9011 --name htwinkle.cn.web \
-                --network host \
-                -v /home/app/htwinkle.cn.web/:/home \
-                -d -it majiajue/jdk1.8
-            docker exec -it htwinkle.cn.web /bin/bash
-            cd /home/web/ && ./runServer.sh start
-            exit
+              docker run -p 9011:9011 --name htwinkle.cn.web \
+                  --network host \
+                  -v /home/app/htwinkle.cn.web/:/home \
+                  -w /home/web \
+                 -it  majiajue/jdk1.8 /bin/bash
+              ./runServer.sh start
+              exit
       
         
         
