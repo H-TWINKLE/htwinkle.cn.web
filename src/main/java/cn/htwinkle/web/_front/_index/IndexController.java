@@ -3,10 +3,10 @@ package cn.htwinkle.web._front._index;
 import cn.htwinkle.web._front.picture.PictureService;
 import cn.htwinkle.web.base.BaseController;
 import cn.htwinkle.web.constants.Constants;
+import cn.htwinkle.web.interceptor.GolbalInterceptor;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.PropKit;
 
-import static cn.htwinkle.web.interceptor.GolbalInterceptor.ATOMIC_INTEGER;
 
 /**
  * 主页类型
@@ -22,9 +22,9 @@ public class IndexController extends BaseController {
     @Override
     public void index() {
         setTitle(PropKit.get(Constants.RECORD_TITLE));
-        set("picArr",pictureService.getPictureListIndexBy());
+        set("picArr", pictureService.getPictureListIndexBy());
         set("indexPage", true);
-        set("globalCount", ATOMIC_INTEGER.get());
+        set("globalCount", GolbalInterceptor.GLOBAL_COUNTER.get());
         render("index.html");
     }
 }

@@ -94,7 +94,7 @@ jobs:
               docker run -p 9011:9011 --name htwinkle.cn.web \
                   --network host \
                   -v /home/app/htwinkle.cn.web/:/home \
-                  -v /home/backUpFile/:/backUpFile \
+                  -v /home/backUpFile/:/home/backUpFile \
                   -w /home/web \
                   -itd rencz/jdk1.8 \
                   /bin/bash ./runServer.sh start

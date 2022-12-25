@@ -10,6 +10,7 @@ import org.leon.swagger.utils.SwaggerJsonUtil;
  * @date : 2021/8/21 18:39
  */
 public class SwaggerController extends BaseController {
+
     public void index() {
         setTitle("swagger文档");
         this.render("index.html");

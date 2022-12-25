@@ -17,7 +17,6 @@ public class AllowOriginInterceptor implements Interceptor {
                 "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
         arg0.invoke();
-
     }
 
 }

@@ -1,7 +1,7 @@
 package cn.htwinkle.web.kit;
 
 import cn.htwinkle.web.config.MainConfig;
-import com.jfinal.kit.LogKit;
+import cn.hutool.core.exceptions.ExceptionUtil;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 import org.apache.commons.io.FileUtils;
@@ -66,27 +66,44 @@ public class FileKit {
      * @param file file
      * @return boolean
      */
-    public static boolean copyFile(File file, String childPath) {
-        String backUpPath = PropKit.get(BACKUP_FILE_PATH);
-        if (!(StrKit.notBlank(backUpPath) && MainConfig.isProEnviron())) {
-            return false;
+    public static File toBackupFile(File file, String childPath) {
+        if (!MainConfig.isProEnviron()) {
+            return null;
         }
-        File baseBackUpDir = new File(backUpPath);
-        if (!baseBackUpDir.exists()) {
-            FileUtils.mkdir(baseBackUpDir.getAbsolutePath());
+        File baseBackUpDir = getBackupDir();
+        if (baseBackUpDir == null) {
+            return null;
         }
         File childDir = new File(baseBackUpDir, childPath);
         if (!childDir.exists()) {
             FileUtils.mkdir(childDir.getAbsolutePath());
         }
         try {
-            File copyFile = new File(childDir, file.getName());
-            LOGGER.info("正在拷贝文件 : " + copyFile.getAbsolutePath());
-            FileUtils.copyFile(file, copyFile);
-            return true;
+            File copyedFile = new File(childDir, file.getName());
+            LOGGER.info("正在拷贝文件 : " + copyedFile.getAbsolutePath());
+            FileUtils.copyFile(file, copyedFile);
+            return copyedFile;
         } catch (IOException e) {
-            LogKit.error(e.getMessage());
-            return false;
+            LOGGER.error("error : " + ExceptionUtil.stacktraceToString(e));
         }
+        return null;
     }
+
+    /**
+     * 获取备份的文件目录
+     *
+     * @return File
+     */
+    public static File getBackupDir() {
+        String backUpPath = PropKit.get(BACKUP_FILE_PATH);
+        if (StrKit.isBlank(backUpPath)) {
+            return null;
+        }
+        File baseBackUpDir = new File(backUpPath);
+        if (!baseBackUpDir.exists()) {
+            FileUtils.mkdir(baseBackUpDir.getAbsolutePath());
+        }
+        return baseBackUpDir;
+    }
+
 }

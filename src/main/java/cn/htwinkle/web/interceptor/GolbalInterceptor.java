@@ -17,28 +17,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class GolbalInterceptor implements Interceptor {
 
     /**
-     * 原子计数器
+     * 全局的原子计数器
      */
-    public static AtomicInteger ATOMIC_INTEGER;
+    public static final AtomicInteger GLOBAL_COUNTER = new AtomicInteger(0);
 
     @Inject
     CommService service;
 
     @Override
     public void intercept(Invocation invocation) {
-
         toAddAtomicNumber();
         PoolExecutorKit.INSTANCE.asyncSaveVisitorInfo(invocation.getController());
         invocation.invoke();
     }
 
     private void toAddAtomicNumber() {
-        if (ATOMIC_INTEGER == null || ATOMIC_INTEGER.getAndIncrement() == 0) {
-            ATOMIC_INTEGER = new AtomicInteger(service.getAllVisitUserNum());
+        if (GLOBAL_COUNTER.getAndIncrement() == 0) {
+            synchronized (this) {
+                GLOBAL_COUNTER.set(service.getAllVisitUserNum());
+            }
         } else {
-            ATOMIC_INTEGER.getAndAdd(0);
+            GLOBAL_COUNTER.getAndIncrement();
         }
     }
-
-
 }

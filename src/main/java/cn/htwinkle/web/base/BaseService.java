@@ -41,6 +41,4 @@ public class BaseService {
     public Integer getAllVisitUserNum() {
         return Visit.dao.findFirst("SELECT COUNT(*) num FROM visit").getInt("num");
     }
-
-
 }

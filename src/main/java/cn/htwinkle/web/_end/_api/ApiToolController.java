@@ -16,29 +16,28 @@ import static cn.htwinkle.web.constants.Constants.UPDATE_TIME;
  * @author : twinkle
  * @date : 2021/8/21 18:14
  */
-@Api(tag = "Api", description = "API工具类")
+@Api(tag = ApiToolController.TAG, description = "API工具类")
 public class ApiToolController extends BaseController {
+
+    protected static final String TAG = "TOOL";
 
     @Inject
     private ApiToolService toolService;
 
-    @ApiOperation(url = "/api", tag = "Api",
-            httpMethod = HttpMethod.GET, description = "获取接口基本信息")
+    @ApiOperation(url = "/api", tag = ApiToolController.TAG, httpMethod = HttpMethod.GET, description = "获取接口基本信息")
     @Override
     public void index() {
         renderDefaultJson();
     }
 
-    @ApiOperation(url = "/api/transferUrl", tag = "Api",
-            httpMethod = HttpMethod.POST, description = "接口转换工具，避免跨域问题")
+    @ApiOperation(url = "/api/transferUrl", tag = ApiToolController.TAG, httpMethod = HttpMethod.POST, description = "接口转换工具，避免跨域问题")
     @Param(name = "url", description = "需要进行代理的地址", required = true)
     public void transferUrl(String url) {
         String resp = toolService.transferUrl(url);
         renderJson(resp);
     }
 
-    @ApiOperation(url = "/api/updateTime", tag = "Api",
-            httpMethod = HttpMethod.GET, description = "获取当前版本信息")
+    @ApiOperation(url = "/api/updateTime", tag = ApiToolController.TAG, httpMethod = HttpMethod.GET, description = "获取当前版本信息")
     public void updateTime() {
         renderText(PropKit.get(UPDATE_TIME));
     }

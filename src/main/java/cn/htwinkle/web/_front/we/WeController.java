@@ -8,8 +8,9 @@ import com.jfinal.upload.UploadFile;
 import org.leon.swagger.annotation.Api;
 import org.leon.swagger.annotation.ApiOperation;
 import org.leon.swagger.annotation.Param;
-import org.leon.swagger.annotation.Params;
 import org.leon.swagger.model.constant.HttpMethod;
+
+import java.io.File;
 
 /**
  * 我们的生活的控制器
@@ -17,8 +18,10 @@ import org.leon.swagger.model.constant.HttpMethod;
  * @author : twinkle
  * @date : 2020/3/15 11:36
  */
-@Api(tag = "WE", description = "我们的生活")
+@Api(tag = WeController.TAG, description = "我们的生活")
 public class WeController extends BaseController {
+
+    protected static final String TAG = "WE";
 
     @Inject
     WeService weService;
@@ -28,20 +31,24 @@ public class WeController extends BaseController {
         renderJson(Kv.create().set("path", "we"));
     }
 
-    /**
-     * 获取图片列表
-     */
-    @ApiOperation(url = "/we/uploadFile", tag = "WE", httpMethod = HttpMethod.POST, description = "上传文件")
-    @Params({
-            @Param(name = "uploadFile", description = "需要上传的文件", required = true, dataType = "file")
-    })
+    @ApiOperation(url = "/we/uploadFile", tag = WeController.TAG, httpMethod = HttpMethod.POST, description = "上传文件")
+    @Param(name = "uploadFile", description = "需要上传的文件", required = true, dataType = "file")
     public void uploadFile() {
         UploadFile uploadFile = getFile("uploadFile");
         if (uploadFile == null) {
-            renderJson(Ret.fail("msg", "文件为空"));
+            renderJson(Ret.fail("文件为空"));
             return;
         }
-        renderJson(weService.backUpWebHomeFile(uploadFile.getFile()) ? Ret.ok() : Ret.fail());
+        File backUpFile = weService.backUpWebHomeFile(uploadFile.getFile());
+        if (backUpFile != null) {
+            renderJson(Ret.ok("上传成功").set("filePath", backUpFile.getAbsolutePath()).set("name", backUpFile.getName()));
+            return;
+        }
+        renderJson(Ret.fail("上传失败"));
     }
 
+    @ApiOperation(url = "/we/getWavList", tag = WeController.TAG, httpMethod = HttpMethod.GET, description = "获取上传的wav文件的时间线")
+    public void getWavList() {
+        renderJson(weService.getBackUpWavFile());
+    }
 }

@@ -6,7 +6,6 @@ import cn.htwinkle.web.kit.FileKit;
 import cn.htwinkle.web.model.User;
 import com.jfinal.kit.*;
 import org.apache.log4j.Logger;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.*;
@@ -75,7 +74,28 @@ public class DiAoService extends BaseService {
      * @return List<File>
      */
     public List<Kv> getAllCanDownloadFile() {
-        return getDownLoadFileList();
+        List<Kv> fileList = new ArrayList<>();
+        Set<String> addedFileSet = new HashSet<>();
+        File[] files = getFilesBy(DI_AO_WEB_APP_PATH);
+
+        if (null != files) {
+            Arrays.stream(files).forEach(detailFile -> {
+                addedFileSet.add(detailFile.getName());
+                addFileToList(fileList, detailFile, true);
+            });
+        }
+
+        File[] backUpFiles = getFilesBy(getDiAoBackUpPath());
+
+        if (null != backUpFiles) {
+            Arrays.stream(backUpFiles).forEach(detailFile -> {
+                if (!addedFileSet.contains(detailFile.getName())) {
+                    addedFileSet.add(detailFile.getName());
+                    addFileToList(fileList, detailFile, false);
+                }
+            });
+        }
+        return fileList;
     }
 
     /**
@@ -85,7 +105,7 @@ public class DiAoService extends BaseService {
      * @return boolean
      */
     public boolean fileRenameToDiAoPath(File file) {
-        FileKit.copyFile(file, DIAO_TAG);
+        FileKit.toBackupFile(file, DIAO_TAG);
         return file.renameTo(new File(DI_AO_WEB_APP_PATH, file.getName()));
     }
 
@@ -134,36 +154,6 @@ public class DiAoService extends BaseService {
             return copyFile;
         }
         return null;
-    }
-
-    /**
-     * 获取不重复的set
-     *
-     * @return Set<File>
-     */
-    private List<Kv> getDownLoadFileList() {
-        List<Kv> fileList = new ArrayList<>();
-        Set<String> addedFileSet = new HashSet<>();
-        File[] files = getFilesBy(DI_AO_WEB_APP_PATH);
-
-        if (null != files) {
-            Arrays.stream(files).forEach(detailFile -> {
-                addedFileSet.add(detailFile.getName());
-                addFileToList(fileList, detailFile, true);
-            });
-        }
-
-        File[] backUpFiles = getFilesBy(getDiAoBackUpPath());
-
-        if (null != backUpFiles) {
-            Arrays.stream(backUpFiles).forEach(detailFile -> {
-                if (!addedFileSet.contains(detailFile.getName())) {
-                    addedFileSet.add(detailFile.getName());
-                    addFileToList(fileList, detailFile, false);
-                }
-            });
-        }
-        return fileList;
     }
 
     /**

@@ -20,6 +20,6 @@ public class ApiToolService extends BaseService {
                 return resp;
             }
         }
-        return Ret.fail("msg", "is empty").toJson();
+        return Ret.fail("is empty").toJson();
     }
 }

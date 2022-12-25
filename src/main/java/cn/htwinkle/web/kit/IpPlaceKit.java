@@ -160,5 +160,4 @@ public enum IpPlaceKit {
         return controller.getHeader(Constants.USER_AGENT);
     }
 
-
 }

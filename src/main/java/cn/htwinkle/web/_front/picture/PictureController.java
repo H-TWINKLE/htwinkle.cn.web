@@ -19,8 +19,10 @@ import java.util.Arrays;
  * @author : twinkle
  * @date : 2020/3/15 11:37
  */
-@Api(tag = "Picture", description = "每日一图")
+@Api(tag = PictureController.TAG, description = "每日一图")
 public class PictureController extends BaseController {
+
+    protected static final String TAG = "PICTURE";
 
     @Inject
     PictureService pictureService;
@@ -37,10 +39,7 @@ public class PictureController extends BaseController {
     /**
      * 获取图片列表
      */
-    @ApiOperation(url = "/picture/api",
-            tag = "Picture",
-            httpMethod = HttpMethod.GET,
-            description = "获取图片列表")
+    @ApiOperation(url = "/picture/api", tag = PictureController.TAG, httpMethod = HttpMethod.GET, description = "获取图片列表")
     @Params({
             @Param(name = "num", description = "图片张数", defaultValue = "10"),
             @Param(name = "plate", description = "图片分类(1：手机、2：电脑)", defaultValue = "2"),

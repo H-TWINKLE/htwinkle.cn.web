@@ -16,9 +16,9 @@ import java.util.List;
  * @author : twinkle
  * @date : 2020/3/15 11:36
  */
-@Api(tag = "Article", description = "每日一文")
+@Api(tag = ArticleController.TAG, description = "每日一文")
 public class ArticleController extends BaseController {
-
+    protected static final String TAG = "ARTICLE";
     @Inject
     ArticleService articleService;
 
@@ -29,16 +29,11 @@ public class ArticleController extends BaseController {
         render("index.html");
     }
 
-    @ApiOperation(url = "/article/api",
-            tag = "Article",
-            httpMethod = HttpMethod.GET,
-            description = "获取文章列表")
-    @Param(name = "num", description = "文章的条数",
-            defaultValue = "10")
+    @ApiOperation(url = "/article/api", tag = ArticleController.TAG, httpMethod = HttpMethod.GET, description = "获取文章列表")
+    @Param(name = "num", description = "文章的条数", defaultValue = "10")
     public void api() {
         Integer num = getDefaultNumForApi();
         List<Article> list = articleService.getArticleList(num);
         renderJson(getDefaultJson(num, list));
     }
-
 }

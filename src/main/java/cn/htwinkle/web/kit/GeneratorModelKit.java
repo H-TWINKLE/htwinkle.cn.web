@@ -20,8 +20,7 @@ public class GeneratorModelKit {
     /**
      * model 文件保存路径
      */
-    public static final String MODEL_DIR = getNowPath() +
-            "/src/main/java/" + MODEL_PKG.replaceAll("\\.", "/");
+    public static final String MODEL_DIR = getNowPath() + "/src/main/java/" + MODEL_PKG.replaceAll("\\.", "/");
 
     /**
      * base model 文件保存路径

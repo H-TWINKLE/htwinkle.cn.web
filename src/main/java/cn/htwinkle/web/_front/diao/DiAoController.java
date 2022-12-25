@@ -26,8 +26,9 @@ import java.io.File;
  * @date : 2020/3/15 14:06
  */
 @Before(DiAoInterceptor.class)
-@Api(tag = "DiAo", description = "文件上传")
+@Api(tag = DiAoController.TAG, description = "文件上传")
 public class DiAoController extends BaseController {
+    protected static final String TAG = "DI_AO";
 
     /**
      * 标题
@@ -70,10 +71,7 @@ public class DiAoController extends BaseController {
     }
 
     @Clear(DiAoInterceptor.class)
-    @ApiOperation(url = "/diao/uploadFile",
-            tag = "DiAo",
-            httpMethod = HttpMethod.POST,
-            description = "上传文件")
+    @ApiOperation(url = "/diao/uploadFile", tag = TAG, httpMethod = HttpMethod.POST, description = "上传文件")
     @Params({
             @Param(name = "uploadFile", description = "需要上传的文件", required = true, dataType = "file"),
             @Param(name = "isApi", description = "返回是否为json,只要存在值就是返回json", defaultValue = "1")

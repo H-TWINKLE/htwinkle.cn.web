@@ -74,6 +74,4 @@ public enum EhcacheKit {
             return EhcacheConstants.DEFAULTS;
         }
     }
-
-
 }
