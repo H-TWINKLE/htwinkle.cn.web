@@ -1,16 +1,14 @@
 package cn.htwinkle.web._front.diao;
 
 import cn.htwinkle.web.base.BaseService;
-import cn.htwinkle.web.config.MainConfig;
 import cn.htwinkle.web.constants.Constants;
 import cn.htwinkle.web.kit.FileKit;
 import cn.htwinkle.web.model.User;
 import com.jfinal.kit.*;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -29,13 +27,10 @@ public class DiAoService extends BaseService {
     /**
      * 基础的文件下载目录
      */
-    public static final String DI_AO_PATH =
+    public static final String DI_AO_WEB_APP_PATH =
             PathKit.getWebRootPath() + File.separator + PropKit.get(Constants.DIAO_PATH);
 
-    /**
-     * 复制文件的目录
-     */
-    public static final String COPY_FILE_PATH = "copyFilePath";
+    public static final String DIAO_TAG = "diao";
 
     /**
      * 登录的方法
@@ -64,6 +59,17 @@ public class DiAoService extends BaseService {
     }
 
     /**
+     * 获取加密后的密码
+     *
+     * @param salt salt
+     * @param pass pass
+     * @return String
+     */
+    private String getRealPass(String salt, String pass) {
+        return HashKit.sha256(salt + pass);
+    }
+
+    /**
      * 获取所有能够下载的文件
      *
      * @return List<File>
@@ -79,9 +85,8 @@ public class DiAoService extends BaseService {
      * @return boolean
      */
     public boolean fileRenameToDiAoPath(File file) {
-        copyFile(file);
-        return file.renameTo(new File(DI_AO_PATH, file.getName()));
-
+        FileKit.copyFile(file, DIAO_TAG);
+        return file.renameTo(new File(DI_AO_WEB_APP_PATH, file.getName()));
     }
 
     /**
@@ -98,26 +103,6 @@ public class DiAoService extends BaseService {
         boolean flag = null != file && file.exists() && file.delete();
         LOGGER.info(String.format("删除文件状态 %s", flag));
         return flag;
-    }
-
-    /**
-     * 复制文件
-     *
-     * @param file file
-     * @return boolean
-     */
-    public boolean copyFile(File file) {
-        String copyPath = PropKit.get(COPY_FILE_PATH);
-        if (!(StrKit.notBlank(copyPath) && MainConfig.isProEnviron())) {
-            return false;
-        }
-        try {
-            FileUtils.copyFile(file, new File(copyPath + File.separator + file.getName()));
-            return true;
-        } catch (IOException e) {
-            LogKit.error(e.getMessage());
-            return false;
-        }
     }
 
     /**
@@ -140,26 +125,15 @@ public class DiAoService extends BaseService {
      * @return File
      */
     private File getFileNameBy(String fileName) {
-        File file = new File(DI_AO_PATH, fileName);
+        File file = new File(DI_AO_WEB_APP_PATH, fileName);
         if (file.exists() && file.isFile()) {
             return file;
         }
-        File copyFile = new File(PropKit.get(COPY_FILE_PATH), fileName);
+        File copyFile = new File(getDiAoBackUpPath(), fileName);
         if (copyFile.exists() && copyFile.isFile()) {
             return copyFile;
         }
         return null;
-    }
-
-    /**
-     * 获取加密后的密码
-     *
-     * @param salt salt
-     * @param pass pass
-     * @return String
-     */
-    private String getRealPass(String salt, String pass) {
-        return HashKit.sha256(salt + pass);
     }
 
     /**
@@ -168,12 +142,9 @@ public class DiAoService extends BaseService {
      * @return Set<File>
      */
     private List<Kv> getDownLoadFileList() {
-
         List<Kv> fileList = new ArrayList<>();
-
         Set<String> addedFileSet = new HashSet<>();
-
-        File[] files = getFileFromBaseDir();
+        File[] files = getFilesBy(DI_AO_WEB_APP_PATH);
 
         if (null != files) {
             Arrays.stream(files).forEach(detailFile -> {
@@ -182,7 +153,7 @@ public class DiAoService extends BaseService {
             });
         }
 
-        File[] backUpFiles = getFileFromBackUpDir();
+        File[] backUpFiles = getFilesBy(getDiAoBackUpPath());
 
         if (null != backUpFiles) {
             Arrays.stream(backUpFiles).forEach(detailFile -> {
@@ -209,19 +180,12 @@ public class DiAoService extends BaseService {
                 .set("size", FileKit.getPrintSize(detailFile.length())));
     }
 
-    /**
-     * 获取文件从基本的webApp目录
-     *
-     * @return File[]
-     */
-    private File[] getFileFromBaseDir() {
-        File diAoPathFiles = new File(DI_AO_PATH);
-
-        if (!diAoPathFiles.isDirectory()) {
+    private File[] getFilesBy(String filePath) {
+        File file = new File(filePath);
+        if (!file.isDirectory()) {
             return null;
         }
-
-        File[] files = diAoPathFiles.listFiles();
+        File[] files = file.listFiles();
         if (files == null || files.length == 0) {
             return null;
         }
@@ -229,21 +193,11 @@ public class DiAoService extends BaseService {
     }
 
     /**
-     * 获取文件从备份的文件夹
+     * 备份文件的路径
      *
-     * @return File[]
+     * @return String
      */
-    private File[] getFileFromBackUpDir() {
-        File diAoPathFiles = new File(PropKit.get(COPY_FILE_PATH));
-
-        if (!diAoPathFiles.isDirectory()) {
-            return null;
-        }
-
-        File[] files = diAoPathFiles.listFiles();
-        if (files == null || files.length == 0) {
-            return null;
-        }
-        return files;
+    private String getDiAoBackUpPath() {
+        return new File(PropKit.get(FileKit.BACKUP_FILE_PATH), DIAO_TAG).getAbsolutePath();
     }
 }

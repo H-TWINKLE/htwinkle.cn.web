@@ -5,6 +5,7 @@ import cn.htwinkle.web._front.diao.DiAoController;
 import cn.htwinkle.web._front.idea.IdeaController;
 import cn.htwinkle.web._front._index.IndexController;
 import cn.htwinkle.web._front.picture.PictureController;
+import cn.htwinkle.web._front.we.WeController;
 import com.jfinal.config.Routes;
 
 /**
@@ -22,5 +23,6 @@ public class FrontRoutes extends Routes {
         add("/article", ArticleController.class, "/article");
         add("/diao", DiAoController.class, "/diao");
         add("/idea", IdeaController.class, "/idea");
+        add("/we", WeController.class, "/we");
     }
 }
