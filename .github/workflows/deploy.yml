@@ -96,7 +96,7 @@ jobs:
                   -v /home/app/htwinkle.cn.web/:/home \
                   -v /home/backUpFile/:/backUpFile \
                   -w /home/web \
-                  -itd majiajue/jdk1.8 \
+                  -itd rencz/jdk1.8 \
                   /bin/bash ./runServer.sh start
       
         
