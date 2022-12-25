@@ -24,9 +24,23 @@ public enum PoolExecutorKit {
     /**
      * 线程池
      */
-    private static final ThreadPoolExecutor POOL_EXECUTOR =
-            new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), 5, 0,
-                    TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
+    private static final ThreadPoolExecutor POOL_EXECUTOR;
+
+    static {
+        int corePoolSize = getCorePoolSize();
+        POOL_EXECUTOR = new ThreadPoolExecutor(corePoolSize + 2, corePoolSize * 4, 0,
+                TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
+    }
+
+    /**
+     * 获取核心线程数
+     *
+     * @return int
+     */
+    private static int getCorePoolSize() {
+        int i = Runtime.getRuntime().availableProcessors();
+        return i > 0 ? i : 1;
+    }
 
     /**
      * 执行一个线程

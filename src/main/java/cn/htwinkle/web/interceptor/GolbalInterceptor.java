@@ -32,7 +32,7 @@ public class GolbalInterceptor implements Interceptor {
     }
 
     private void toAddAtomicNumber() {
-        if (GLOBAL_COUNTER.getAndIncrement() == 0) {
+        if (GLOBAL_COUNTER.get() == 0) {
             synchronized (this) {
                 GLOBAL_COUNTER.set(service.getAllVisitUserNum());
             }
