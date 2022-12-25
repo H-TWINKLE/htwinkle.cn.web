@@ -34,16 +34,17 @@ public class WeController extends BaseController {
 
     @ApiOperation(url = "/we/uploadFile", tag = WeController.TAG, httpMethod = HttpMethod.POST, description = "上传文件")
     @Params({
-            @Param(name = "uploadFile", description = "需要上传的文件", required = true, dataType = "file")
+            @Param(name = "file", description = "需要上传的文件", required = true, dataType = "file")
     })
     public void uploadFile() {
-        UploadFile uploadFile = getFile("uploadFile");
+        UploadFile uploadFile = getFile("file");
         if (uploadFile == null) {
             renderJson(Ret.fail("文件为空"));
             return;
         }
         File backUpFile = weService.backUpWebHomeFile(uploadFile.getFile());
         if (backUpFile != null) {
+            uploadFile.getFile().delete();
             renderJson(Ret.ok("上传成功").set("filePath", backUpFile.getAbsolutePath()).set("name", backUpFile.getName()));
             return;
         }
