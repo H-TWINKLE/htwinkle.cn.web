@@ -5,6 +5,7 @@ import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +17,10 @@ import java.io.IOException;
  * @date : 2020/3/15 16:37
  */
 public class FileKit {
+    /**
+     * FileKit的输出日志对象
+     */
+    private static final Logger LOGGER = Logger.getLogger(FileKit.class.getName());
 
     /**
      * 复制文件的目录
@@ -75,7 +80,9 @@ public class FileKit {
             FileUtils.mkdir(childDir.getAbsolutePath());
         }
         try {
-            FileUtils.copyFile(file, new File(childDir, file.getName()));
+            File copyFile = new File(childDir, file.getName());
+            LOGGER.info("正在拷贝文件 : " + copyFile.getAbsolutePath());
+            FileUtils.copyFile(file, copyFile);
             return true;
         } catch (IOException e) {
             LogKit.error(e.getMessage());
