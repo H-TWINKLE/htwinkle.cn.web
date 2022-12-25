@@ -35,6 +35,19 @@
         </repository>
     </repositories>
 
+<pluginRepositories>
+    <pluginRepository>
+        <id>aliyun-plugin</id>
+        <url>https://maven.aliyun.com/repository/public/</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </pluginRepository>
+</pluginRepositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -85,6 +98,14 @@
             <artifactId>cron4j</artifactId>
             <version>2.2.5</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-speech -->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-speech</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>

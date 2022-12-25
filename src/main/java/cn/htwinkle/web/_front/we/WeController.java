@@ -8,6 +8,7 @@ import com.jfinal.upload.UploadFile;
 import org.leon.swagger.annotation.Api;
 import org.leon.swagger.annotation.ApiOperation;
 import org.leon.swagger.annotation.Param;
+import org.leon.swagger.annotation.Params;
 import org.leon.swagger.model.constant.HttpMethod;
 
 import java.io.File;
@@ -32,7 +33,9 @@ public class WeController extends BaseController {
     }
 
     @ApiOperation(url = "/we/uploadFile", tag = WeController.TAG, httpMethod = HttpMethod.POST, description = "上传文件")
-    @Param(name = "uploadFile", description = "需要上传的文件", required = true, dataType = "file")
+    @Params({
+            @Param(name = "uploadFile", description = "需要上传的文件", required = true, dataType = "file")
+    })
     public void uploadFile() {
         UploadFile uploadFile = getFile("uploadFile");
         if (uploadFile == null) {

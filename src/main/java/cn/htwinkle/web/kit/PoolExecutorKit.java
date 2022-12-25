@@ -24,8 +24,8 @@ public enum PoolExecutorKit {
     /**
      * 线程池
      */
-    private static ThreadPoolExecutor POOL_EXECUTOR =
-            new ThreadPoolExecutor(1, 5, 0,
+    private static final ThreadPoolExecutor POOL_EXECUTOR =
+            new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), 5, 0,
                     TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
 
     /**
