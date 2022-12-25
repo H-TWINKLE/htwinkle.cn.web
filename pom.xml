@@ -42,7 +42,6 @@
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <chartset.UTF8>UTF-8</chartset.UTF8>
         <jdk.version>1.8</jdk.version>
-        <cos.version>2020.4</cos.version>
     </properties>
 
     <dependencies>
@@ -71,7 +70,7 @@
         <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>cos</artifactId>
-            <version>${cos.version}</version>
+            <version>2022.2</version>
         </dependency>
 
         <dependency>
