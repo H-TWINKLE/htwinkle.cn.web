@@ -37,8 +37,7 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           script: |
-              docker rm -f htwinkle.cn.web     
-        
+              docker rm -f htwinkle.cn.web
               
       - name: delete server dir
         uses: cross-the-world/ssh-pipeline@master
@@ -61,13 +60,13 @@ jobs:
           remote: "/home/app/htwinkle.cn.web/"
 
       - name: unzip server package file
-        uses: matheusvanzan/sshpass-action@v2
+        uses: cross-the-world/ssh-pipeline@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           port: ${{ secrets.SERVER_PORT }}
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
-          run: |
+          script: |
             echo 'change dir'
             cd /home/app/htwinkle.cn.web
             ls     
@@ -85,13 +84,13 @@ jobs:
               chmod +755 runServer.sh
               
       - name: start server
-        uses: tarunjangra/ssh-remote-cmd@v1
+        uses: cross-the-world/ssh-pipeline@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           port: ${{ secrets.SERVER_PORT }}
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
-          command: |
+          script: |
               docker run -p 9011:9011 --name htwinkle.cn.web \
                   --network host \
                   -v /home/app/htwinkle.cn.web/:/home \
