@@ -27,7 +27,17 @@ jobs:
         run: mvn clean package -DskipTests=true
         
       - name: show package dir
-        run: ls  
+        run: ls
+
+      - name: upload to server
+        uses: cross-the-world/scp-pipeline@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          user: ${{ secrets.SERVER_USER }}
+          pass: ${{ secrets.SERVER_PASS }}
+          local: "./target/web-release*.zip"
+          remote: "/home/app/htwinkle.cn.web.bak/"
         
       - name: stop server
         uses: cross-the-world/ssh-pipeline@master
@@ -48,16 +58,7 @@ jobs:
           pass: ${{ secrets.SERVER_PASS }}
           script: |
               rm -rf /home/app/htwinkle.cn.web/
-
-      - name: upload to server
-        uses: cross-the-world/scp-pipeline@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          port: ${{ secrets.SERVER_PORT }}
-          user: ${{ secrets.SERVER_USER }}
-          pass: ${{ secrets.SERVER_PASS }}
-          local: "./target/web-release*.zip"
-          remote: "/home/app/htwinkle.cn.web/"
+              rm -rf /home/app/htwinkle.cn.web.bak/
 
       - name: unzip server package file
         uses: cross-the-world/ssh-pipeline@master
@@ -68,9 +69,9 @@ jobs:
           pass: ${{ secrets.SERVER_PASS }}
           script: |
             echo 'change dir'
-            cd /home/app/htwinkle.cn.web
-            ls     
-            unzip web-release*.zip
+            cd /home/app/htwinkle.cn.web.bak
+            ls
+            unzip web-release*.zip -d /home/app/htwinkle.cn.web/
           
       - name: chmod shell file
         uses: cross-the-world/ssh-pipeline@master
