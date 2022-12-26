@@ -1,12 +1,15 @@
 package cn.htwinkle.web.kit;
 
+import cn.htwinkle.web.constants.Constants;
 import cn.htwinkle.web.model.Visit;
+import cn.hutool.core.util.StrUtil;
 import com.jfinal.core.Controller;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 /**
  * PoolExecutorKit
@@ -54,11 +57,15 @@ public enum PoolExecutorKit {
 
     /**
      * 异步的保存用户访问信息
+     * 本地ip则直接禁止
      *
      * @param controller controller
      */
     public void asyncSaveVisitorInfo(Controller controller) {
         String ip = IpPlaceKit.INSTANCE.getRemoteAddrIp(controller);
+        if (StrUtil.isBlank(ip) || Stream.of("127.0.0.1", "localhost", Constants.LOCALIP).anyMatch(item -> item.contains(ip))) {
+            return;
+        }
         String userAgent = IpPlaceKit.INSTANCE.getUserAgent(controller);
         PrintKit.INSTANCE.printHeader(controller);
         POOL_EXECUTOR.execute(() -> {

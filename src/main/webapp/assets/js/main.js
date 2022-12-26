@@ -88,7 +88,8 @@
             $wrapper = $('#wrapper');
 
         // Disable animations/transitions until the page has loaded.
-        $body.addClass('is-loading');
+        // todo 去除显隐藏动画
+        // $body.addClass('is-loading');
 
         $window.on('load', function () {
             window.setTimeout(function () {

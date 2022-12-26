@@ -27,9 +27,7 @@ public class DiAoInterceptor implements Interceptor {
             invocation.getController().forwardAction("/diao/login");
             return;
         }
-
         invocation.getController().set(Constants.SESSION_USER, user);
         invocation.invoke();
-
     }
 }
