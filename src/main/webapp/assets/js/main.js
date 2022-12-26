@@ -89,12 +89,13 @@
 
         // Disable animations/transitions until the page has loaded.
         // todo 去除显隐藏动画
-        // $body.addClass('is-loading');
+        $body.addClass('is-loading');
 
         $window.on('load', function () {
             window.setTimeout(function () {
                 $body.removeClass('is-loading');
-            }, 100);
+                $("#wrapper").css('display','');
+            }, 80);
         });
 
         // Tweaks/fixes.
