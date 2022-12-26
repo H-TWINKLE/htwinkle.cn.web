@@ -6,10 +6,10 @@ import cn.hutool.core.util.StrUtil;
 import com.jfinal.core.Controller;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
 
 /**
  * PoolExecutorKit
@@ -63,7 +63,7 @@ public enum PoolExecutorKit {
      */
     public void asyncSaveVisitorInfo(Controller controller) {
         String ip = IpPlaceKit.INSTANCE.getRemoteAddrIp(controller);
-        if (StrUtil.isBlank(ip) || Stream.of("127.0.0.1", "localhost", Constants.LOCALIP).anyMatch(item -> item.contains(ip))) {
+        if (StrUtil.isBlank(ip) || Arrays.asList("127.0.0.1", "localhost", Constants.LOCALIP).contains(ip)) {
             return;
         }
         String userAgent = IpPlaceKit.INSTANCE.getUserAgent(controller);
