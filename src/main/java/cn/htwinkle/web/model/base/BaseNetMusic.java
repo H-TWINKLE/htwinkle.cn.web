@@ -147,7 +147,7 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	/**
 	 * 抓取时间
 	 */
-	public M setNetMusicSongDate(java.time.LocalDateTime netMusicSongDate) {
+	public M setNetMusicSongDate(java.util.Date netMusicSongDate) {
 		set("netMusicSongDate", netMusicSongDate);
 		return (M)this;
 	}
@@ -155,8 +155,8 @@ public abstract class BaseNetMusic<M extends BaseNetMusic<M>> extends Model<M> i
 	/**
 	 * 抓取时间
 	 */
-	public java.time.LocalDateTime getNetMusicSongDate() {
-		return getLocalDateTime("netMusicSongDate");
+	public java.util.Date getNetMusicSongDate() {
+		return getDate("netMusicSongDate");
 	}
 	
 }

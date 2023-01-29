@@ -12,8 +12,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -111,7 +111,7 @@ public class NetMusicTopListImpl implements ISpider<NetMusic, BaseOption> {
             netMusic.setNetMusicSongTime(songInfo.getString("duration"));
             netMusic.setNetMusicSongAlbum(getAlbum(songInfo.getJSONObject("album")));
             netMusic.setNetMusicSongMvId(songInfo.getString("mvid"));
-            netMusic.setNetMusicSongDate(LocalDateTime.now());
+            netMusic.setNetMusicSongDate(new Date());
             System.out.println(netMusic);
             musicList.add(netMusic);
         }

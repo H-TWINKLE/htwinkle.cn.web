@@ -9,8 +9,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -79,7 +79,7 @@ public class ArticleSpiderImpl implements ISpider<Article, ArticleOption> {
         art.setArticleAuthor(ele.getElementsByTag("span").first().text());
         art.setArticleContent(ele.getElementsByClass("article_text").first().
                 getElementsByTag("p").toString());
-        art.setArticleDate(LocalDateTime.now());
+        art.setArticleDate(new Date());
         art.save();
         return art;
     }

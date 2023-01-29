@@ -1,10 +1,11 @@
 package cn.htwinkle.web.routes;
 
+import cn.htwinkle.web._front._index.IndexController;
 import cn.htwinkle.web._front.article.ArticleController;
 import cn.htwinkle.web._front.diao.DiAoController;
 import cn.htwinkle.web._front.idea.IdeaController;
-import cn.htwinkle.web._front._index.IndexController;
 import cn.htwinkle.web._front.picture.PictureController;
+import cn.htwinkle.web._front.sms.SmsGroupController;
 import cn.htwinkle.web._front.we.WeController;
 import com.jfinal.config.Routes;
 
@@ -24,5 +25,6 @@ public class FrontRoutes extends Routes {
         add("/diao", DiAoController.class, "/diao");
         add("/idea", IdeaController.class, "/idea");
         add("/we", WeController.class, "/we");
+        add("/sms", SmsGroupController.class, "/sms");
     }
 }

@@ -45,13 +45,13 @@ public abstract class BaseVisit<M extends BaseVisit<M>> extends Model<M> impleme
 		return getStr("visitUserAgent");
 	}
 	
-	public M setVisitDate(java.time.LocalDateTime visitDate) {
+	public M setVisitDate(java.util.Date visitDate) {
 		set("visitDate", visitDate);
 		return (M)this;
 	}
 	
-	public java.time.LocalDateTime getVisitDate() {
-		return getLocalDateTime("visitDate");
+	public java.util.Date getVisitDate() {
+		return getDate("visitDate");
 	}
 	
 }

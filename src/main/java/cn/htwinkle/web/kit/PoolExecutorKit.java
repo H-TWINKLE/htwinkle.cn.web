@@ -5,8 +5,8 @@ import cn.htwinkle.web.model.Visit;
 import cn.hutool.core.util.StrUtil;
 import com.jfinal.core.Controller;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -74,7 +74,7 @@ public enum PoolExecutorKit {
                     .setVisitIp(ip)
                     .setVisitUserAgent(userAgent)
                     .setVisitPlace(place)
-                    .setVisitDate(LocalDateTime.now());
+                    .setVisitDate(new Date());
             visit.save();
         });
     }

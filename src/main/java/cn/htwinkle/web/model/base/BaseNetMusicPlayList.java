@@ -102,7 +102,7 @@ public abstract class BaseNetMusicPlayList<M extends BaseNetMusicPlayList<M>> ex
 	/**
 	 * 歌单列表抓取时间
 	 */
-	public M setNetMusicPlayListDate(java.time.LocalDateTime netMusicPlayListDate) {
+	public M setNetMusicPlayListDate(java.util.Date netMusicPlayListDate) {
 		set("netMusicPlayListDate", netMusicPlayListDate);
 		return (M)this;
 	}
@@ -110,8 +110,8 @@ public abstract class BaseNetMusicPlayList<M extends BaseNetMusicPlayList<M>> ex
 	/**
 	 * 歌单列表抓取时间
 	 */
-	public java.time.LocalDateTime getNetMusicPlayListDate() {
-		return getLocalDateTime("netMusicPlayListDate");
+	public java.util.Date getNetMusicPlayListDate() {
+		return getDate("netMusicPlayListDate");
 	}
 	
 }

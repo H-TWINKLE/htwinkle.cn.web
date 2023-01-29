@@ -45,13 +45,13 @@ public abstract class BaseArticle<M extends BaseArticle<M>> extends Model<M> imp
 		return getStr("articleContent");
 	}
 	
-	public M setArticleDate(java.time.LocalDateTime articleDate) {
+	public M setArticleDate(java.util.Date articleDate) {
 		set("articleDate", articleDate);
 		return (M)this;
 	}
 	
-	public java.time.LocalDateTime getArticleDate() {
-		return getLocalDateTime("articleDate");
+	public java.util.Date getArticleDate() {
+		return getDate("articleDate");
 	}
 	
 }

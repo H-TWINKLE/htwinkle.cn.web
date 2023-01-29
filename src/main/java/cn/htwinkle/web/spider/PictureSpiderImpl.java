@@ -11,8 +11,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -201,7 +201,7 @@ public class PictureSpiderImpl implements ISpider<Picture, PictureOption> {
         picture.setPictureHost(getHost(plate));
         picture.setPictureTypes(type);
         picture.setPicturePlate(plate);
-        picture.setPictureDate(LocalDateTime.now());
+        picture.setPictureDate(new Date());
         picture.setPictureName(getRealTitle(title));
         picture.setPictureUrl(getReplaceSrcDetailBy(imgEle, plate));
         if (StrKit.notBlank(picture.getPictureUrl())) {

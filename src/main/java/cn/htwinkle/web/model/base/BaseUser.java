@@ -63,13 +63,13 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		return getStr("userSex");
 	}
 	
-	public M setUserYear(java.time.LocalDateTime userYear) {
+	public M setUserYear(java.util.Date userYear) {
 		set("userYear", userYear);
 		return (M)this;
 	}
 	
-	public java.time.LocalDateTime getUserYear() {
-		return getLocalDateTime("userYear");
+	public java.util.Date getUserYear() {
+		return getDate("userYear");
 	}
 	
 	public M setUserAuto(java.lang.String userAuto) {
@@ -99,22 +99,22 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		return getStr("userTel");
 	}
 	
-	public M setUserUpdate(java.time.LocalDateTime userUpdate) {
+	public M setUserUpdate(java.util.Date userUpdate) {
 		set("userUpdate", userUpdate);
 		return (M)this;
 	}
 	
-	public java.time.LocalDateTime getUserUpdate() {
-		return getLocalDateTime("userUpdate");
+	public java.util.Date getUserUpdate() {
+		return getDate("userUpdate");
 	}
 	
-	public M setUsersaveDate(java.time.LocalDateTime usersaveDate) {
+	public M setUsersaveDate(java.util.Date usersaveDate) {
 		set("usersaveDate", usersaveDate);
 		return (M)this;
 	}
 	
-	public java.time.LocalDateTime getUsersaveDate() {
-		return getLocalDateTime("usersaveDate");
+	public java.util.Date getUsersaveDate() {
+		return getDate("usersaveDate");
 	}
 	
 }

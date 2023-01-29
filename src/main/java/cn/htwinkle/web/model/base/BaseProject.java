@@ -189,13 +189,13 @@ public abstract class BaseProject<M extends BaseProject<M>> extends Model<M> imp
 		return getStr("projectPicPosition");
 	}
 	
-	public M setProjectDate(java.time.LocalDateTime projectDate) {
+	public M setProjectDate(java.util.Date projectDate) {
 		set("projectDate", projectDate);
 		return (M)this;
 	}
 	
-	public java.time.LocalDateTime getProjectDate() {
-		return getLocalDateTime("projectDate");
+	public java.util.Date getProjectDate() {
+		return getDate("projectDate");
 	}
 	
 }

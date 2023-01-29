@@ -21,6 +21,7 @@ public class _MappingKit {
 		arp.addMapping("netMusicPlayList", "netMusicPlayListId", NetMusicPlayList.class);
 		arp.addMapping("picture", "pictureId", Picture.class);
 		arp.addMapping("project", "projectId", Project.class);
+		arp.addMapping("sms_group", "sms_tel", SmsGroup.class);
 		arp.addMapping("user", "userId", User.class);
 		arp.addMapping("visit", "visitId", Visit.class);
 	}

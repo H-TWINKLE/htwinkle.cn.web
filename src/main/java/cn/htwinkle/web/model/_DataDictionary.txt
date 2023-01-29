@@ -70,6 +70,18 @@ Table: project
  projectDate                   | DATETIME(19) | YES  |     |         |         
 -------------------------------+--------------+------+-----+---------+---------
 
+Table: sms_group
+-----------------+--------------+------+-----+---------+---------
+ Field           | Type         | Null | Key | Default | Remarks 
+-----------------+--------------+------+-----+---------+---------
+ sms_tel         | VARCHAR(191) | NO   | PRI |         | 电话号码    
+ sms_name        | VARCHAR(191) | YES  |     |         | 名字      
+ sms_send_name   | VARCHAR(191) | YES  |     |         | 发送的名字   
+ tel_sn          | VARCHAR(191) | YES  |     |         | 设备的唯一标志 
+ sms_backup      | INT(10)      | YES  |     |         | 备份的标志   
+ sms_send_status | INT(10)      | YES  |     |         | 发送的标志   
+-----------------+--------------+------+-----+---------+---------
+
 Table: user
 --------------+--------------+------+-----+---------+---------
  Field        | Type         | Null | Key | Default | Remarks 

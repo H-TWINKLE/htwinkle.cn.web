@@ -114,11 +114,13 @@
             <scope>test</scope>
         </dependency>
 
+
         <dependency>
-            <groupId>com.github.xiaoxinrui</groupId>
+            <groupId>com.github.H-TWINKLE</groupId>
             <artifactId>swagger4jfinal</artifactId>
-            <version>-4f9e73a258-1</version>
+            <version>4323edad11</version>
         </dependency>
+
 
         <dependency>
             <groupId>log4j</groupId>

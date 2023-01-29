@@ -78,7 +78,7 @@ public abstract class BasePicture<M extends BasePicture<M>> extends Model<M> imp
 	/**
 	 * 抓取的时间
 	 */
-	public M setPictureDate(java.time.LocalDateTime pictureDate) {
+	public M setPictureDate(java.util.Date pictureDate) {
 		set("pictureDate", pictureDate);
 		return (M)this;
 	}
@@ -86,8 +86,8 @@ public abstract class BasePicture<M extends BasePicture<M>> extends Model<M> imp
 	/**
 	 * 抓取的时间
 	 */
-	public java.time.LocalDateTime getPictureDate() {
-		return getLocalDateTime("pictureDate");
+	public java.util.Date getPictureDate() {
+		return getDate("pictureDate");
 	}
 	
 }
