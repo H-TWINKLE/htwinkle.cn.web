@@ -29,6 +29,16 @@ jobs:
       - name: show package dir
         run: ls
 
+      - name: delete server bak.dir
+        uses: cross-the-world/ssh-pipeline@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          user: ${{ secrets.SERVER_USER }}
+          pass: ${{ secrets.SERVER_PASS }}
+          script: |
+              rm -rf /home/app/htwinkle.cn.web.bak/
+
       - name: upload to server
         uses: cross-the-world/scp-pipeline@master
         with:
@@ -58,7 +68,6 @@ jobs:
           pass: ${{ secrets.SERVER_PASS }}
           script: |
               rm -rf /home/app/htwinkle.cn.web/
-              rm -rf /home/app/htwinkle.cn.web.bak/
 
       - name: unzip server package file
         uses: cross-the-world/ssh-pipeline@master
