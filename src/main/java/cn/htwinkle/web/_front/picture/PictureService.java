@@ -4,10 +4,15 @@ import cn.htwinkle.web.base.BaseService;
 import cn.htwinkle.web.constants.Constants;
 import cn.htwinkle.web.domain.PictureOption;
 import cn.htwinkle.web.kit.PoolExecutorKit;
+import cn.htwinkle.web.kit.Safety;
 import cn.htwinkle.web.model.Picture;
 import cn.htwinkle.web.model.base.BasePicture;
 import cn.htwinkle.web.spider.ISpider;
 import cn.htwinkle.web.spider.PictureSpiderImpl;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.jfinal.aop.Aop;
 import com.jfinal.kit.StrKit;
 
@@ -25,6 +30,8 @@ import java.util.stream.Collectors;
  */
 public class PictureService extends BaseService {
 
+    public static final String BASE_IMG_JPG = "http://htwinkle.cn/images/baseImg.jpg";
+    public static final String BING_COM = "https://www.bing.com";
     private final ISpider<Picture, PictureOption> spider = Aop.get(PictureSpiderImpl.class);
 
     /**
@@ -67,9 +74,9 @@ public class PictureService extends BaseService {
     public List<Picture> getPictureList(int num, int plate, String type) {
         List<Picture> list = Picture.dao.find(
                 "SELECT * from picture " +
-                        "where to_days(`pictureDate`) = to_days(now()) AND " +
-                        "pictureTypes = ? AND " +
-                        "picturePlate = ? " +
+                        "where to_days(`pictureDate`) = to_days(now()) " +
+                        "AND pictureTypes = ? " +
+                        "AND picturePlate = ? " +
                         "ORDER BY rand() LIMIT 0," + num, type, plate);
         if (null == list || list.isEmpty()) {
             asyncGetList(type, plate);
@@ -80,8 +87,8 @@ public class PictureService extends BaseService {
     public List<Picture> getPictureList(int num, String type) {
         List<Picture> list = Picture.dao.find(
                 "SELECT * from picture " +
-                        "where to_days(`pictureDate`) = to_days(now()) AND " +
-                        "pictureTypes = ? " +
+                        "where to_days(`pictureDate`) = to_days(now()) " +
+                        "AND pictureTypes = ? " +
                         "ORDER BY rand() LIMIT 0," + num, type);
         if (null == list || list.isEmpty()) {
             asyncGetList(type, Picture.PLATE_All);
@@ -90,12 +97,35 @@ public class PictureService extends BaseService {
         return list;
     }
 
-
     public Picture getOnePicture() {
+        return getOnePicture(Picture.PLATE_DESK, Constants.G3_BIZHI_TYPES[0]);
+    }
+
+    public String getBiyingPic() {
+        String url = BING_COM + "/HPImageArchive.aspx?format=js&idx=0&n=1";
+        return Safety.get(() -> {
+            String response = HttpUtil.get(url);
+            JSONObject jsonObject = JSONObject.parseObject(response);
+            if (jsonObject.containsKey("images")) {
+                JSONArray array = jsonObject.getJSONArray("images");
+                if (CollUtil.isNotEmpty(array)) {
+                    JSONObject img = array.getJSONObject(0);
+                    if (img.containsKey("url")) {
+                        return BING_COM + img.get("url");
+                    }
+                }
+            }
+            return BASE_IMG_JPG;
+        }, true, BASE_IMG_JPG);
+    }
+
+    public Picture getOnePicture(int plate, String type) {
         List<Picture> list = Picture.dao
                 .find("SELECT * FROM picture " +
                         "WHERE to_days(`pictureDate`) = to_days(now()) " +
-                        "ORDER BY rand() LIMIT 1");
+                        "AND pictureTypes = ? " +
+                        "AND picturePlate = ? " +
+                        "ORDER BY rand() LIMIT 1", type, plate);
         if (null == list || list.isEmpty()) {
             PoolExecutorKit.INSTANCE.execute(spider::get);
             return null;
@@ -115,7 +145,7 @@ public class PictureService extends BaseService {
     /**
      * 异步的获取数据
      *
-     * @param type type
+     * @param type  type
      * @param plate plate
      */
     private void asyncGetList(String type, int plate) {

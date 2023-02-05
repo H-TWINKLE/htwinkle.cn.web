@@ -43,8 +43,7 @@ public class PictureController extends BaseController {
     @Params({
             @Param(name = "num", description = "图片张数", defaultValue = "10"),
             @Param(name = "plate", description = "图片分类(1：手机、2：电脑)", defaultValue = "2"),
-            @Param(name = "type", description = "图片类型(fengjing, keai, jianzhu, zhiwu, dongwu, meishi)",
-                    defaultValue = "fengjing")
+            @Param(name = "type", description = "图片类型(fengjing, keai, jianzhu, zhiwu, dongwu, meishi)", defaultValue = "fengjing")
     })
     public void api() {
         Integer num = getDefaultNumForApi();
@@ -56,6 +55,32 @@ public class PictureController extends BaseController {
                         .set("type", type));
     }
 
+    /**
+     * 获取图片列表
+     */
+    @ApiOperation(url = "/picture/randomImg", tag = PictureController.TAG, httpMethod = HttpMethod.GET, description = "随机获取一张图片")
+    @Params({
+            @Param(name = "plate", description = "图片分类(1：手机、2：电脑)", defaultValue = "2"),
+            @Param(name = "type", description = "图片类型(fengjing, keai, jianzhu, zhiwu, dongwu, meishi)", defaultValue = "fengjing")
+    })
+    public void randomImg() {
+        Integer plate = getDefaultPlate();
+        String type = getDefaultType();
+        Picture onePicture = pictureService.getOnePicture(plate, type);
+        if (onePicture == null) {
+            redirect(pictureService.getBiyingPic());
+            return;
+        }
+        redirect(onePicture.getPictureUrl());
+    }
+
+    /**
+     * 获取图片列表
+     */
+    @ApiOperation(url = "/picture/biYingUrl", tag = PictureController.TAG, httpMethod = HttpMethod.GET, description = "获取必应壁纸")
+    public void biYingUrl() {
+        redirect(pictureService.getBiyingPic());
+    }
 
     /**
      * 从参数中取得类型
