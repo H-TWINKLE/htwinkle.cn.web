@@ -2,7 +2,34 @@
 
 用 ♥ 制作新版本
 
-## 容器启动指令
+### 手动启动
+
+1. 停止容器
+
+```shell
+docker rm -f htwinkle.cn.web
+```
+
+2. 删除目录
+
+```shell
+rm -rf /home/app/htwinkle.cn.web/
+```
+
+3. 上传文件
+4. 解压文件
+
+```shell
+unzip web-release*.zip -d /home/app/htwinkle.cn.web/
+```
+
+5. 授予权限
+
+```shell
+cd /home/app/htwinkle.cn.web/web && chmod +755 runServer.sh
+```
+
+6. 启动运行容器
 
 ```shell
 docker run -p 9011:9011 --name htwinkle.cn.web \
