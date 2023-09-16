@@ -18,6 +18,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.leon.swagger.plugin.SwaggerPlugin;
 
@@ -30,6 +31,10 @@ import static cn.htwinkle.web.constants.Constants.*;
  * @date : 2020/3/9 19:13
  */
 public class MainConfig extends JFinalConfig {
+    /**
+     * MainConfig的输出日志对象
+     */
+    private static final Logger LOGGER = Logger.getLogger(MainConfig.class.getName());
 
     /**
      * 配置JFinal常量
@@ -132,7 +137,9 @@ public class MainConfig extends JFinalConfig {
 
     @NotNull
     private String getMYSQLPass() {
-        return EnvKit.INSTANCE.getEnvironmentValue(PropKit.get(JDBC_PASS).trim());
+        String environmentValue = EnvKit.INSTANCE.getEnvironmentValue(PropKit.get(JDBC_PASS).trim());
+        LOGGER.info("get env prop : " + environmentValue);
+        return environmentValue;
     }
 }
 

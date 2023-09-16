@@ -16,7 +16,7 @@ services:
       - "MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}" #这里自行设置root用户的密码
     volumes:
       - "/opt/app/mysql/my.cnf:/etc/mysql/my.cnf"
-      - "/opt/app/mysql/data:/data/mysql/"
+      - "/opt/app/mysql/data:/var/lib/mysql"
     ports:
       - "9501:3306"  #宿主机和容器间的端口映射，可自行配置
     networks:
@@ -48,6 +48,7 @@ services:
     environment:
       - "TZ=Asia/Shanghai"
       - "LANG=en_US.UTF-8"
+      - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
     volumes:
       - "/opt/htwinkle.cn.web/web/log/:/opt/hwinkle.cn.web/web/log/"
     networks:
