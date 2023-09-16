@@ -2,6 +2,7 @@ package cn.htwinkle.web.config;
 
 import cn.htwinkle.web.interceptor.AllowOriginInterceptor;
 import cn.htwinkle.web.interceptor.GolbalInterceptor;
+import cn.htwinkle.web.kit.EnvKit;
 import cn.htwinkle.web.model._MappingKit;
 import cn.htwinkle.web.routes.FrontRoutes;
 import cn.htwinkle.web.routes.ToolRoutes;
@@ -17,6 +18,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import org.jetbrains.annotations.NotNull;
 import org.leon.swagger.plugin.SwaggerPlugin;
 
 import static cn.htwinkle.web.constants.Constants.*;
@@ -30,17 +32,12 @@ import static cn.htwinkle.web.constants.Constants.*;
 public class MainConfig extends JFinalConfig {
 
     /**
-     * 自动判断是否为服务器环境
-     */
-    private static int IS_PRO_ENV = 0;
-
-    /**
      * 配置JFinal常量
      */
     @Override
     public void configConstant(Constants me) {
         PropKit.use(CONFIG_DEV_FILE_NAME);
-        if (isProEnviron()) {
+        if (EnvKit.INSTANCE.isProEnviron()) {
             PropKit.append(CONFIG_PRO_FILE_NAME);
         }
         me.setDevMode(PropKit.getBoolean(DEV_MODE));
@@ -70,8 +67,9 @@ public class MainConfig extends JFinalConfig {
     @Override
     public void configPlugin(Plugins me) {
         /*JDBC-PLUGIN*/
-        DruidPlugin druidPlugin = new DruidPlugin(PropKit.get(JDBC_URL), PropKit.get(JDBC_USER),
-                PropKit.get(JDBC_PASS).trim());
+        DruidPlugin druidPlugin = new DruidPlugin(PropKit.get(JDBC_URL),
+                PropKit.get(JDBC_USER),
+                getMYSQLPass());
         StatFilter set = new StatFilter();
         set.setLogSlowSql(true);
 
@@ -132,14 +130,9 @@ public class MainConfig extends JFinalConfig {
         me.addSharedObject(UPDATE_TIME, PropKit.get(UPDATE_TIME, ""));
     }
 
-    /**
-     * 存在则为本地环境 返回 2 即false
-     */
-    public static boolean isProEnviron() {
-        if (IS_PRO_ENV == 0) {
-            IS_PRO_ENV = System.getProperty("os.name").toLowerCase().contains("windows") ? 2 : 1;
-        }
-        return IS_PRO_ENV == 1;
+    @NotNull
+    private String getMYSQLPass() {
+        return EnvKit.INSTANCE.getEnvironmentValue(PropKit.get(JDBC_PASS).trim());
     }
 }
 

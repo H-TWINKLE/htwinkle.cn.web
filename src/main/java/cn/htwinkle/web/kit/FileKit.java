@@ -1,6 +1,5 @@
 package cn.htwinkle.web.kit;
 
-import cn.htwinkle.web.config.MainConfig;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
@@ -67,7 +66,7 @@ public class FileKit {
      * @return boolean
      */
     public static File toBackupFile(File file, String childPath) {
-        if (!MainConfig.isProEnviron()) {
+        if (!EnvKit.INSTANCE.isProEnviron()) {
             return null;
         }
         File baseBackUpDir = getBackupDir();
