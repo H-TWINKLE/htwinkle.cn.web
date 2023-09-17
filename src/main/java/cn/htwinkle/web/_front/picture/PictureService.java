@@ -4,9 +4,9 @@ import cn.htwinkle.web.base.BaseService;
 import cn.htwinkle.web.constants.Constants;
 import cn.htwinkle.web.domain.PictureOption;
 import cn.htwinkle.web.kit.PoolExecutorKit;
+import cn.htwinkle.web.kit.ProxyKit;
 import cn.htwinkle.web.kit.Safety;
 import cn.htwinkle.web.model.Picture;
-import cn.htwinkle.web.model.base.BasePicture;
 import cn.htwinkle.web.spider.ISpider;
 import cn.htwinkle.web.spider.PictureSpiderImpl;
 import cn.hutool.core.collection.CollUtil;
@@ -46,13 +46,13 @@ public class PictureService extends BaseService {
                         "where to_days(`pictureDate`) = to_days(now()) AND " +
                         "pictureTypes = ? AND " +
                         "picturePlate = ? ", type, Picture.PLATE_DESK);
-        if (null == list || list.isEmpty()) {
+        if (CollUtil.isEmpty(list)) {
             asyncGetList(type, Picture.PLATE_DESK);
             return getDefaultPicArr();
         }
         List<String> filterList = list
                 .stream()
-                .map(BasePicture::getPictureUrl)
+                .map(item -> ProxyKit.getProxyUrl(item.getPictureUrl()))
                 .filter(StrKit::notBlank)
                 .collect(Collectors.toList());
         Collections.shuffle(filterList);
@@ -78,7 +78,7 @@ public class PictureService extends BaseService {
                         "AND pictureTypes = ? " +
                         "AND picturePlate = ? " +
                         "ORDER BY rand() LIMIT 0," + num, type, plate);
-        if (null == list || list.isEmpty()) {
+        if (CollUtil.isEmpty(list)) {
             asyncGetList(type, plate);
         }
         return list;
@@ -90,11 +90,11 @@ public class PictureService extends BaseService {
                         "where to_days(`pictureDate`) = to_days(now()) " +
                         "AND pictureTypes = ? " +
                         "ORDER BY rand() LIMIT 0," + num, type);
-        if (null == list || list.isEmpty()) {
+        if (CollUtil.isEmpty(list)) {
             asyncGetList(type, Picture.PLATE_All);
             return null;
         }
-        return list;
+        return list.stream().map(item -> item.setPictureUrl(ProxyKit.getProxyUrl(item.getPictureUrl()))).collect(Collectors.toList());
     }
 
     public Picture getOnePicture() {

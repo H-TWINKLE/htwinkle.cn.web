@@ -1,5 +1,6 @@
 package cn.htwinkle.web.config;
 
+import cn.htwinkle.web.handler.ZolProxyHandler;
 import cn.htwinkle.web.interceptor.AllowOriginInterceptor;
 import cn.htwinkle.web.interceptor.GolbalInterceptor;
 import cn.htwinkle.web.kit.EnvKit;
@@ -114,6 +115,7 @@ public class MainConfig extends JFinalConfig {
     @Override
     public void configHandler(Handlers me) {
         me.add(new ContextPathHandler("base"));
+        me.add(new ZolProxyHandler());
     }
 
     /**
