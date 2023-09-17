@@ -2,7 +2,7 @@ name: htwinkle.web - deploy
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ master ]
     
   workflow_dispatch:
   
