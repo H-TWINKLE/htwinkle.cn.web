@@ -3,9 +3,9 @@ name: htwinkle.web - docker
 on:
   push:
     branches: [ develop ]
-    
+
   workflow_dispatch:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,18 +14,28 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
         with:
-         distribution: 'adopt'
-         java-version: '8'
+          distribution: 'adopt'
+          java-version: '8'
       - uses: stCarolas/setup-maven@v4
         with:
-         maven-version: 3.5.4
-         
+          maven-version: 3.5.4
+
       - name: show dir
         run: ls
-        
+
+      - name: restore maven cache
+        uses: skjolber/maven-cache-github-action@v1
+        with:
+          step: restore
+
       - name: package
         run: mvn clean package -DskipTests=true
-        
+
+      - name: save maven cache
+        uses: skjolber/maven-cache-github-action@v1
+        with:
+          step: save
+
       - name: show package dir
         run: ls
 
@@ -41,7 +51,7 @@ jobs:
 
       - name: upload image
         run: docker push registry.cn-hangzhou.aliyuncs.com/htwinkle/htwinkle.cn.web:latest
-        
+
       - name: deploy server
         uses: cross-the-world/ssh-pipeline@master
         with:
@@ -50,9 +60,9 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           pass: ${{ secrets.SERVER_PASS }}
           script: |
-              cd /opt/htwinkle.cn.web && docker-compose down
-              docker image rm registry.cn-hangzhou.aliyuncs.com/htwinkle/htwinkle.cn.web:latest
-              docker-compose up -d
+            cd /opt/htwinkle.cn.web && docker-compose down
+            docker image rm registry.cn-hangzhou.aliyuncs.com/htwinkle/htwinkle.cn.web:latest
+            docker-compose up -d
       
         
         
