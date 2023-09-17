@@ -12,3 +12,4 @@ services:
       - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
     volumes:
       - "/opt/htwinkle.cn.web/web/log/:/opt/hwinkle.cn.web/web/log/"
+      - "/opt/htwinkle.cn.web/backUpFile/:/opt/htwinkle.cn.web/backUpFile/"
