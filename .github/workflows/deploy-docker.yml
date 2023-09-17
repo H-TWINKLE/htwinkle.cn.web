@@ -1,4 +1,4 @@
-name: htwinkle.web - deploy
+name: htwinkle.web - docker
 
 on:
   push:
