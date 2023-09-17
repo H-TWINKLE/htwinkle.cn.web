@@ -5,7 +5,7 @@
 <section id="gallery-wrapper">
     #for( li : picture??)
     <article class="white-panel">
-        <img src="#(li.pictureUrl??)" class="thumb">
+        <img src="#(li.pictureUrl??)" loading='lazy' class="thumb">
         <h1>
             <a target="_blank" href="#(li.pictureUrl??)">#(li.pictureName??)</a>
         </h1>
