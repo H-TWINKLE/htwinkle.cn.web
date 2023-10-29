@@ -2,8 +2,10 @@ package cn.htwinkle.web._front.picture;
 
 import cn.htwinkle.web.base.BaseController;
 import cn.htwinkle.web.constants.Constants;
+import cn.htwinkle.web.kit.ProxyKit;
 import cn.htwinkle.web.model.Picture;
 import com.jfinal.aop.Inject;
+import com.jfinal.core.JFinal;
 import com.jfinal.kit.StrKit;
 import org.leon.swagger.annotation.Api;
 import org.leon.swagger.annotation.ApiOperation;
@@ -71,7 +73,7 @@ public class PictureController extends BaseController {
             redirect(pictureService.getBiyingPic());
             return;
         }
-        redirect(onePicture.getPictureUrl());
+        redirect(JFinal.me().getContextPath() + ProxyKit.getProxyUrl(onePicture.getPictureUrl()));
     }
 
     /**
