@@ -63,17 +63,21 @@ public class PictureController extends BaseController {
     @ApiOperation(url = "/picture/randomImg", tag = PictureController.TAG, httpMethod = HttpMethod.GET, description = "随机获取一张图片")
     @Params({
             @Param(name = "plate", description = "图片分类(1：手机、2：电脑)", defaultValue = "2"),
+            @Param(name = "proxy", description = "是否代理", defaultValue = "true"),
             @Param(name = "type", description = "图片类型(fengjing, keai, jianzhu, zhiwu, dongwu, meishi)", defaultValue = "fengjing")
     })
     public void randomImg() {
         Integer plate = getDefaultPlate();
         String type = getDefaultType();
+        Boolean proxy = getDefaultProxy();
+
         Picture onePicture = pictureService.getOnePicture(plate, type);
+
         if (onePicture == null) {
             redirect(pictureService.getBiyingPic());
             return;
         }
-        redirect(JFinal.me().getContextPath() + ProxyKit.getProxyUrl(onePicture.getPictureUrl()));
+        redirect(JFinal.me().getContextPath() + (proxy ? ProxyKit.getProxyUrl(onePicture.getPictureUrl()) : onePicture.getPictureUrl()));
     }
 
     /**
@@ -110,5 +114,10 @@ public class PictureController extends BaseController {
             plate = Picture.PLATE_DESK;
         }
         return plate;
+    }
+
+    private Boolean getDefaultProxy() {
+        Boolean proxy = getBoolean("proxy");
+        return null == proxy || proxy;
     }
 }
